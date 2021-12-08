@@ -5,7 +5,7 @@
     </title>
 
     <style>
-    body,div, textarea{
+    body,div, textarea, select, option{
     background-color: black;
     color: #aaaaaa;
     display: flex;
@@ -22,14 +22,33 @@
     textarea#codes{
     min-width: 200px;
     max-width: 50vw;
+    height: 100%;
     flex-direction: column;
     border-radius: 6px;
     padding: 4px 6px 4px 6px;
     }
 
+    select, option{
+    background-color: black;
+    color: #aaaaaa;
+    border-radius: 6px;
+    padding: 0px 0px 0px 2px;
+    }
+    
+    input[type=checkbox]{
+    margin-right: 8px;
+    }
+    
     .col{
-    border: 1px solid red;
     max-height: calc(100vh - 30px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    }
+
+    .col > div{
+    box-sizing: border-box;
     }
     </style>
   </head>
@@ -39,12 +58,21 @@
       <div class="col">
       <textarea id="codes"></textarea>
       </div>
-      <div class="col" style="margin-left: 50px;flex-grow: 3;">
-      <div><input type="checkbox" />asdfasdf</div>
-      <div><input type="checkbox" />asdfasdf</div>
-      <div><input type="checkbox" />asdfasdf</div>
-      <div><input type="checkbox" />asdfasdf</div>
+
+      <div class="col" style="margin-left: 50px;flex-grow: 3; border: 1px solid #aaaaaa; border-radius: 6px; padding: 6px; overflow: auto;">
+        <div style="flex-direction: column;"> 
+        <div><input type="checkbox" name="Gald 1" value="03000F94:967F" /></div>
+        <div><input type="checkbox" name="Gald 2" value="03000F94:98" /></div>
+        <div><input type="checkbox" name="manual/semi/auto (might require technical ring)" value="03000aae:02" /></div>
+        <div><input type="checkbox" name="save in dunegon" value="03001A03:60" /></div>
+        <div><input type="checkbox" name="save in dunegon + sorceror's ring" value="03001A03:63" /></div>
+        </div>
+
+        <select id="items"></select>
       </div>
+
+  
+
     </div> 
 
 
@@ -460,6 +488,31 @@
     itemHash["love statue"]={"val":"018F","num":"1063"};
     itemHash["dream statue"]={"val":"0190","num":"1064"};
     itemHash["s flag"]={"val":"0191","num":"1064"};
+
+
+    //make drop down for items
+    function fllItem(hsh){
+    var arr=Object.keys(hsh);
+    var rtrn="";
+      for(i in arr){
+      rtrn+='<option value="'+arr[i]+'">'+arr[i]+'</option>';
+      }
+    document.getElementById('items').innerHTML=rtrn;
+    }
+    
+    //every checkbox is code
+    function chckBxCodes(){
+    var chcks=document.getElementsByTagName("input");
+      for(let el of chcks){
+        if(el.hasAttribute("type") && el.type=="checkbox"){
+        var txt = document.createTextNode(el.name+" ("+el.value+")");
+        el.parentNode.insertBefore(txt, el.nextSibling);
+        }
+      }
+    }
+
+    chckBxCodes();
+    fllItem(itemHash);
 
 
 
