@@ -1,0 +1,468 @@
+<html>
+  <head>
+    <title>
+    Tales of Phantasia Cheat File Generator
+    </title>
+
+    <style>
+    body,div, textarea{
+    background-color: black;
+    color: #aaaaaa;
+    display: flex;
+    max-height: 100%;
+    }
+    
+    #wrapper{
+    width: 100vw;
+    height: calc(100vh - 30px);
+    flex-direction: row;
+    padding: 6px;
+    }
+
+    textarea#codes{
+    min-width: 200px;
+    max-width: 50vw;
+    flex-direction: column;
+    border-radius: 6px;
+    padding: 4px 6px 4px 6px;
+    }
+
+    .col{
+    border: 1px solid red;
+    max-height: calc(100vh - 30px);
+    }
+    </style>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div class="col">
+      <textarea id="codes"></textarea>
+      </div>
+      <div class="col" style="margin-left: 50px;flex-grow: 3;">
+      <div><input type="checkbox" />asdfasdf</div>
+      <div><input type="checkbox" />asdfasdf</div>
+      <div><input type="checkbox" />asdfasdf</div>
+      <div><input type="checkbox" />asdfasdf</div>
+      </div>
+    </div> 
+
+
+    <script>
+    //String(n).padStart(4, '0'); // '0009'
+    //hexString = yourNumber.toString(16); //to hex string
+    //yourNumber = parseInt(hexString, 16); //hex to dec
+
+    var codeList=[];
+
+    var itemModAddr="0300109C";
+    var itemNumAddrBs="03000"; //03000F9C
+    var itemHash={};
+    itemHash["none"]={"val":"0000", "num":"F9C"};
+    itemHash["?sword (long sword)"]={"val":"0001","num":"F9C"};
+    itemHash["?sword (fame face)"]={"val":"0002","num":"F9D"};
+    itemHash["?sword (slayer sword)"]={"val":"0003","num":"F9D"};
+    itemHash["?sword (moon falx)"]={"val":"0004","num":"F9E"};
+    itemHash["?sword (holy sword)"]={"val":"0005","num":"F9E"};
+    itemHash["?sword (dragon tooth)"]={"val":"0006","num":"F9F"};
+    itemHash["?sword (flare baselard)"]={"val":"0007","num":"F9F"};
+    itemHash["?sword (ice coffin)"]={"val":"0008","num":"FA0"};
+    itemHash["?sword (duel sword)"]={"val":"0009","num":"FA0"};
+    itemHash["?sword (luck blade)"]={"val":"000A","num":"FA1"};
+    itemHash["?sword (wazier rapier)"]={"val":"000B","num":"FA1"};
+    itemHash["?sword (saint rapier)"]={"val":"000C","num":"FA2"};
+    itemHash["?sword (doom blade)"]={"val":"000D","num":"FA2"};
+    itemHash["?sword (excalibur)"]={"val":"000E","num":"FA3"};
+    itemHash["?spear (arc wind)"]={"val":"000F","num":"FA3"};
+    itemHash["?axe (strike axe)"]={"val":"0010","num":"FA4"};
+    itemHash["?axe (bahumut's tail)"]={"val":"0011","num":"FA4"};
+    itemHash["?axespr (saint Halberd)"]={"val":"0012","num":"FA5"};
+    itemHash["?bow (sylph bow L)"]={"val":"0013","num":"FA5"};
+    itemHash["?bow (aqua sprite)"]={"val":"0014","num":"FA6"};
+    itemHash["?bow (flare sprite)"]={"val":"0015","num":"FA6"};
+    itemHash["?bow (sand sprite)"]={"val":"0016","num":"FA7"};
+    itemHash["?bow (gale sprite)"]={"val":"0017","num":"FA7"};
+    itemHash["?bow (merciless bow)"]={"val":"0018","num":"FA8"};
+    itemHash["?bow (berserker arrow)"]={"val":"0019","num":"FA8"};
+    itemHash["?rod (rod)"]={"val":"001A","num":"FA9"};
+    itemHash["?rod (runestaff)"]={"val":"001B","num":"FA9"};
+    itemHash["?rod (rod mace)"]={"val":"001C","num":"FAA"};
+    itemHash["?book (sukebe book, porno mag)"]={"val":"001D","num":"FAA"};
+    itemHash["?book (yellow king)"]={"val":"001E","num":"FAB"};
+    itemHash["?book (lavor ionis)"]={"val":"001F","num":"FAB"};
+    itemHash["?book (mist seven sun)"]={"val":"0020","num":"FAC"};
+    itemHash["?book (misa requiem)"]={"val":"0021","num":"FAC"};
+    itemHash["?book (toll magic)"]={"val":"0022","num":"FAD"};
+    itemHash["?cloth (star cloak)"]={"val":"0023","num":"FAD"};
+    itemHash["?cloth (mythril mesh)"]={"val":"0024","num":"FAE"};
+    itemHash["?armor (leather armor)"]={"val":"0025","num":"FAE"};
+    itemHash["?armor (reflex)"]={"val":"0026","num":"FAF"};
+    itemHash["?armor (mam.bane)"]={"val":"0027","num":"FAF"};
+    itemHash["?armor (gold armor)"]={"val":"0028","num":"FB0"};
+    itemHash["?helm (leather helm)"]={"val":"0029","num":"FB0"};
+    itemHash["?helm (duel helm)"]={"val":"002A","num":"FB1"};
+    itemHash["?helm (star helm)"]={"val":"002B","num":"FB1"};
+    itemHash["?beret (star beret)"]={"val":"002C","num":"FB2"};
+    itemHash["?spear (conseska)"]={"val":"002D","num":"FB2"};
+    itemHash["?axe (battle axe)"]={"val":"002E","num":"FB3"};
+    itemHash["?bow (crescent arrow)"]={"val":"002F","num":"FB3"};
+    itemHash["pendant"]={"val":"0030","num":"FB4"};
+    itemHash["mascot"]={"val":"0031","num":"FB4"};
+    itemHash["earring"]={"val":"0032","num":"FB5"};
+    itemHash["lace ruby"]={"val":"0033","num":"FB5"};
+    itemHash["Morrison's book"]={"val":"0034","num":"FB6"};
+    itemHash["broken bow"]={"val":"0035","num":"FB6"};
+    itemHash["elemental orb"]={"val":"0036","num":"FB7"};
+    itemHash["dimel's key"]={"val":"0037","num":"FB7"};
+    itemHash["permit (morlia)"]={"val":"0038","num":"FB8"};
+    itemHash["emblem"]={"val":"0039","num":"FB8"};
+    itemHash["introduction letter"]={"val":"003A","num":"FB9"};
+    itemHash["broken ring"]={"val":"003B","num":"FB9"};
+    itemHash["lava key"]={"val":"003C","num":"FBA"};
+    itemHash["cards"]={"val":"003D","num":"FBA"};
+    itemHash["mysterious mirror"]={"val":"003E","num":"FBB"};
+    itemHash["golden key"]={"val":"003F","num":"FBB"};
+    itemHash["wing pack"]={"val":"0040","num":"FBC"};
+    itemHash["advisor book"]={"val":"0041","num":"FBC"};
+    itemHash["Rosenia's Dress"]={"val":"0042","num":"FBD"};
+    itemHash["common room key"]={"val":"0043","num":"FBD"};
+    itemHash["holy log"]={"val":"0044","num":"FBE"};
+    itemHash["mercury"]={"val":"0045","num":"FBE"};
+    itemHash["incense"]={"val":"0046","num":"FBF"};
+    itemHash["Ukiyo's portrait"]={"val":"0047","num":"FBF"};
+    itemHash["coral"]={"val":"0048","num":"FC0"};
+    itemHash["marble"]={"val":"0049","num":"FC0"};
+    itemHash["clay pot"]={"val":"004A","num":"FC1"};
+    itemHash["tapestry"]={"val":"004B","num":"FC1"};
+    itemHash["black platform"]={"val":"004C","num":"FC2"};
+    itemHash["fur skin"]={"val":"004D","num":"FC2"};
+    itemHash["winter bug summer grass"]={"val":"004E","num":"FC3"};
+    itemHash["teacup"]={"val":"004F","num":"FC3"};
+    itemHash["3 flavor string (instrument)"]={"val":"0050","num":"FC4"};
+    itemHash["Ivory"]={"val":"0051","num":"FC4"};
+    itemHash["carrots"]={"val":"0052","num":"FC5"};
+    itemHash["cabbage"]={"val":"0053","num":"FC5"};
+    itemHash["lettus"]={"val":"0054","num":"FC6"};
+    itemHash["daikon radish"]={"val":"0055","num":"FC6"};
+    itemHash["cucumber"]={"val":"0056","num":"FC7"};
+    itemHash["potato"]={"val":"0057","num":"FC7"};
+    itemHash["tomato"]={"val":"0058","num":"FC8"};
+    itemHash["onion"]={"val":"0059","num":"FC8"};
+    itemHash["apple"]={"val":"005A","num":"FC9"};
+    itemHash["lemon"]={"val":"005B","num":"FC9"};
+    itemHash["strawberry"]={"val":"005C","num":"FCA"};
+    itemHash["banana"]={"val":"005D","num":"FCA"};
+    itemHash["pineapple"]={"val":"005E","num":"FCB"};
+    itemHash["melon"]={"val":"005F","num":"FCB"};
+    itemHash["grapes"]={"val":"0060","num":"FCC"};
+    itemHash["mangos"]={"val":"0061","num":"FCC"};
+    itemHash["prunes"]={"val":"0062","num":"FCD"};
+    itemHash["tuna"]={"val":"0063","num":"FCD"};
+    itemHash["horse mackerl"]={"val":"0064","num":"FCE"};
+    itemHash["sardine"]={"val":"0065","num":"FCE"};
+    itemHash["squid"]={"val":"0066","num":"FCF"};
+    itemHash["octopus"]={"val":"0067","num":"FCF"};
+    itemHash["shrimp"]={"val":"0068","num":"FD0"};
+    itemHash["chicken"]={"val":"0069","num":"FD0"};
+    itemHash["beef"]={"val":"006A","num":"FD1"};
+    itemHash["pork"]={"val":"006B","num":"FD1"};
+    itemHash["milk"]={"val":"006C","num":"FD2"};
+    itemHash["cheese"]={"val":"006D","num":"FD2"};
+    itemHash["konniyaku"]={"val":"006E","num":"FD3"};
+    itemHash["kelp"]={"val":"006F","num":"FD3"};
+    itemHash["eggs"]={"val":"0070","num":"FD4"};
+    itemHash["miso"]={"val":"0071","num":"FD4"};
+    itemHash["bread"]={"val":"0072","num":"FD5"};
+    itemHash["rice"]={"val":"0073","num":"FD5"};
+    itemHash["seaweed"]={"val":"0074","num":"FD6"};
+    itemHash["spice"]={"val":"0075","num":"FD6"};
+    itemHash["pasta"]={"val":"0076","num":"FD7"};
+    itemHash["apple gumi"]={"val":"0077","num":"FD7"};
+    itemHash["orange gumi"]={"val":"0078","num":"FD8"};
+    itemHash["mix gumi"]={"val":"0079","num":"FD8"};
+    itemHash["lemon gumi"]={"val":"007A","num":"FD9"};
+    itemHash["pine gumi"]={"val":"007B","num":"FD9"};
+    itemHash["miracle gumi"]={"val":"007C","num":"FDA"};
+    itemHash["elixir"]={"val":"007D","num":"FDA"};
+    itemHash["basilisk scale"]={"val":"007E","num":"FDB"};
+    itemHash["sage"]={"val":"007F","num":"FDB"};
+    itemHash["savory"]={"val":"0080","num":"FDC"};
+    itemHash["verbene"]={"val":"0081","num":"FDC"};
+    itemHash["lavender"]={"val":"0082","num":"FDD"};
+    itemHash["red sage"]={"val":"0083","num":"FDD"};
+    itemHash["red savory"]={"val":"0084","num":"FDE"};
+    itemHash["red verbene"]={"val":"0085","num":"FDE"};
+    itemHash["red lavender"]={"val":"0086","num":"FDF"};
+    itemHash["pansea bottle"]={"val":"0087","num":"FDF"};
+    itemHash["life bottle"]={"val":"0088","num":"FE0"};
+    itemHash["flare bottle"]={"val":"0089","num":"FE0"};
+    itemHash["liquer bottle"]={"val":"008A","num":"FE1"};
+    itemHash["holy bottle"]={"val":"008B","num":"FE1"};
+    itemHash["dark bottle"]={"val":"008C","num":"FE2"};
+    itemHash["rune bottle"]={"val":"008D","num":"FE2"};
+    itemHash["charm bottle"]={"val":"008E","num":"FE3"};
+    itemHash["miracle charm bottle"]={"val":"008F","num":"FE3"};
+    itemHash["world map"]={"val":"0090","num":"FE4"};
+    itemHash["scout orb"]={"val":"0091","num":"FE4"};
+    itemHash["hourglass"]={"val":"0092","num":"FE5"};
+    itemHash["chrono glass"]={"val":"0093","num":"FE5"};
+    itemHash["combo counter"]={"val":"0094","num":"FE6"};
+    itemHash["spectacles"]={"val":"0095","num":"FE6"};
+    itemHash["pick axe"]={"val":"0096","num":"FE7"};
+    itemHash["magical rouge"]={"val":"0097","num":"FE7"};
+    itemHash["red lanter"]={"val":"0098","num":"FE8"};
+    itemHash["green torch"]={"val":"0099","num":"FE8"};
+    itemHash["blue candle"]={"val":"009A","num":"FE9"};
+    itemHash["rope"]={"val":"009B","num":"FE9"};
+    itemHash["drum set"]={"val":"009C","num":"FEA"};
+    itemHash["mah jong tile"]={"val":"009D","num":"FEA"};
+    itemHash["monstery book"]={"val":"009E","num":"FEB"};
+    itemHash["collector's book"]={"val":"009F","num":"FEB"};
+    itemHash["ticket"]={"val":"00A0","num":"FEC"};
+    itemHash["loudspeaker"]={"val":"00A1","num":"FEC"};
+    itemHash["long sword"]={"val":"00A2","num":"FED"};
+    itemHash["sabre"]={"val":"00A3","num":"FED"};
+    itemHash["rapier"]={"val":"00A4","num":"FEE"};
+    itemHash["knight saber"]={"val":"00A5","num":"FEE"};
+    itemHash["verdun"]={"val":"00A6","num":"FEF"};
+    itemHash["Colichemarde"]={"val":"00A7","num":"FEF"};
+    itemHash["fine saber"]={"val":"00A8","num":"FF0"};
+    itemHash["walloon sword"]={"val":"00A9","num":"FF0"};
+    itemHash["fame face"]={"val":"00AA","num":"FF1"};
+    itemHash["slayer sword"]={"val":"00AB","num":"FF1"};
+    itemHash["Moon Falx"]={"val":"00AC","num":"FF2"};
+    itemHash["Damascus sword"]={"val":"00AD","num":"FF2"};
+    itemHash["sinclair"]={"val":"00AE","num":"FF3"};
+    itemHash["destroyer"]={"val":"00AF","num":"FF3"};
+    itemHash["holy sword"]={"val":"00B0","num":"FF4"};
+    itemHash["dragon tooth"]={"val":"00B1","num":"FF4"};
+    itemHash["flare baselard"]={"val":"00B2","num":"FF5"};
+    itemHash["ice coffin"]={"val":"00B3","num":"FF5"};
+    itemHash["laser blade"]={"val":"00B4","num":"FF6"};
+    itemHash["duel sword"]={"val":"00B5","num":"FF6"};
+    itemHash["luck blade"]={"val":"00B6","num":"FF7"};
+    itemHash["muramasa"]={"val":"00B7","num":"FF7"};
+    itemHash["wazier rapier"]={"val":"00B8","num":"FF8"};
+    itemHash["saint rapier"]={"val":"00B9","num":"FF8"};
+    itemHash["doom blade"]={"val":"00BA","num":"FF9"};
+    itemHash["excalibur"]={"val":"00BB","num":"FF9"};
+    itemHash["vorpal sword"]={"val":"00BC","num":"FFA"};
+    itemHash["Flamberge"]={"val":"00BD","num":"FFA"};
+    itemHash["super deform"]={"val":"00BE","num":"FFB"};
+    itemHash["corsesca"]={"val":"00BF","num":"FFB"};
+    itemHash["gungnir"]={"val":"00C0","num":"FFC"};
+    itemHash["sadingrav"]={"val":"00C1","num":"FFC"};
+    itemHash["naginata blade"]={"val":"00C2","num":"FFD"};
+    itemHash["arcwind"]={"val":"00C3","num":"FFD"};
+    itemHash["gungnir (real)"]={"val":"00C4","num":"FFE"};
+    itemHash["gungnir (revised)"]={"val":"00C5","num":"FFE"};
+    itemHash["battle axe"]={"val":"00C6","num":"FFF"};
+    itemHash["crescent axe"]={"val":"00C7","num":"FFF"};
+    itemHash["bardiche"]={"val":"00C8","num":"1000"};
+    itemHash["strike axe"]={"val":"00C9","num":"1000"};
+    itemHash["hard cleaver"]={"val":"00CA","num":"1001"};
+    itemHash["bahumut tail"]={"val":"00CB","num":"1001"};
+    itemHash["halberd"]={"val":"00CC","num":"1002"};
+    itemHash["pole axe"]={"val":"00CD","num":"1002"};
+    itemHash["mechhalberd"]={"val":"00CE","num":"1003"};
+    itemHash["saint halberd"]={"val":"00CF","num":"1003"};
+    itemHash["sylph bow s"]={"val":"00D0","num":"1004"};
+    itemHash["sylph bow l"]={"val":"00D1","num":"1004"};
+    itemHash["composite bow"]={"val":"00D2","num":"1005"};
+    itemHash["Crane quinn"]={"val":"00D3","num":"1005"};
+    itemHash["aqua sprite"]={"val":"00D4","num":"1006"};
+    itemHash["flare sprite"]={"val":"00D5","num":"1006"};
+    itemHash["sand sprite "]={"val":"00D6","num":"1007"};
+    itemHash["gale sprite"]={"val":"00D7","num":"1007"};
+    itemHash["crescent arrow"]={"val":"00D8","num":"1008"};
+    itemHash["elven bow"]={"val":"00D9","num":"1008"};
+    itemHash["merciless bow"]={"val":"00DA","num":"1009"};
+    itemHash["berserker arrow"]={"val":"00DB","num":"1009"};
+    itemHash["elven bow (2)"]={"val":"00DC","num":"100A"};
+    itemHash["rod"]={"val":"00DD","num":"100A"};
+    itemHash["gem rod"]={"val":"00DE","num":"100B"};
+    itemHash["ruby rod"]={"val":"00DF","num":"100B"};
+    itemHash["rune staff"]={"val":"00E0","num":"100C"};
+    itemHash["unicorn horn"]={"val":"00E1","num":"100C"};
+    itemHash["holy staff"]={"val":"00E2","num":"100D"};
+    itemHash["star mace"]={"val":"00E3","num":"100D"};
+    itemHash["BC rod"]={"val":"00E4","num":"100E"};
+    itemHash["Porno mag"]={"val":"00E5","num":"100E"};
+    itemHash["Namco Gamers (book)"]={"val":"00E6","num":"100F"};
+    itemHash["necronomicon"]={"val":"00E7","num":"100F"};
+    itemHash["yellow kings"]={"val":"00E8","num":"1010"};
+    itemHash["Serano Fragment"]={"val":"00E9","num":"1010"};
+    itemHash["rebainois"]={"val":"00EA","num":"1011"};
+    itemHash["aqua dinguen"]={"val":"00EB","num":"1011"};
+    itemHash["gale fragment"]={"val":"00EC","num":"1012"};
+    itemHash["mist seven sun"]={"val":"00ED","num":"1012"};
+    itemHash["misa requiem"]={"val":"00EE","num":"1013"};
+    itemHash["doom magic"]={"val":"00EF","num":"1013"};
+    itemHash["broom"]={"val":"00F0","num":"1014"};
+    itemHash["mystery broom"]={"val":"00F1","num":"1014"};
+    itemHash["magical broom"]={"val":"00F2","num":"1015"};
+    itemHash["sylph broom"]={"val":"00F3","num":"1015"};
+    itemHash["wonder broom"]={"val":"00F4","num":"1016"};
+    itemHash["star broom"]={"val":"00F5","num":"1016"};
+    itemHash["deck brush"]={"val":"00F6","num":"1017"};
+    itemHash["nintou botan"]={"val":"00F7","num":"1017"};
+    itemHash["nintou ayame"]={"val":"00F8","num":"1018"};
+    itemHash["nintou kikyou"]={"val":"00F9","num":"1018"};
+    itemHash["nintou yuri"]={"val":"00FA","num":"1019"};
+    itemHash["nintou chisakura"]={"val":"00FB","num":"1019"};
+    itemHash["eternal sword"]={"val":"00FC","num":"101A"};
+    itemHash["leather armor"]={"val":"00FD","num":"101A"};
+    itemHash["chain mail"]={"val":"00FE","num":"101B"};
+    itemHash["ring mail"]={"val":"00FF","num":"101B"};
+    itemHash["sprint mail"]={"val":"0100","num":"101C"};
+    itemHash["breast plate"]={"val":"0101","num":"101C"};
+    itemHash["plate mail"]={"val":"0102","num":"101D"};
+    itemHash["mythril plate"]={"val":"0103","num":"101D"};
+    itemHash["reflex"]={"val":"0104","num":"101E"};
+    itemHash["silver plate"]={"val":"0105","num":"101E"};
+    itemHash["rare plate"]={"val":"0106","num":"101F"};
+    itemHash["mambane"]={"val":"0107","num":"101F"};
+    itemHash["gold armor"]={"val":"0108","num":"1020"};
+    itemHash["cloak"]={"val":"0109","num":"1020"};
+    itemHash["amber cloack"]={"val":"010A","num":"1021"};
+    itemHash["silver cloak"]={"val":"010B","num":"1021"};
+    itemHash["holy cloak"]={"val":"010C","num":"1022"};
+    itemHash["star cloak"]={"val":"010D","num":"1022"};
+    itemHash["mythril mesh"]={"val":"010E","num":"1023"};
+    itemHash["black clothes"]={"val":"010F","num":"1023"};
+    itemHash["kisaragi"]={"val":"0110","num":"1024"};
+    itemHash["yayoi"]={"val":"0111","num":"1024"};
+    itemHash["nagatsuki"]={"val":"0112","num":"1025"};
+    itemHash["kannazuki"]={"val":"0113","num":"1025"};
+    itemHash["wood shield"]={"val":"0114","num":"1026"};
+    itemHash["round shield"]={"val":"0115","num":"1026"};
+    itemHash["kite shield"]={"val":"0116","num":"1027"};
+    itemHash["feet shield"]={"val":"0117","num":"1027"};
+    itemHash["fine shield"]={"val":"0118","num":"1028"};
+    itemHash["anhk shield"]={"val":"0119","num":"1028"};
+    itemHash["rare shield"]={"val":"011A","num":"1029"};
+    itemHash["red line shield"]={"val":"011B","num":"1029"};
+    itemHash["star shield"]={"val":"011C","num":"102A"};
+    itemHash["blue line shield"]={"val":"011D","num":"102A"};
+    itemHash["ring shield"]={"val":"011E","num":"102B"};
+    itemHash["leather armor"]={"val":"011F","num":"102B"};
+    itemHash["iron sallet"]={"val":"0120","num":"102C"};
+    itemHash["amment helm"]={"val":"0121","num":"102C"};
+    itemHash["cross helm"]={"val":"0122","num":"102D"};
+    itemHash["duel helm"]={"val":"0123","num":"102D"};
+    itemHash["rare helm"]={"val":"0124","num":"102E"};
+    itemHash["golden helm"]={"val":"0125","num":"102E"};
+    itemHash["star helm"]={"val":"0126","num":"102F"};
+    itemHash["beret"]={"val":"0127","num":"102F"};
+    itemHash["anhk beret"]={"val":"0128","num":"1030"};
+    itemHash["land beret"]={"val":"0129","num":"1030"};
+    itemHash["fine beret"]={"val":"012A","num":"1031"};
+    itemHash["star beret"]={"val":"012B","num":"1031"};
+    itemHash["head wrap"]={"val":"012C","num":"1032"};
+    itemHash["face wrap"]={"val":"012D","num":"1032"};
+    itemHash["blue ribbon"]={"val":"012E","num":"1033"};
+    itemHash["large blue ribbon"]={"val":"012F","num":"1033"};
+    itemHash["stripe ribbon"]={"val":"0130","num":"1034"};
+    itemHash["pretty ribbon"]={"val":"0131","num":"1034"};
+    itemHash["magical ribbon"]={"val":"0132","num":"1035"};
+    itemHash["leather glove"]={"val":"0133","num":"1035"};
+    itemHash["iron glove"]={"val":"0134","num":"1036"};
+    itemHash["gauntlet"]={"val":"0135","num":"1036"};
+    itemHash["mythril glove"]={"val":"0136","num":"1037"};
+    itemHash["rare gauntlet"]={"val":"0137","num":"1037"};
+    itemHash["star glove"]={"val":"0138","num":"1038"};
+    itemHash["h gauntlet"]={"val":"0139","num":"1038"};
+    itemHash["claw gloves"]={"val":"013A","num":"1039"};
+    itemHash["kitchen mittens"]={"val":"013B","num":"1039"};
+    itemHash["pretty mitten"]={"val":"013C","num":"103A"};
+    itemHash["mother's gloves"]={"val":"013D","num":"103A"};
+    itemHash["white gloves"]={"val":"013E","num":"103B"};
+    itemHash["stone check"]={"val":"013F","num":"103B"};
+    itemHash["tailsman"]={"val":"0140","num":"103C"};
+    itemHash["blue tailsman"]={"val":"0141","num":"103C"};
+    itemHash["paralyze check"]={"val":"0142","num":"103D"};
+    itemHash["piyohan"]={"val":"0143","num":"103D"};
+    itemHash["poison check"]={"val":"0144","num":"103E"};
+    itemHash["rabbit symbol"]={"val":"0145","num":"103E"};
+    itemHash["Flame's protection"]={"val":"0146","num":"103F"};
+    itemHash["ice's protection"]={"val":"0147","num":"103F"};
+    itemHash["manji's symbol"]={"val":"0148","num":"1040"};
+    itemHash["silver cape"]={"val":"0149","num":"1040"};
+    itemHash["princess cape"]={"val":"014A","num":"1041"};
+    itemHash["iron boots"]={"val":"014B","num":"1041"};
+    itemHash["elven boots"]={"val":"014C","num":"1042"};
+    itemHash["jet boots"]={"val":"014D","num":"1042"};
+    itemHash["persian boots"]={"val":"014E","num":"1043"};
+    itemHash["nightmare boots"]={"val":"014F","num":"1043"};
+    itemHash["water spider"]={"val":"0150","num":"1044"};
+    itemHash["mantle"]={"val":"0151","num":"1044"};
+    itemHash["leather mantle"]={"val":"0152","num":"1045"};
+    itemHash["thieves mantle"]={"val":"0153","num":"1045"};
+    itemHash["elven mantle"]={"val":"0154","num":"1046"};
+    itemHash["flare mantle"]={"val":"0155","num":"1046"};
+    itemHash["aqua mantle"]={"val":"0156","num":"1047"};
+    itemHash["aquamarine"]={"val":"0157","num":"1047"};
+    itemHash["amethyst"]={"val":"0158","num":"1048"};
+    itemHash["emerald"]={"val":"0159","num":"1048"};
+    itemHash["opal"]={"val":"015A","num":"1049"};
+    itemHash["garnet"]={"val":"015B","num":"1049"};
+    itemHash["sardonyx"]={"val":"015C","num":"104A"};
+    itemHash["sapphire"]={"val":"015D","num":"104A"};
+    itemHash["turquise"]={"val":"015E","num":"104B"};
+    itemHash["diamond"]={"val":"015F","num":"104B"};
+    itemHash["topaz"]={"val":"0160","num":"104C"};
+    itemHash["moonstone"]={"val":"0161","num":"104C"};
+    itemHash["ruby"]={"val":"0162","num":"104D"};
+    itemHash["lapislaiz"]={"val":"0163","num":"104D"};
+    itemHash["sorcerer ring"]={"val":"0164","num":"104E"};
+    itemHash["emerald ring"]={"val":"0165","num":"104E"};
+    itemHash["fairy ring"]={"val":"0166","num":"104F"};
+    itemHash["mental ring"]={"val":"0167","num":"104F"};
+    itemHash["protect ring"]={"val":"0168","num":"1050"};
+    itemHash["faust ring"]={"val":"0169","num":"1050"};
+    itemHash["resist ring"]={"val":"016A","num":"1051"};
+    itemHash["reflect ring"]={"val":"016B","num":"1051"};
+    itemHash["channel ring (bad)"]={"val":"016C","num":"1052"};
+    itemHash["dash ring"]={"val":"016D","num":"1052"};
+    itemHash["technical ring"]={"val":"016E","num":"1053"};
+    itemHash["reverse doll"]={"val":"016F","num":"1053"};
+    itemHash["sephira"]={"val":"0170","num":"1054"};
+    itemHash["sephira +1"]={"val":"0171","num":"1054"};
+    itemHash["pikuru stone"]={"val":"0172","num":"1055"};
+    itemHash["black onyx"]={"val":"0173","num":"1055"};
+    itemHash["white mist"]={"val":"0174","num":"1056"};
+    itemHash["mystical mist"]={"val":"0175","num":"1056"};
+    itemHash["moon crystal"]={"val":"0176","num":"1057"};
+    itemHash["deris emblem"]={"val":"0177","num":"1057"};
+    itemHash["feet symbol"]={"val":"0178","num":"1058"};
+    itemHash["attack symbol"]={"val":"0179","num":"1058"};
+    itemHash["holy symbol"]={"val":"017A","num":"1059"};
+    itemHash["misty symbol"]={"val":"017B","num":"1059"};
+    itemHash["dark seal"]={"val":"017C","num":"105A"};
+    itemHash["demon seal"]={"val":"017D","num":"105A"};
+    itemHash["earring"]={"val":"017E","num":"105B"};
+    itemHash["combo command"]={"val":"017F","num":"105B"};
+    itemHash["silver mattock"]={"val":"0180","num":"105C"};
+    itemHash["magic pouch"]={"val":"0181","num":"105C"};
+    itemHash["magical pouch"]={"val":"0182","num":"105D"};
+    itemHash["copy tail"]={"val":"0183","num":"105D"};
+    itemHash["cleo's mirror"]={"val":"0184","num":"105E"};
+    itemHash["red card"]={"val":"0185","num":"105E"};
+    itemHash["green card"]={"val":"0186","num":"105F"};
+    itemHash["blue card"]={"val":"0187","num":"105F"};
+    itemHash["yellow card"]={"val":"0188","num":"1060"};
+    itemHash["white card"]={"val":"0189","num":"1060"};
+    itemHash["brown card"]={"val":"018A","num":"1061"};
+    itemHash["black card"]={"val":"018B","num":"1061"};
+    itemHash["bravery statue"]={"val":"018C","num":"1062"};
+    itemHash["justice statue"]={"val":"018D","num":"1062"};
+    itemHash["friendship statue"]={"val":"018E","num":"1063"};
+    itemHash["love statue"]={"val":"018F","num":"1063"};
+    itemHash["dream statue"]={"val":"0190","num":"1064"};
+    itemHash["s flag"]={"val":"0191","num":"1064"};
+
+
+
+    </script>
+  </body>
+</html>
