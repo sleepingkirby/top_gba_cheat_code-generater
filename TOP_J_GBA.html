@@ -63,11 +63,19 @@
     .codeSect > .title{
     margin-bottom: 8px;
     }
+
+    .divider{
+    margin-top: 18px;
+    margin-bottom: 4px;
+    padding: 4px 4px 4px 4px;
+    }
  
     </style>
     <script>
     var itemModAddr="0300109C";
+    var itemModAddrMax="";
     var itemNumAddrBs="0300"; //03000F9C
+
     var itemHash={};
     itemHash["none"]={"val":"0000", "num":"0F9C"};
     itemHash["?sword (long sword)"]={"val":"0001","num":"0F9C"};
@@ -471,7 +479,8 @@
     itemHash["love statue"]={"val":"018F","num":"1063"};
     itemHash["dream statue"]={"val":"0190","num":"1064"};
     itemHash["s flag"]={"val":"0191","num":"1064"};
-
+    
+    itemModAddrMax=Object.keys(itemHash).length;
 
     </script>
   </head>
@@ -489,6 +498,22 @@
         <div><input type="checkbox" name="manual/semi/auto (might require technical ring)" value="03000AAE:02" /></div>
         <div><input type="checkbox" name="save in dungeon" value="03001A03:60" /></div>
         <div><input type="checkbox" name="save in dungeon + sorceror's ring" value="03001A03:63" /></div>
+        <div style="margin-top: 10px;"><input type="checkbox" name="Character in 1st slot" value="03000f80:01" /></div>
+        <div><input type="checkbox" name="Character in 2nd slot" value="03000f82:02" /></div>
+        <div><input type="checkbox" name="Character in 3rd slot" value="03000f84:03" /></div>
+        <div><input type="checkbox" name="Character in 4th slot" value="03000f86:04" /></div>
+        <div><input type="checkbox" name="Character in 5th slot" value="03000f88:05" /></div>
+        <div><input type="checkbox" name="Character in 6th slot" value="03000f8A:06" /></div>
+        <div style="margin-top: 10px;">01:Cless</div>
+        <div>02:Mint</div>
+        <div>03:Arche</div>
+        <div>04:Klarth</div>
+        <div>05:Chester</div>
+        <div>06:Suzu</div>
+        <div style="margin-top:10px;"><input type="checkbox" name="Let's go Arche Time (4 seconds)" value="03001731:00" /></div>
+        <div><input type="checkbox" name="Let's go Arche Time (nano seconds)" value="03001730:00" /></div>
+        <div><input type="checkbox" name="Let's go Arche Missions Taken On" value="030017B2:0A" /></div>
+        <div><input type="checkbox" name="Let's go Arche Mission Completed" value="030017B0:0A" /></div>
         </div>
         
         <div class="codeSect">
@@ -506,9 +531,48 @@
     //String(n).padStart(4, '0'); // '0009'
     //hexString = yourNumber.toString(16); //to hex string
     //yourNumber = parseInt(hexString, 16); //hex to dec
+    var num="E";
+    var codeLst=[]; //ordered list
+    var codeHsh={}; //index by address
+    /*codeHsh["03000ABC"]=5;
+      codeLst[5]={"addr":"03000ABC", "val":"F0", "name":"some code name", "on":False};
+    */
 
-    var codeList=[];
-
+    /*-----------------------------
+    pre:textarea element exists
+    post: code updated
+    goes through codelist to find the item amount code
+    and update if needed 
+    -----------------------------*/
+    function findItemCodes(addr, high=false){
+      if(codeHsh.hasOwnProperty("addr")){
+      let i=codeHsh[addr];
+      let ob=Object.assign({}, codeLst[i]);
+        if(high){
+          if(ob.val.charAt(0)!="0"){
+          //already modified no need to do anything
+          return false;
+          }
+          else{
+          ob.val="E"+ob.val.charAt(1);
+          codeHsh[addr]=Object.assign({},ob); //updating address
+          return True;
+          }
+        }
+        else{
+          if(ob.val.charAt(1)!="0"){
+          //already modified no need to do anything
+          return false;
+          }
+          else{
+          ob.val="E"+ob.val.charAt(0);
+          codeHsh[addr]=Object.assign({},ob); //updating address
+          return True;
+          }
+        }   
+      }
+    return False;
+    }
 
     //make drop down for items
     function fllItem(hsh){
@@ -520,8 +584,27 @@
     document.getElementById('items').innerHTML=rtrn;
     }
 
+    function addToTxtArea(code, val="00", name="", on=false){
+      if(!code||code==""){
+      return null;
+      }
+    var codeObj={};
+    var icS=parseInt(itemModAddr,16);//item code area start
+    var icE=icS+itemModAddrMax;
+    var tmp=parseInt(code,16);
+      if(tmp>=icS&&tmp<icE){
+      // insert 2 codes
+      
+      }
+      else{
+
+      }
+    //code renderer
+    }
+
+    //set item slot dropdown
     function itemSlot(){
-    var m=Object.keys(itemHash).length;
+    var m=itemModAddrMax;
     var tmp=parseInt(itemModAddr,16);
     var rtrn="";
     let tmpAddr="";
