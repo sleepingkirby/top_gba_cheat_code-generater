@@ -70,10 +70,15 @@
     padding: 4px 4px 4px 4px;
     }
 
-    .skillname{
-    margin:8px 0px 4px 0px;
-
+    .name{
+    margin:12px 0px 4px 0px;
     }
+
+    .comment{
+    font-size: small;
+    margin: 8px 0px 4px 0px;
+    }
+
  
     </style>
     <script>
@@ -487,6 +492,219 @@
     
     itemModAddrMax=Object.keys(itemHash).length;
 
+    var chars={};
+    chars['00']='end name';
+    chars['0b']='、';
+    chars['0c']='。';
+    chars['0d']='!';
+    chars['0e']='"';
+    chars['0f']='『';
+    chars['10']='』';
+    chars['11']='%';
+    chars['12']='&';
+    chars['13']='♥';
+    chars['14']='(';
+    chars['15']=')';
+    chars['16']='~';
+    chars['17']='+';
+    chars['18']=',';
+    chars['19']='.';
+    chars['1a']='/';
+    chars['1b']='0';
+    chars['1c']='1';
+    chars['1d']='2';
+    chars['1e']='3';
+    chars['1f']='4';
+    chars['20']='5';
+    chars['21']='6';
+    chars['22']='7';
+    chars['23']='8';
+    chars['24']='9';
+    chars['25']='♪';
+    chars['26']=':';
+    chars['27']='<';
+    chars['28']='=';
+    chars['29']='>';
+    chars['2a']='?';
+    chars['2b']='A';
+    chars['2c']='B';
+    chars['2d']='C';
+    chars['2e']='D';
+    chars['2f']='E';
+    chars['30']='F';
+    chars['31']='G';
+    chars['32']='H';
+    chars['33']='I';
+    chars['34']='J';
+    chars['35']='K';
+    chars['36']='L';
+    chars['37']='M';
+    chars['38']='N';
+    chars['39']='O';
+    chars['3a']='P';
+    chars['3b']='Q';
+    chars['3c']='R';
+    chars['3d']='S';
+    chars['3e']='T';
+    chars['3f']='U';
+    chars['40']='V';
+    chars['41']='W';
+    chars['42']='X';
+    chars['43']='Y';
+    chars['44']='Z';
+    chars['45']='○';
+    chars['46']='ᳵ';
+    chars['47']='「';
+    chars['48']='」';
+    chars['49']='.';
+    chars['4a']='-';
+    chars['4b']='ヲ';
+    chars['4c']='ァ';
+    chars['4d']='ィ';
+    chars['4e']='ゥ';
+    chars['4f']='ェ';
+    chars['50']='ォ';
+    chars['51']='ャ';
+    chars['52']='ュ';
+    chars['53']='ョ';
+    chars['54']='ッ';
+    chars['55']='ア';
+    chars['56']='イ';
+    chars['57']='ウ';
+    chars['58']='エ';
+    chars['59']='オ';
+    chars['5a']='カ';
+    chars['5b']='キ';
+    chars['5c']='ク';
+    chars['5d']='ケ';
+    chars['5e']='コ';
+    chars['5f']='サ';
+    chars['60']='シ';
+    chars['61']='ス';
+    chars['62']='セ';
+    chars['63']='ソ';
+    chars['64']='タ';
+    chars['65']='チ';
+    chars['66']='ツ';
+    chars['67']='テ';
+    chars['68']='ト';
+    chars['69']='ナ';
+    chars['6a']='ニ';
+    chars['6b']='ヌ';
+    chars['6c']='ネ';
+    chars['6d']='ノ';
+    chars['6e']='ハ';
+    chars['6f']='ヒ';
+    chars['70']='フ';
+    chars['71']='ヘ';
+    chars['72']='ホ';
+    chars['73']='マ';
+    chars['74']='ミ';
+    chars['75']='ム';
+    chars['76']='メ';
+    chars['77']='モ';
+    chars['78']='ヤ';
+    chars['79']='ユ';
+    chars['7a']='ヨ';
+    chars['7b']='ラ';
+    chars['7c']='リ';
+    chars['7d']='ル';
+    chars['7e']='レ';
+    chars['7f']='ロ';
+    chars['80']='ワ';
+    chars['81']='ン';
+    chars['82']='を';
+    chars['83']='ぁ';
+    chars['84']='ぃ';
+    chars['85']='ぅ';
+    chars['86']='ぇ';
+    chars['87']='ぉ';
+    chars['88']='ゃ';
+    chars['89']='ゅ';
+    chars['8a']='ょ';
+    chars['8b']='っ';
+    chars['8c']='あ';
+    chars['8d']='い';
+    chars['8e']='う';
+    chars['8f']='え';
+    chars['90']='お';
+    chars['91']='か';
+    chars['92']='き';
+    chars['93']='く';
+    chars['94']='け';
+    chars['95']='こ';
+    chars['96']='さ';
+    chars['97']='し';
+    chars['98']='す';
+    chars['99']='せ';
+    chars['9a']='そ';
+    chars['9b']='た';
+    chars['9c']='ち';
+    chars['9d']='つ';
+    chars['9e']='て';
+    chars['9f']='と';
+    chars['a0']='な';
+    chars['a1']='に';
+    chars['a2']='ぬ';
+    chars['a3']='ね';
+    chars['a4']='の';
+    chars['a5']='は';
+    chars['a6']='ひ';
+    chars['a7']='ふ';
+    chars['a8']='へ';
+    chars['a9']='ほ';
+    chars['aa']='ま';
+    chars['ab']='み';
+    chars['ac']='む';
+    chars['ad']='め';
+    chars['ae']='も';
+    chars['af']='や';
+    chars['b0']='ゆ';
+    chars['b1']='よ';
+    chars['b2']='ら';
+    chars['b3']='り';
+    chars['b4']='る';
+    chars['b5']='れ';
+    chars['b6']='ろ';
+    chars['b7']='わ';
+    chars['b8']='ん';
+    chars['b9']='💍';
+    chars['ba']='△';
+    chars['bb']='⒞';
+    chars['bc']='⒞(shaded)';
+    chars['bd']='·';
+    chars['be']='★';
+    chars['bf']='□';
+    chars['c0']='➡';
+    chars['c1']='【';
+    chars['c2']='】';
+    chars['c3']='ガ';
+    chars['c4']='ギ';
+    chars['c5']='グ';
+    chars['c6']='ゲ';
+    chars['c7']='ゴ';
+    chars['c8']='ザ';
+    chars['c9']='ジ';
+    chars['ca']='ズ';
+    chars['cb']='ゼ';
+    chars['cc']='ゾ';
+    chars['cd']='ダ';
+    chars['ce']='ヂ';
+    chars['cf']='ヅ';
+    chars['d0']='デ';
+    chars['d1']='ド';
+    chars['d2']='バ';
+    chars['d3']='ビ';
+    chars['d4']='ブ';
+    chars['d5']='ベ';
+    chars['d6']='ボ';
+    chars['d7']='パ';
+    chars['d8']='ピ';
+    chars['d9']='プ';
+    chars['da']='ペ';
+    chars['db']='ポ';
+    chars['dc']='ヷ';
+
     </script>
   </head>
 
@@ -498,149 +716,222 @@
 
       <div class="col" style="margin-left: 50px;flex-grow: 3; border: 1px solid #aaaaaa; border-radius: 6px; padding: 6px; overflow: auto;">
         <div style="flex-direction: column;"> 
-        <div><input type="checkbox" name="Gald 1" value="03000F94:967F" /></div>
-        <div><input type="checkbox" name="Gald 2" value="03000F94:98" /></div>
-        <div><input type="checkbox" name="manual/semi/auto (might require technical ring)" value="03000AAE:02" /></div>
-        <div><input type="checkbox" name="save in dungeon" value="03001A03:60" /></div>
-        <div><input type="checkbox" name="save in dungeon + sorceror's ring" value="03001A03:63" /></div>
-        <div style="margin-top: 10px;"><input type="checkbox" name="Character in 1st slot" value="03000f80:01" /></div>
-        <div><input type="checkbox" name="Character in 2nd slot" value="03000f82:02" /></div>
-        <div><input type="checkbox" name="Character in 3rd slot" value="03000f84:03" /></div>
-        <div><input type="checkbox" name="Character in 4th slot" value="03000f86:04" /></div>
-        <div><input type="checkbox" name="Character in 5th slot" value="03000f88:05" /></div>
-        <div><input type="checkbox" name="Character in 6th slot" value="03000f8A:06" /></div>
-        <div style="margin-top: 10px;">01:Cless</div>
-        <div>02:Mint</div>
-        <div>03:Arche</div>
-        <div>04:Klarth</div>
-        <div>05:Chester</div>
-        <div>06:Suzu</div>
-        <div style="margin-top:10px;"><input type="checkbox" name="Let's go Arche Time (4 seconds)" value="03001731:00" /></div>
-        <div><input type="checkbox" name="Let's go Arche Time (nano seconds)" value="03001730:00" /></div>
-        <div><input type="checkbox" name="Let's go Arche Missions Taken On" value="030017B2:0A" /></div>
-        <div><input type="checkbox" name="Let's go Arche Mission Completed" value="030017B0:0A" /></div>
+          <div><input type="checkbox" name="Gald 1" value="03000F94:967F" /></div>
+          <div><input type="checkbox" name="Gald 2" value="03000F94:98" /></div>
+          <div><input type="checkbox" name="manual/semi/auto (might require technical ring)" value="03000AAE:02" /></div>
+          <div><input type="checkbox" name="save in dungeon" value="03001A03:60" /></div>
+          <div><input type="checkbox" name="save in dungeon + sorceror's ring" value="03001A03:63" /></div>
+
+          <div style="margin-top: 10px;">What character in what slot?</div>
+          <div class="comment">01:Cless, 02:Mint, 03:Arche, 04:Klarth, 05:Chester, 06:Suzu, 07:Ria, 08:Brambart. *Note* Ria and Brambart are NPC's.</div>
+          <div><input type="checkbox" name="1st slot" value="03000f80:01" /></div>
+          <div><input type="checkbox" name="2nd slot" value="03000f82:02" /></div>
+          <div><input type="checkbox" name="3rd slot" value="03000f84:03" /></div>
+          <div><input type="checkbox" name="4th slot" value="03000f86:04" /></div>
+          <div><input type="checkbox" name="5th slot" value="03000f88:05" /></div>
+          <div><input type="checkbox" name="6th slot" value="03000f8A:06" /></div>
+
+          <div class="name">Let's go Arche</div>
+          <div><input type="checkbox" name="Time (4 seconds)" value="03001731:00" /></div>
+          <div><input type="checkbox" name="Time (nano seconds)" value="03001730:00" /></div>
+          <div><input type="checkbox" name="Missions Taken On" value="030017B2:0A" /></div>
+          <div><input type="checkbox" name="Arche Mission Completed" value="030017B0:0A" /></div>
         </div>
 
         <div class="codeSect">
-        <div>Skills</div>
-        <div style="font-size: small; margin: 8px 0px 14px 0px;">Note that a lot of skills, particularly magic, can be used by anyone. Also, characters that are not Cless can often have room to hold extra skills</div>
-        <div class="skillname">Cless</div>
-        <div><input type="checkbox" name="Skill Slot 1 Psion Bolt" value="03000ab0:01" /></div>
-        <div><input type="checkbox" name="Skill Slot 2 Dual Kick" value="03000ab1:02" /></div>
-        <div><input type="checkbox" name="Skill Slot 3 Lightning Bolt" value="03000ab2:03" /></div>
-        <div><input type="checkbox" name="Skill Slot 4 Blade Storm" value="03000ab3:04" /></div>
-        <div><input type="checkbox" name="Skill Slot 5 Tiger teeth" value="03000ab4:05" /></div>
-        <div><input type="checkbox" name="Skill Slot 6 Focus" value="03000ab5:10" /></div>
-        <div><input type="checkbox" name="Skill Slot 7 Phoenix" value="03000ab6:06" /></div>
-        <div><input type="checkbox" name="Skill Slot 8 Gale Shield" value="03000ab7:0e" /></div>
-        <div><input type="checkbox" name="Skill Slot 9 Fury Slash" value="03000ab8:0c" /></div>
-        <div><input type="checkbox" name="Skill Slot 10 Eir's Love" value="03000ab9:11" /></div>
-        <div><input type="checkbox" name="Skill Slot 11 Lionheart" value="03000aba:07" /></div>
-        <div><input type="checkbox" name="Skill Slot 12 Focus More" value="03000abb:0f" /></div>
-        <div><input type="checkbox" name="Skill Slot 13 Magma Rift" value="03000abc:08" /></div>
-        <div><input type="checkbox" name="Skill Slot 14 Firebrand" value="03000abd:0d" /></div>
-        <div><input type="checkbox" name="Skill Slot 15 Soul Wave" value="03000abe:09" /></div>
-        <div><input type="checkbox" name="Skill Slot 16 Teleport" value="03000abf:0A" /></div>
-        <div><input type="checkbox" name="Skill Slot 17 Soul Edge" value="03000ac0:0B" /></div>
-        <div><input type="checkbox" name="Skill Slot 18 Wild tiger strike (???)" value="03000ac1:12" /></div>
-        <div><input type="checkbox" name="Skill Slot 19 Psion Kick (Psion Bolt +Dual Kick)" value="03000ac2:13" /></div>
-        <div><input type="checkbox" name="Skill Slot 20 Mecha Blade (Psion Bolt+Tiger Teeth)" value="03000ac3:14" /></div>
-        <div><input type="checkbox" name="Skill Slot 21 Psion Storm (Psion Bolt+Blade Storm)" value="03000ac4:15" /></div>
-        <div><input type="checkbox" name="Skill Slot 22 Magma Bolt (Psion Bolt+Magma Rift)" value="03000ac5:16" /></div>
-        <div><input type="checkbox" name="Skill Slot 23 Lion Lunge (Lionheart+Dual Kick)" value="03000ac6:17" /></div>
-        <div><input type="checkbox" name="Skill Slot 24 Lion Teeth (Lionheart +Tiger Teeth)" value="03000ac7:18" /></div>
-        <div><input type="checkbox" name="Skill Slot 25 Lion Claws (Lionheart +Blade Storm)" value="03000ac8:19" /></div>
-        <div><input type="checkbox" name="Skill Slot 26 Lion Flare(Lionheart + Magma Rift)" value="03000ac9:1a" /></div>
-        <div><input type="checkbox" name="Skill Slot 27 Bolt Crash (Lightning+Dual Kick)" value="03000aca:1b" /></div>
-        <div><input type="checkbox" name="Skill Slot 28 Thor's Wrath(Lightning+Tiger Teeth)" value="03000acb:1c" /></div>
-        <div><input type="checkbox" name="Skill Slot 29 Tempest (Lightning+Blade Storm)" value="03000acc:1d" /></div>
-        <div><input type="checkbox" name="Skill Slot 30 Earth's Rage(Lightning +Magma Rift)" value="03000acd:1e" /></div>
-        <div><input type="checkbox" name="Skill Slot 31 Flare Talon (Phoenix+Dual Kick)" value="03000ace:1f" /></div>
-        <div><input type="checkbox" name="Skill Slot 32 Odin's Wrath (Phoenix+Tiger Teeth)" value="03000acf:20" /></div>
-        <div><input type="checkbox" name="Skill Slot 33 Burning Soul (Phoenix+Blade storm)" value="03000ad0:21" /></div>
-        <div><input type="checkbox" name="Skill Slot 34 Cinder Hawk (Phoneix+Magma Rift)" value="03000ad1:22" /></div>
-        <div><input type="checkbox" name="Skill Slot 35 Soul Forge (Soul wave+Soul Edge)" value="03000ad2:23" /></div>
-        <div><input type="checkbox" name="Skill Slot 36 Soul Strike (Teleport+Soul Wave)" value="03000ad3:24" /></div>
-        <div class="skillname">Chester</div>
-        <div><input type="checkbox" name="Crimson Lotus" value="03000d40:25" /></div>
-        <div><input type="checkbox" name="Frozen Fang" value="03000d41:26" /></div>
-        <div><input type="checkbox" name="Thundering Sky" value="03000d42:27" /></div>
-        <div><input type="checkbox" name="Shock Wave" value="03000d43:2a" /></div>
-        <div><input type="checkbox" name="Quaking Sky" value="03000d44:2b" /></div>
-        <div><input type="checkbox" name="Eagle Wing" value="03000d45:28" /></div>
-        <div><input type="checkbox" name="Rapid wind" value="03000d46:29" /></div>
-        <div><input type="checkbox" name="Giant Fang" value="03000d47:2c" /></div>
-        <div><input type="checkbox" name="Dragon Slay" value="03000d48:2d" /></div>
-        <div class="skillname">Mint</div>
-        <div><input type="checkbox" name="First Aid" value="03000b54:5c" /></div>
-        <div><input type="checkbox" name="Pico Hammer" value="03000b55:64" /></div>
-        <div><input type="checkbox" name="Charge" value="03000b56:6a" /></div>
-        <div><input type="checkbox" name="Deep Mist" value="03000b57:67" /></div>
-        <div><input type="checkbox" name="Heal" value="03000b58:5d" /></div>
-        <div><input type="checkbox" name="Acid Rain" value="03000b59:66" /></div>
-        <div><input type="checkbox" name="Antidote" value="03000b5a:61" /></div>
-        <div><input type="checkbox" name="Nurse" value="03000b5b:5f" /></div>
-        <div><input type="checkbox" name="Haste" value="03000b5c:5e" /></div>
-        <div><input type="checkbox" name="Antidote" value="03000b5d:6c" /></div>
-        <div><input type="checkbox" name="Silence" value="03000b5e:68" /></div>
-        <div><input type="checkbox" name="Sharpness" value="03000b5f:6d" /></div>
-        <div><input type="checkbox" name="Recover" value="03000b60:62" /></div>
-        <div><input type="checkbox" name="Pico-pico hammer" value="03000b61:65" /></div>
-        <div><input type="checkbox" name="Barrier" value="03000b62:6b" /></div>
-        <div><input type="checkbox" name="Raise dead" value="03000b63:63" /></div>
-        <div><input type="checkbox" name="Ressurection" value="03000b64:60" /></div>
-        <div><input type="checkbox" name="Time Stop" value="03000b65:69" /></div>
-        <div><input type="checkbox" name="Fire Ball" value="03000bf8:37" /></div>
-        <div><input type="checkbox" name="ice needle" value="03000bf9:3e" /></div>
-        <div><input type="checkbox" name="stone blast" value="03000bfa:42" /></div>
-        <div><input type="checkbox" name="lightning" value="03000bfb:3b" /></div>
-        <div><input type="checkbox" name="distortion" value="03000bfc:46" /></div>
-        <div><input type="checkbox" name="grave" value="03000bfd:43" /></div>
-        <div><input type="checkbox" name="ice tornado" value="03000bfe:3f" /></div>
-        <div><input type="checkbox" name="eruption" value="03000bff:38" /></div>
-        <div><input type="checkbox" name="tractor beam" value="03000c00:4c" /></div>
-        <div><input type="checkbox" name="thunder blade" value="03000c01:3c" /></div>
-        <div><input type="checkbox" name="cyclone" value="03000c02:47" /></div>
-        <div><input type="checkbox" name="ray" value="03000c03:4a" /></div>
-        <div><input type="checkbox" name="firestorm" value="03000c04:39" /></div>
-        <div><input type="checkbox" name="Rock Mountain" value="03000c05:44" /></div>
-        <div><input type="checkbox" name="Tempst" value="03000c06:48" /></div>
-        <div><input type="checkbox" name="Maelstorm" value="03000c07:40" /></div>
-        <div><input type="checkbox" name="Earthquake" value="03000c08:45" /></div>
-        <div><input type="checkbox" name="God Breath" value="03000c09:49" /></div>
-        <div><input type="checkbox" name="Explode" value="03000c0a:3a" /></div>
-        <div><input type="checkbox" name="Indignation" value="03000c0b:3d" /></div>
-        <div><input type="checkbox" name="Tidal Wave" value="03000c0c:41" /></div>
-        <div><input type="checkbox" name="Black hole" value="03000c0d:4e" /></div>
-        <div><input type="checkbox" name="Meteo-swarm" value="03000c0e:4d" /></div>
-        <div><input type="checkbox" name="Extinction" value="03000c0f:4b" /></div>
-        <div><input type="checkbox" name="Sylph" value="03000c9c:4f" /></div>
-        <div><input type="checkbox" name="Undine" value="03001c9c:50" /></div>
-        <div><input type="checkbox" name="Gnome" value="03002c9c:51" /></div>
-        <div><input type="checkbox" name="Ifrit" value="03003c9c:52" /></div>
-        <div><input type="checkbox" name="Maxwell" value="03004c9c:53" /></div>
-        <div><input type="checkbox" name="Luna" value="03005c9c:54" /></div>
-        <div><input type="checkbox" name="Shadow" value="03006c9c:55" /></div>
-        <div><input type="checkbox" name="Aska" value="03007c9c:56" /></div>
-        <div><input type="checkbox" name="Volt" value="03008c9c:57" /></div>
-        <div><input type="checkbox" name="Origin" value="03009c9c:58" /></div>
-        <div><input type="checkbox" name="Gremlin Lair" value="03010c9c:59" /></div>
-        <div><input type="checkbox" name="Chamleon" value="03011c9c:5a" /></div>
-        <div><input type="checkbox" name="Pluto" value="03012c9c:5b" /></div>
-        <div><input type="checkbox" name="utsusemi" value="03000DE4:2E" /></div>
-        <div><input type="checkbox" name="shiranui" value="03000DE5:32" /></div>
-        <div><input type="checkbox" name="izunaotoshi" value="03000DE6:30" /></div>
-        <div><input type="checkbox" name="hagakure" value="03000DE7:31" /></div>
-        <div><input type="checkbox" name="masonjushaku" value="03000DE8:33" /></div>
-        <div><input type="checkbox" name="kamaitachi" value="03000DE9:35" /></div>
-        <div><input type="checkbox" name="raiden" value="03000DEA:34" /></div>
-        <div><input type="checkbox" name="samidare" value="03000DEB:2F" /></div>
-        <div><input type="checkbox" name="jiraiya" value="03000DEC:36" /></div>
+          <div>Skills</div>
+          <div class="comment">These skills are laid out in the order that the game has them, but it doesn't have to be this order. Note that a lot of skills, particularly magic, can be used by anyone. Also, characters that are not Cless can often have room to hold extra skills. Ex. 0301d49:69 will give chester time stop after his last skill.</div>
+          <div class="name">Cless</div>
+          <div><input type="checkbox" name="Slot 1 Psion Bolt" value="03000ab0:01" /></div>
+          <div><input type="checkbox" name="Slot 2 Dual Kick" value="03000ab1:02" /></div>
+          <div><input type="checkbox" name="Slot 3 Lightning Bolt" value="03000ab2:03" /></div>
+          <div><input type="checkbox" name="Slot 4 Blade Storm" value="03000ab3:04" /></div>
+          <div><input type="checkbox" name="Slot 5 Tiger teeth" value="03000ab4:05" /></div>
+          <div><input type="checkbox" name="Slot 6 Focus" value="03000ab5:10" /></div>
+          <div><input type="checkbox" name="Slot 7 Phoenix" value="03000ab6:06" /></div>
+          <div><input type="checkbox" name="Slot 8 Gale Shield" value="03000ab7:0e" /></div>
+          <div><input type="checkbox" name="Slot 9 Fury Slash" value="03000ab8:0c" /></div>
+          <div><input type="checkbox" name="Slot 10 Eir's Love" value="03000ab9:11" /></div>
+          <div><input type="checkbox" name="Slot 11 Lionheart" value="03000aba:07" /></div>
+          <div><input type="checkbox" name="Slot 12 Focus More" value="03000abb:0f" /></div>
+          <div><input type="checkbox" name="Slot 13 Magma Rift" value="03000abc:08" /></div>
+          <div><input type="checkbox" name="Slot 14 Firebrand" value="03000abd:0d" /></div>
+          <div><input type="checkbox" name="Slot 15 Soul Wave" value="03000abe:09" /></div>
+          <div><input type="checkbox" name="Slot 16 Teleport" value="03000abf:0A" /></div>
+          <div><input type="checkbox" name="Slot 17 Soul Edge" value="03000ac0:0B" /></div>
+          <div><input type="checkbox" name="Slot 18 Wild tiger strike (???)" value="03000ac1:12" /></div>
+          <div><input type="checkbox" name="Slot 19 Psion Kick (Psion Bolt +Dual Kick)" value="03000ac2:13" /></div>
+          <div><input type="checkbox" name="Slot 20 Mecha Blade (Psion Bolt+Tiger Teeth)" value="03000ac3:14" /></div>
+          <div><input type="checkbox" name="Slot 21 Psion Storm (Psion Bolt+Blade Storm)" value="03000ac4:15" /></div>
+          <div><input type="checkbox" name="Slot 22 Magma Bolt (Psion Bolt+Magma Rift)" value="03000ac5:16" /></div>
+          <div><input type="checkbox" name="Slot 23 Lion Lunge (Lionheart+Dual Kick)" value="03000ac6:17" /></div>
+          <div><input type="checkbox" name="Slot 24 Lion Teeth (Lionheart +Tiger Teeth)" value="03000ac7:18" /></div>
+          <div><input type="checkbox" name="Slot 25 Lion Claws (Lionheart +Blade Storm)" value="03000ac8:19" /></div>
+          <div><input type="checkbox" name="Slot 26 Lion Flare(Lionheart + Magma Rift)" value="03000ac9:1a" /></div>
+          <div><input type="checkbox" name="Slot 27 Bolt Crash (Lightning+Dual Kick)" value="03000aca:1b" /></div>
+          <div><input type="checkbox" name="Slot 28 Thor's Wrath(Lightning+Tiger Teeth)" value="03000acb:1c" /></div>
+          <div><input type="checkbox" name="Slot 29 Tempest (Lightning+Blade Storm)" value="03000acc:1d" /></div>
+          <div><input type="checkbox" name="Slot 30 Earth's Rage(Lightning +Magma Rift)" value="03000acd:1e" /></div>
+          <div><input type="checkbox" name="Slot 31 Flare Talon (Phoenix+Dual Kick)" value="03000ace:1f" /></div>
+          <div><input type="checkbox" name="Slot 32 Odin's Wrath (Phoenix+Tiger Teeth)" value="03000acf:20" /></div>
+          <div><input type="checkbox" name="Slot 33 Burning Soul (Phoenix+Blade storm)" value="03000ad0:21" /></div>
+          <div><input type="checkbox" name="Slot 34 Cinder Hawk (Phoneix+Magma Rift)" value="03000ad1:22" /></div>
+          <div><input type="checkbox" name="Slot 35 Soul Forge (Soul wave+Soul Edge)" value="03000ad2:23" /></div>
+          <div><input type="checkbox" name="Slot 36 Soul Strike (Teleport+Soul Wave)" value="03000ad3:24" /></div>
+          <div class="name">Chester</div>
+          <div><input type="checkbox" name="Slot 1 Crimson Lotus" value="03000d40:25" /></div>
+          <div><input type="checkbox" name="Slot 2 Frozen Fang" value="03000d41:26" /></div>
+          <div><input type="checkbox" name="Slot 3 Thundering Sky" value="03000d42:27" /></div>
+          <div><input type="checkbox" name="Slot 4 Shock Wave" value="03000d43:2a" /></div>
+          <div><input type="checkbox" name="Slot 5 Quaking Sky" value="03000d44:2b" /></div>
+          <div><input type="checkbox" name="Slot 6 Eagle Wing" value="03000d45:28" /></div>
+          <div><input type="checkbox" name="Slot 7 Rapid wind" value="03000d46:29" /></div>
+          <div><input type="checkbox" name="Slot 8 Giant Fang" value="03000d47:2c" /></div>
+          <div><input type="checkbox" name="Slot 9 Dragon Slay" value="03000d48:2d" /></div>
+          <div class="name">Mint</div>
+          <div><input type="checkbox" name="Slot 1 First Aid" value="03000b54:5c" /></div>
+          <div><input type="checkbox" name="Slot 2 Pico Hammer" value="03000b55:64" /></div>
+          <div><input type="checkbox" name="Slot 3 Charge" value="03000b56:6a" /></div>
+          <div><input type="checkbox" name="Slot 4 Deep Mist" value="03000b57:67" /></div>
+          <div><input type="checkbox" name="Slot 5 Heal" value="03000b58:5d" /></div>
+          <div><input type="checkbox" name="Slot 6 Acid Rain" value="03000b59:66" /></div>
+          <div><input type="checkbox" name="Slot 7 Antidote" value="03000b5a:61" /></div>
+          <div><input type="checkbox" name="Slot 8 Nurse" value="03000b5b:5f" /></div>
+          <div><input type="checkbox" name="Slot 9 Haste" value="03000b5c:5e" /></div>
+          <div><input type="checkbox" name="Slot 10 Antidote" value="03000b5d:6c" /></div>
+          <div><input type="checkbox" name="Slot 11 Silence" value="03000b5e:68" /></div>
+          <div><input type="checkbox" name="Slot 12 Sharpness" value="03000b5f:6d" /></div>
+          <div><input type="checkbox" name="Slot 13 Recover" value="03000b60:62" /></div>
+          <div><input type="checkbox" name="Slot 14 Pico-pico hammer" value="03000b61:65" /></div>
+          <div><input type="checkbox" name="Slot 15 Barrier" value="03000b62:6b" /></div>
+          <div><input type="checkbox" name="Slot 16 Raise dead" value="03000b63:63" /></div>
+          <div><input type="checkbox" name="Slot 17 Ressurection" value="03000b64:60" /></div>
+          <div><input type="checkbox" name="Slot 18 Time Stop" value="03000b65:69" /></div>
+          <div class="name">Arche</div>
+          <div><input type="checkbox" name="Slot 1 Fire Ball" value="03000bf8:37" /></div>
+          <div><input type="checkbox" name="Slot 2 ice needle" value="03000bf9:3e" /></div>
+          <div><input type="checkbox" name="Slot 3 stone blast" value="03000bfa:42" /></div>
+          <div><input type="checkbox" name="Slot 4 lightning" value="03000bfb:3b" /></div>
+          <div><input type="checkbox" name="Slot 5 distortion" value="03000bfc:46" /></div>
+          <div><input type="checkbox" name="Slot 6 grave" value="03000bfd:43" /></div>
+          <div><input type="checkbox" name="Slot 7 ice tornado" value="03000bfe:3f" /></div>
+          <div><input type="checkbox" name="Slot 8 eruption" value="03000bff:38" /></div>
+          <div><input type="checkbox" name="Slot 9 tractor beam" value="03000c00:4c" /></div>
+          <div><input type="checkbox" name="Slot 10 thunder blade" value="03000c01:3c" /></div>
+          <div><input type="checkbox" name="Slot 11 cyclone" value="03000c02:47" /></div>
+          <div><input type="checkbox" name="Slot 12 ray" value="03000c03:4a" /></div>
+          <div><input type="checkbox" name="Slot 13 firestorm" value="03000c04:39" /></div>
+          <div><input type="checkbox" name="Slot 14 Rock Mountain" value="03000c05:44" /></div>
+          <div><input type="checkbox" name="Slot 15 Tempst" value="03000c06:48" /></div>
+          <div><input type="checkbox" name="Slot 16 Maelstorm" value="03000c07:40" /></div>
+          <div><input type="checkbox" name="Slot 17 Earthquake" value="03000c08:45" /></div>
+          <div><input type="checkbox" name="Slot 18 God Breath" value="03000c09:49" /></div>
+          <div><input type="checkbox" name="Slot 19 Explode" value="03000c0a:3a" /></div>
+          <div><input type="checkbox" name="Slot 20 Indignation" value="03000c0b:3d" /></div>
+          <div><input type="checkbox" name="Slot 21 Tidal Wave" value="03000c0c:41" /></div>
+          <div><input type="checkbox" name="Slot 22 Black hole" value="03000c0d:4e" /></div>
+          <div><input type="checkbox" name="Slot 23 Meteo-swarm" value="03000c0e:4d" /></div>
+          <div><input type="checkbox" name="Slot 24 Extinction" value="03000c0f:4b" /></div>
+          <div class="name">Klarth</div>
+          <div><input type="checkbox" name="Slot 1 Sylph" value="03000c9c:4f" /></div>
+          <div><input type="checkbox" name="Slot 2 Undine" value="03000c9d:50" /></div>
+          <div><input type="checkbox" name="Slot 3 Gnome" value="03000c9e:51" /></div>
+          <div><input type="checkbox" name="Slot 4 Ifrit" value="03000c9f:52" /></div>
+          <div><input type="checkbox" name="Slot 5 Maxwell" value="03000ca0:53" /></div>
+          <div><input type="checkbox" name="Slot 6 Luna" value="03000ca1:54" /></div>
+          <div><input type="checkbox" name="Slot 7 Shadow" value="03000ca2:55" /></div>
+          <div><input type="checkbox" name="Slot 8 Aska" value="03000ca3:56" /></div>
+          <div><input type="checkbox" name="Slot 9 Volt" value="03000ca4:57" /></div>
+          <div><input type="checkbox" name="Slot 10 Origin" value="03000ca5:58" /></div>
+          <div><input type="checkbox" name="Slot 11 Gremlin Lair" value="03000ca6:59" /></div>
+          <div><input type="checkbox" name="Slot 12 Chamleon" value="03000ca7:5a" /></div>
+          <div><input type="checkbox" name="Slot 13 Pluto" value="03000ca8:5b" /></div>
+          <div class="name">Suzu</div>
+          <div><input type="checkbox" name="Slot 1 utsusemi" value="03000DE4:2E" /></div>
+          <div><input type="checkbox" name="Slot 2 shiranui" value="03000DE5:32" /></div>
+          <div><input type="checkbox" name="Slot 3 izunaotoshi" value="03000DE6:30" /></div>
+          <div><input type="checkbox" name="Slot 4 hagakure" value="03000DE7:31" /></div>
+          <div><input type="checkbox" name="Slot 5 masonjushaku" value="03000DE8:33" /></div>
+          <div><input type="checkbox" name="Slot 6 kamaitachi" value="03000DE9:35" /></div>
+          <div><input type="checkbox" name="Slot 7 raiden" value="03000DEA:34" /></div>
+          <div><input type="checkbox" name="Slot 8 samidare" value="03000DEB:2F" /></div>
+          <div><input type="checkbox" name="Slot 9 jiraiya" value="03000DEC:36" /></div>
+        </div>
+
+        <div class="codeSect">
+          <div class="title">Skill Exp</div>
+          <div class="comment">Set to 0x63/99. Use once to master. Master at 0xFF/255. The flag for enabling a combo is different from the amount used. Mastering the skills for a combo will enable the combo. But you can enable it directly with the "Combo Enable" codes below.</div>
+          <div><input type="checkbox" name="Psion Bolt " value="030014ec:63" /></div>
+          <div><input type="checkbox" name="Dual Kick" value="030014ed:63" /></div>
+          <div><input type="checkbox" name="Lightning Bolt " value="030014ee:63" /></div>
+          <div><input type="checkbox" name="Blade Storm" value="030014ef:63" /></div>
+          <div><input type="checkbox" name="Tiger teeth" value="030014f0:63" /></div>
+          <div><input type="checkbox" name="Phoenix" value="030014f1:63" /></div>
+          <div><input type="checkbox" name="Lionheart" value="030014f2:63" /></div>
+          <div><input type="checkbox" name="Magma Rift " value="030014f3:63" /></div>
+          <div><input type="checkbox" name="Soul Wave" value="030014f4:63" /></div>
+          <div><input type="checkbox" name="Teleport " value="030014f5:63" /></div>
+          <div><input type="checkbox" name="Soul Edge" value="030014f6:63" /></div>
+          <div class="name">Combo Enable</div>
+          <div class="comment">Even if it doesn't reflect in the menu, when cheat is on, these will be useable in battle.</div>
+          <div><input type="checkbox" name="Psion Kick (Psion Bolt+Dual Kick) " value="030014f8:01" /></div>
+          <div><input type="checkbox" name="Mecha Blade (Psion Bolt+Tiger Teeth) " value="030014f9:01" /></div>
+          <div><input type="checkbox" name="Psion Storm (Psion Bolt+Blade Storm) " value="030014fa:01" /></div>
+          <div><input type="checkbox" name="Magma Bolt (Psion Bolt+Magma Rift) " value="030014fb:01" /></div>
+          <div><input type="checkbox" name="Lion Lunge (Lionheart+Dual Kick) " value="030014fc:01" /></div>
+          <div><input type="checkbox" name="Lion Teeth (Lionheart+Tiger Teeth)" value="030014fd:01" /></div>
+          <div><input type="checkbox" name="Lion Claws (Lionheart+Blade Storm)" value="030014fe:01" /></div>
+          <div><input type="checkbox" name="Lion Flare(Lionheart+Magma Rift) " value="030014ff:01" /></div>
+          <div><input type="checkbox" name="Bolt Crash (Lightning+Dual Kick) " value="03001500:01" /></div>
+          <div><input type="checkbox" name="Thor's Wrath(Lightning+Tiger Teeth)" value="03001501:01" /></div>
+          <div><input type="checkbox" name="Tempest (Lightning+Blade Storm)" value="03001502:01" /></div>
+          <div><input type="checkbox" name="Earth's Rage(Lightning+Magma Rift)" value="03001503:01" /></div>
+          <div><input type="checkbox" name="Flare Talon (Phoenix+Dual Kick)" value="03001504:01" /></div>
+          <div><input type="checkbox" name="Odin's Wrath (Phoenix+Tiger Teeth) " value="03001505:01" /></div>
+          <div><input type="checkbox" name="Burning Soul (Phoenix+Blade storm) " value="03001506:01" /></div>
+          <div><input type="checkbox" name="Cinder Hawk (Phoneix+Magma Rift) " value="03001507:01" /></div>
+          <div><input type="checkbox" name="Soul Forge (Soul wave+Soul Edge) " value="03001508:01" /></div>
+          <div><input type="checkbox" name="Soul Strike (Teleport+Soul Wave) " value="03001509:01" /></div>
+        </div>
+
+        <div class="codeSect">
+          <div class="title">Char mod</div>
+          
+          <div class="title">Chester</div>
+            <div style="margin-bottom: 6px;">Name:&nbsp;
+              <select name="chester" codetype="name" addr="03000cfc"></select>
+              <select name="chester" codetype="name" addr="03000cfd"></select>
+              <select name="chester" codetype="name" addr="03000cfe"></select>
+              <select name="chester" codetype="name" addr="03000cff"></select>
+              <select name="chester" codetype="name" addr="03000d00"></select>
+              <select name="chester" codetype="name" addr="03000d01"></select>
+              <input type="submit" name value="+" />
+            </div>
+            <div><input type="checkbox" name="Level" value="03000cf2:63" /></div>
+            <div><input type="checkbox" name="Exp to go" value="03000cf8:01" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="checkbox" name="Str" value="03000d10:00" size="2" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000d04:00" size="2" /></div>
+            <div><input type="checkbox" name="HP max" value="03000d06:00" size="2" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000d08:00" size="2" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000d22:00" size="2" /></div>
+            <div><input type="checkbox" name="Atk" value="03000d24:00" size="2" /></div>
+            <div><input type="checkbox" name="Def" value="03000d26:00" size="2" /></div>
+            <div><input type="checkbox" name="Acc" value="03000d28:00" size="2" /></div>
+            <div><input type="checkbox" name="Eva" value="03000d2a:00" size="2" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000d2c:00" /></div>  
+            <div><input type="checkbox" name="Armor slot" value="03000d2e:00" /></div>  
+            <div><input type="checkbox" name="Shield Slot" value="03000d30:00" /></div>  
+            <div><input type="checkbox" name="Head Slot" value="03000d32:00" /></div>  
+            <div><input type="checkbox" name="Arm slot" value="03000d34:00" /></div>  
+            <div><input type="checkbox" name="Access 1" value="03000d36:00" /></div>  
+            <div><input type="checkbox" name="Access 2" value="03000d38:00" /></div>  
+            <div><input type="checkbox" name="status(00:norm,01:psn,02:prz,04:stn,08:fnt)" value="03000d39:00" /></div>
+
         </div>
 
         <div class="codeSect">
           <div class="title">Items:</div>
-          <div>Inventory: <select id="itemSlot"></select><select id="items"></select><input type="submit" name="" value="+" /></div>
+          <div>Inventory: <select id="itemSlot" size="2"></select><select id="items"></select><input type="submit" name="" value="+" /></div>
         </div>
       </div>
 
@@ -700,8 +991,8 @@
     function fllItem(hsh){
     var arr=Object.keys(hsh);
     var rtrn="";
-      for(i in arr){
-      rtrn+='<option value="'+arr[i]+'">'+arr[i]+'</option>';
+      for(let i in arr){
+      rtrn+='<option value="'+hsh[arr[i]].val+'">'+arr[i]+' ['+hsh[arr[i]].val+']'+'</option>';
       }
     document.getElementById('items').innerHTML=rtrn;
     }
@@ -737,6 +1028,21 @@
       }
     document.getElementById('itemSlot').innerHTML=rtrn;
     }
+
+    //fills the drop down of character for names
+    function nameSlot(){
+    var elArr=document.getElementsByTagName("select");
+    var indcs=Object.keys(chars).sort();
+    var rtrn="";
+      for(let i in indcs){
+      rtrn+='<option value="'+indcs[i]+'">'+chars[indcs[i]]+'</option>';
+      }
+      for(let el of elArr){
+        if(el.getAttribute('codetype')=='name'){
+        el.innerHTML=rtrn;
+        }
+      }
+    }
     
     //every checkbox is code
     function chckBxCodes(){
@@ -752,6 +1058,7 @@
 
     chckBxCodes();
     itemSlot();
+    nameSlot();
     fllItem(itemHash);
 
 
