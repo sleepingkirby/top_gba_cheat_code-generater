@@ -753,12 +753,12 @@
 
           <div style="margin-top: 10px;">What character in what slot?</div>
           <div class="comment">01:Cless, 02:Mint, 03:Arche, 04:Klarth, 05:Chester, 06:Suzu, 07:Ria, 08:Brambart. *Note* Ria and Brambart are NPC's.</div>
-          <div><input type="checkbox" name="1st slot" value="03000f80:01" /></div>
-          <div><input type="checkbox" name="2nd slot" value="03000f82:02" /></div>
-          <div><input type="checkbox" name="3rd slot" value="03000f84:03" /></div>
-          <div><input type="checkbox" name="4th slot" value="03000f86:04" /></div>
-          <div><input type="checkbox" name="5th slot" value="03000f88:05" /></div>
-          <div><input type="checkbox" name="6th slot" value="03000f8A:06" /></div>
+          <div><input type="checkbox" name="1st slot" value="03001530:01" /></div>
+          <div><input type="checkbox" name="2nd slot" value="03001532:02" /></div>
+          <div><input type="checkbox" name="3rd slot" value="03001534:03" /></div>
+          <div><input type="checkbox" name="4th slot" value="03001536:04" /></div>
+          <div><input type="checkbox" name="5th slot" value="03001538:05" /></div>
+          <div><input type="checkbox" name="6th slot" value="0300153A:06" /></div>
 
           <div class="name">Let's go Arche</div>
           <div><input type="checkbox" name="Time (4 seconds)" value="03001731:00" /></div>
@@ -970,9 +970,98 @@
             <div><input type="checkbox" name="Arm slot" value="03000aa4:00" /></div>  
             <div><input type="checkbox" name="Access 1" value="03000aa6:00" /></div>  
             <div><input type="checkbox" name="Access 2" value="03000aa8:00" /></div>  
-            <div><input type="checkbox" name="statu" value="03000aaa:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="checkbox" name="status" value="03000aaa:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
-         
+           <div class="title">Mint</div>
+            <div style="margin-bottom: 6px;">Name:&nbsp;
+              <select name="chester" codetype="name" addr="03000b10"></select>
+              <select name="chester" codetype="name" addr="03000b11"></select>
+              <select name="chester" codetype="name" addr="03000b12"></select>
+              <select name="chester" codetype="name" addr="03000b13"></select>
+              <select name="chester" codetype="name" addr="03000b14"></select>
+              <select name="chester" codetype="name" addr="03000b15"></select>
+              <input type="submit" name value="+" />
+            </div>
+            <div><input type="checkbox" name="Level" value="03000b06:63" /></div>
+            <div><input type="checkbox" name="Exp to go" value="03000b0c:01" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="checkbox" name="Str" value="03000b24:270f" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000b18:270f" /></div>
+            <div><input type="checkbox" name="HP max" value="03000b1a:270f" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000b1c:270f" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000b36:270f" /></div>
+            <div><input type="checkbox" name="Atk" value="03000b38:270f" /></div>
+            <div><input type="checkbox" name="Def" value="03000b3a:270f" /></div>
+            <div><input type="checkbox" name="Acc" value="03000b3c:270f" /></div>
+            <div><input type="checkbox" name="Eva" value="03000b3e:270f" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000b40:00dc" /></div>  
+            <div><input type="checkbox" name="Armor slot" value="03000b42:00" /></div>  
+            <div><input type="checkbox" name="Shield Slot" value="03000b44:00" /></div>  
+            <div><input type="checkbox" name="Head Slot" value="03000b46:00" /></div>  
+            <div><input type="checkbox" name="Arm slot" value="03000b48:00" /></div>  
+            <div><input type="checkbox" name="Access 1" value="03000b4a:00" /></div>  
+            <div><input type="checkbox" name="Access 2" value="03000b4c:00" /></div>  
+            <div><input type="checkbox" name="status" value="03000b4e:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+
+           <div class="title">Arche</div>
+            <div style="margin-bottom: 6px;">Name:&nbsp;
+              <select name="chester" codetype="name" addr="03000bb4"></select>
+              <select name="chester" codetype="name" addr="03000bb5"></select>
+              <select name="chester" codetype="name" addr="03000bb6"></select>
+              <select name="chester" codetype="name" addr="03000bb7"></select>
+              <select name="chester" codetype="name" addr="03000bb8"></select>
+              <select name="chester" codetype="name" addr="03000bb9"></select>
+              <input type="submit" name value="+" />
+            </div>
+            <div><input type="checkbox" name="Level" value="03000baa:63" /></div>
+            <div><input type="checkbox" name="Exp to go" value="03000bb0:01" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="checkbox" name="Str" value="03000bc8:270f" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000bbc:270f" /></div>
+            <div><input type="checkbox" name="HP max" value="03000bbe:270f" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000bc0:270f" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000bda:270f" /></div>
+            <div><input type="checkbox" name="Atk" value="03000bdc:270f" /></div>
+            <div><input type="checkbox" name="Def" value="03000bde:270f" /></div>
+            <div><input type="checkbox" name="Acc" value="03000be0:270f" /></div>
+            <div><input type="checkbox" name="Eva" value="03000be2:270f" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000be4:00dc" /></div>  
+            <div><input type="checkbox" name="Armor slot" value="03000be6:00" /></div>  
+            <div><input type="checkbox" name="Shield Slot" value="03000be8:00" /></div>  
+            <div><input type="checkbox" name="Head Slot" value="03000bea:00" /></div>  
+            <div><input type="checkbox" name="Arm slot" value="03000bec:00" /></div>  
+            <div><input type="checkbox" name="Access 1" value="03000bee:00" /></div>  
+            <div><input type="checkbox" name="Access 2" value="03000bf0:00" /></div>  
+            <div><input type="checkbox" name="status" value="03000bf2:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+
+           <div class="title">Klarth</div>
+            <div style="margin-bottom: 6px;">Name:&nbsp;
+              <select name="chester" codetype="name" addr="03000c58"></select>
+              <select name="chester" codetype="name" addr="03000c59"></select>
+              <select name="chester" codetype="name" addr="03000c5a"></select>
+              <select name="chester" codetype="name" addr="03000c5b"></select>
+              <select name="chester" codetype="name" addr="03000c5c"></select>
+              <select name="chester" codetype="name" addr="03000c5d"></select>
+              <input type="submit" name value="+" />
+            </div>
+            <div><input type="checkbox" name="Level" value="03000c4e:63" /></div>
+            <div><input type="checkbox" name="Exp to go" value="03000c54:01" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="checkbox" name="Str" value="03000c6c:270f" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000c60:270f" /></div>
+            <div><input type="checkbox" name="HP max" value="03000c62:270f" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000c64:270f" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000c7e:270f" /></div>
+            <div><input type="checkbox" name="Atk" value="03000c80:270f" /></div>
+            <div><input type="checkbox" name="Def" value="03000c82:270f" /></div>
+            <div><input type="checkbox" name="Acc" value="03000c84:270f" /></div>
+            <div><input type="checkbox" name="Eva" value="03000c86:270f" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000c88:00dc" /></div>  
+            <div><input type="checkbox" name="Armor slot" value="03000c8a:00" /></div>  
+            <div><input type="checkbox" name="Shield Slot" value="03000c8c:00" /></div>  
+            <div><input type="checkbox" name="Head Slot" value="03000c8e:00" /></div>  
+            <div><input type="checkbox" name="Arm slot" value="03000c90:00" /></div>  
+            <div><input type="checkbox" name="Access 1" value="03000c92:00" /></div>  
+            <div><input type="checkbox" name="Access 2" value="03000c94:00" /></div>  
+            <div><input type="checkbox" name="status" value="03000c96:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+
           <div class="title">Chester</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000cfc"></select>
@@ -1001,7 +1090,39 @@
             <div><input type="checkbox" name="Arm slot" value="03000d34:00" /></div>  
             <div><input type="checkbox" name="Access 1" value="03000d36:00" /></div>  
             <div><input type="checkbox" name="Access 2" value="03000d38:00" /></div>  
-            <div><input type="checkbox" name="statu" value="03000d3a:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="checkbox" name="Status" value="03000d3a:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+
+          <div class="title">Suzu</div>
+            <div style="margin-bottom: 6px;">Name:&nbsp;
+              <select name="chester" codetype="name" addr="03000da0"></select>
+              <select name="chester" codetype="name" addr="03000da1"></select>
+              <select name="chester" codetype="name" addr="03000da2"></select>
+              <select name="chester" codetype="name" addr="03000da3"></select>
+              <select name="chester" codetype="name" addr="03000da4"></select>
+              <select name="chester" codetype="name" addr="03000da5"></select>
+              <input type="submit" name value="+" />
+            </div>
+            <div><input type="checkbox" name="Level" value="03000d96:63" /></div>
+            <div><input type="checkbox" name="Exp to go" value="03000d9c:01" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="checkbox" name="Str" value="03000db4:270f" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000da8:270f" /></div>
+            <div><input type="checkbox" name="HP max" value="03000daa:270f" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000dac:270f" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000dc6:270f" /></div>
+            <div><input type="checkbox" name="Atk" value="03000dc8:270f" /></div>
+            <div><input type="checkbox" name="Def" value="03000dca:270f" /></div>
+            <div><input type="checkbox" name="Acc" value="03000dcc:270f" /></div>
+            <div><input type="checkbox" name="Eva" value="03000dce:270f" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000dd0:00dc" /></div>  
+            <div><input type="checkbox" name="Armor slot" value="03000dd2:00" /></div>  
+            <div><input type="checkbox" name="Shield Slot" value="03000dd4:00" /></div>  
+            <div><input type="checkbox" name="Head Slot" value="03000dd6:00" /></div>  
+            <div><input type="checkbox" name="Arm slot" value="03000dd8:00" /></div>  
+            <div><input type="checkbox" name="Access 1" value="03000dda:00" /></div>  
+            <div><input type="checkbox" name="Access 2" value="03000ddc:00" /></div>  
+            <div><input type="checkbox" name="Status" value="03000dde:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+
+
 
         </div>
 
