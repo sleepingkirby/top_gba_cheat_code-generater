@@ -493,217 +493,245 @@
     itemModAddrMax=Object.keys(itemHash).length;
 
     var chars={};
-    chars['00']='end name';
-    chars['0b']='、';
-    chars['0c']='。';
-    chars['0d']='!';
-    chars['0e']='"';
-    chars['0f']='『';
-    chars['10']='』';
-    chars['11']='%';
-    chars['12']='&';
-    chars['13']='♥';
-    chars['14']='(';
-    chars['15']=')';
-    chars['16']='~';
-    chars['17']='+';
-    chars['18']=',';
-    chars['19']='.';
-    chars['1a']='/';
-    chars['1b']='0';
-    chars['1c']='1';
-    chars['1d']='2';
-    chars['1e']='3';
-    chars['1f']='4';
-    chars['20']='5';
-    chars['21']='6';
-    chars['22']='7';
-    chars['23']='8';
-    chars['24']='9';
-    chars['25']='♪';
-    chars['26']=':';
-    chars['27']='<';
-    chars['28']='=';
-    chars['29']='>';
-    chars['2a']='?';
-    chars['2b']='A';
-    chars['2c']='B';
-    chars['2d']='C';
-    chars['2e']='D';
-    chars['2f']='E';
-    chars['30']='F';
-    chars['31']='G';
-    chars['32']='H';
-    chars['33']='I';
-    chars['34']='J';
-    chars['35']='K';
-    chars['36']='L';
-    chars['37']='M';
-    chars['38']='N';
-    chars['39']='O';
-    chars['3a']='P';
-    chars['3b']='Q';
-    chars['3c']='R';
-    chars['3d']='S';
-    chars['3e']='T';
-    chars['3f']='U';
-    chars['40']='V';
-    chars['41']='W';
-    chars['42']='X';
-    chars['43']='Y';
-    chars['44']='Z';
-    chars['45']='○';
-    chars['46']='ᳵ';
-    chars['47']='「';
-    chars['48']='」';
-    chars['49']='.';
-    chars['4a']='-';
-    chars['4b']='ヲ';
-    chars['4c']='ァ';
-    chars['4d']='ィ';
-    chars['4e']='ゥ';
-    chars['4f']='ェ';
-    chars['50']='ォ';
-    chars['51']='ャ';
-    chars['52']='ュ';
-    chars['53']='ョ';
-    chars['54']='ッ';
-    chars['55']='ア';
-    chars['56']='イ';
-    chars['57']='ウ';
-    chars['58']='エ';
-    chars['59']='オ';
-    chars['5a']='カ';
-    chars['5b']='キ';
-    chars['5c']='ク';
-    chars['5d']='ケ';
-    chars['5e']='コ';
-    chars['5f']='サ';
-    chars['60']='シ';
-    chars['61']='ス';
-    chars['62']='セ';
-    chars['63']='ソ';
-    chars['64']='タ';
-    chars['65']='チ';
-    chars['66']='ツ';
-    chars['67']='テ';
-    chars['68']='ト';
-    chars['69']='ナ';
-    chars['6a']='ニ';
-    chars['6b']='ヌ';
-    chars['6c']='ネ';
-    chars['6d']='ノ';
-    chars['6e']='ハ';
-    chars['6f']='ヒ';
-    chars['70']='フ';
-    chars['71']='ヘ';
-    chars['72']='ホ';
-    chars['73']='マ';
-    chars['74']='ミ';
-    chars['75']='ム';
-    chars['76']='メ';
-    chars['77']='モ';
-    chars['78']='ヤ';
-    chars['79']='ユ';
-    chars['7a']='ヨ';
-    chars['7b']='ラ';
-    chars['7c']='リ';
-    chars['7d']='ル';
-    chars['7e']='レ';
-    chars['7f']='ロ';
-    chars['80']='ワ';
-    chars['81']='ン';
-    chars['82']='を';
-    chars['83']='ぁ';
-    chars['84']='ぃ';
-    chars['85']='ぅ';
-    chars['86']='ぇ';
-    chars['87']='ぉ';
-    chars['88']='ゃ';
-    chars['89']='ゅ';
-    chars['8a']='ょ';
-    chars['8b']='っ';
-    chars['8c']='あ';
-    chars['8d']='い';
-    chars['8e']='う';
-    chars['8f']='え';
-    chars['90']='お';
-    chars['91']='か';
-    chars['92']='き';
-    chars['93']='く';
-    chars['94']='け';
-    chars['95']='こ';
-    chars['96']='さ';
-    chars['97']='し';
-    chars['98']='す';
-    chars['99']='せ';
-    chars['9a']='そ';
-    chars['9b']='た';
-    chars['9c']='ち';
-    chars['9d']='つ';
-    chars['9e']='て';
-    chars['9f']='と';
-    chars['a0']='な';
-    chars['a1']='に';
-    chars['a2']='ぬ';
-    chars['a3']='ね';
-    chars['a4']='の';
-    chars['a5']='は';
-    chars['a6']='ひ';
-    chars['a7']='ふ';
-    chars['a8']='へ';
-    chars['a9']='ほ';
-    chars['aa']='ま';
-    chars['ab']='み';
-    chars['ac']='む';
-    chars['ad']='め';
-    chars['ae']='も';
-    chars['af']='や';
-    chars['b0']='ゆ';
-    chars['b1']='よ';
-    chars['b2']='ら';
-    chars['b3']='り';
-    chars['b4']='る';
-    chars['b5']='れ';
-    chars['b6']='ろ';
-    chars['b7']='わ';
-    chars['b8']='ん';
-    chars['b9']='💍';
-    chars['ba']='△';
-    chars['bb']='⒞';
-    chars['bc']='⒞(shaded)';
-    chars['bd']='·';
-    chars['be']='★';
-    chars['bf']='□';
-    chars['c0']='➡';
-    chars['c1']='【';
-    chars['c2']='】';
-    chars['c3']='ガ';
-    chars['c4']='ギ';
-    chars['c5']='グ';
-    chars['c6']='ゲ';
-    chars['c7']='ゴ';
-    chars['c8']='ザ';
-    chars['c9']='ジ';
-    chars['ca']='ズ';
-    chars['cb']='ゼ';
-    chars['cc']='ゾ';
-    chars['cd']='ダ';
-    chars['ce']='ヂ';
-    chars['cf']='ヅ';
-    chars['d0']='デ';
-    chars['d1']='ド';
-    chars['d2']='バ';
-    chars['d3']='ビ';
-    chars['d4']='ブ';
-    chars['d5']='ベ';
-    chars['d6']='ボ';
-    chars['d7']='パ';
-    chars['d8']='ピ';
-    chars['d9']='プ';
-    chars['da']='ペ';
-    chars['db']='ポ';
-    chars['dc']='ヷ';
+    chars['11']='、';
+    chars['12']='。';
+    chars['13']='!';
+    chars['14']='"';
+    chars['15']='『';
+    chars['16']='』';
+    chars['17']='%';
+    chars['18']='&';
+    chars['19']='♥';
+    chars['1a']='(';
+    chars['1b']=')';
+    chars['1c']='~';
+    chars['1d']='+';
+    chars['1e']=',';
+    chars['1f']='-';
+    chars['20']='.';
+    chars['21']='/';
+    chars['22']='0';
+    chars['23']='1';
+    chars['24']='2';
+    chars['25']='3';
+    chars['26']='4';
+    chars['27']='5';
+    chars['28']='6';
+    chars['29']='7';
+    chars['2a']='8';
+    chars['2b']='9';
+    chars['2c']='♪';
+    chars['2d']=':';
+    chars['2e']='<';
+    chars['2f']='=';
+    chars['30']='>';
+    chars['31']='?';
+    chars['32']='A';
+    chars['33']='B';
+    chars['34']='C';
+    chars['35']='D';
+    chars['36']='E';
+    chars['37']='F';
+    chars['38']='G';
+    chars['39']='H';
+    chars['3a']='I';
+    chars['3b']='J';
+    chars['3c']='K';
+    chars['3d']='L';
+    chars['3e']='M';
+    chars['3f']='N';
+    chars['40']='O';
+    chars['41']='P';
+    chars['42']='Q';
+    chars['43']='R';
+    chars['44']='S';
+    chars['45']='T';
+    chars['46']='U';
+    chars['47']='V';
+    chars['48']='W';
+    chars['49']='X';
+    chars['4a']='Y';
+    chars['4b']='Z';
+    chars['4c']='○';
+    chars['4d']='ᳵ';
+    chars['4e']='「';
+    chars['4f']='」';
+    chars['50']='.';
+    chars['51']='-';
+    chars['52']='ヲ';
+    chars['53']='ァ';
+    chars['54']='ィ';
+    chars['55']='ゥ';
+    chars['56']='ェ';
+    chars['57']='ォ';
+    chars['58']='ャ';
+    chars['59']='ュ';
+    chars['5a']='ョ';
+    chars['5b']='ッ';
+    chars['5c']='ア';
+    chars['5d']='イ';
+    chars['5e']='ウ';
+    chars['5f']='エ';
+    chars['60']='オ';
+    chars['61']='カ';
+    chars['62']='キ';
+    chars['63']='ク';
+    chars['64']='ケ';
+    chars['65']='コ';
+    chars['66']='サ';
+    chars['67']='シ';
+    chars['68']='ス';
+    chars['69']='セ';
+    chars['6a']='ソ';
+    chars['6b']='タ';
+    chars['6c']='チ';
+    chars['6d']='ツ';
+    chars['6e']='テ';
+    chars['6f']='ト';
+    chars['70']='ナ';
+    chars['71']='ニ';
+    chars['72']='ヌ';
+    chars['73']='ネ';
+    chars['74']='ノ';
+    chars['75']='ハ';
+    chars['76']='ヒ';
+    chars['77']='フ';
+    chars['78']='ヘ';
+    chars['79']='ホ';
+    chars['7a']='マ';
+    chars['7b']='ミ';
+    chars['7c']='ム';
+    chars['7d']='メ';
+    chars['7e']='モ';
+    chars['7f']='ヤ';
+    chars['80']='ユ';
+    chars['81']='ヨ';
+    chars['82']='ラ';
+    chars['83']='リ';
+    chars['84']='ル';
+    chars['85']='レ';
+    chars['86']='ロ';
+    chars['87']='ワ';
+    chars['88']='ン';
+    chars['89']='を';
+    chars['8a']='ぁ';
+    chars['8b']='ぃ';
+    chars['8c']='ぅ';
+    chars['8d']='ぇ';
+    chars['8e']='ぉ';
+    chars['8f']='ゃ';
+    chars['90']='ゅ';
+    chars['91']='ょ';
+    chars['92']='っ';
+    chars['93']='あ';
+    chars['94']='い';
+    chars['95']='う';
+    chars['96']='え';
+    chars['97']='お';
+    chars['98']='か';
+    chars['99']='き';
+    chars['9a']='く';
+    chars['9b']='け';
+    chars['9c']='こ';
+    chars['9d']='さ';
+    chars['9e']='し';
+    chars['9f']='す';
+    chars['a0']='せ';
+    chars['a1']='そ';
+    chars['a2']='た';
+    chars['a3']='ち';
+    chars['a4']='つ';
+    chars['a5']='て';
+    chars['a6']='と';
+    chars['a7']='な';
+    chars['a8']='に';
+    chars['a9']='ぬ';
+    chars['aa']='ね';
+    chars['ab']='の';
+    chars['ac']='は';
+    chars['ad']='ひ';
+    chars['ae']='ふ';
+    chars['af']='へ';
+    chars['b0']='ほ';
+    chars['b1']='ま';
+    chars['b2']='み';
+    chars['b3']='む';
+    chars['b4']='め';
+    chars['b5']='も';
+    chars['b6']='や';
+    chars['b7']='ゆ';
+    chars['b8']='よ';
+    chars['b9']='ら';
+    chars['ba']='り';
+    chars['bb']='る';
+    chars['bc']='れ';
+    chars['bd']='ろ';
+    chars['be']='わ';
+    chars['bf']='ん';
+    chars['c0']='💍';
+    chars['c1']='△';
+    chars['c2']='⒞';
+    chars['c3']='⒞(shaded)';
+    chars['c4']='·';
+    chars['c5']='★';
+    chars['c6']='⬛';
+    chars['c7']='➡';
+    chars['c8']='【';
+    chars['c9']='】';
+    chars['ca']='blank';
+    chars['cb']='blank';
+    chars['cc']='blank';
+    chars['cd']='ガ';
+    chars['ce']='ギ';
+    chars['cf']='グ';
+    chars['d0']='ゲ';
+    chars['d1']='ゴ';
+    chars['d2']='ザ';
+    chars['d3']='ジ';
+    chars['d4']='ズ';
+    chars['d5']='ゼ';
+    chars['d6']='ゾ';
+    chars['d7']='ダ';
+    chars['d8']='ヂ';
+    chars['d9']='ヅ';
+    chars['da']='デ';
+    chars['db']='ド';
+    chars['dc']='バ';
+    chars['dd']='ビ';
+    chars['de']='ブ';
+    chars['df']='ベ';
+    chars['e0']='ボ';
+    chars['e1']='パ';
+    chars['e2']='ピ';
+    chars['e3']='プ';
+    chars['e4']='ペ';
+    chars['e5']='ポ';
+    chars['e6']='が';
+    chars['e7']='ぎ';
+    chars['e8']='ぐ';
+    chars['e9']='げ';
+    chars['ea']='ご';
+    chars['eb']='ざ';
+    chars['ec']='じ';
+    chars['ed']='ず';
+    chars['ee']='ぜ';
+    chars['ef']='ぞ';
+    chars['f0']='だ';
+    chars['f1']='ぢ';
+    chars['f2']='づ';
+    chars['f3']='で';
+    chars['f4']='ど';
+    chars['f5']='ば';
+    chars['f6']='び';
+    chars['f7']='ぶ';
+    chars['f8']='べ';
+    chars['f9']='ぼ';
+    chars['fa']='ぱ';
+    chars['fb']='ぴ';
+    chars['fc']='ぷ';
+    chars['fd']='ぺ';
+    chars['fe']='ぽ';
+    chars['ff']='ヷ';
 
     </script>
   </head>
@@ -721,6 +749,7 @@
           <div><input type="checkbox" name="manual/semi/auto (might require technical ring)" value="03000AAE:02" /></div>
           <div><input type="checkbox" name="save in dungeon" value="03001A03:60" /></div>
           <div><input type="checkbox" name="save in dungeon + sorceror's ring" value="03001A03:63" /></div>
+          <div class="comment">Be careful with the save in dungeon codes. The one-off small rooms in some dungeons are temporary storage. Saving in there and reloading the game from there may get you stuck in that room.</div>
 
           <div style="margin-top: 10px;">What character in what slot?</div>
           <div class="comment">01:Cless, 02:Mint, 03:Arche, 04:Klarth, 05:Chester, 06:Suzu, 07:Ria, 08:Brambart. *Note* Ria and Brambart are NPC's.</div>
@@ -736,6 +765,23 @@
           <div><input type="checkbox" name="Time (nano seconds)" value="03001730:00" /></div>
           <div><input type="checkbox" name="Missions Taken On" value="030017B2:0A" /></div>
           <div><input type="checkbox" name="Arche Mission Completed" value="030017B0:0A" /></div>
+        </div>
+
+        <div class="codeSect">
+          <div>Battle Codes:</div>
+          <div class="comment">status: 00=norm, 01=psn, 02=prlz, 04=stn, 08=fnt</div>
+          <div><input type="checkbox" name="P1 status" value="02021e80:00" /></div>
+          <div><input type="checkbox" name="P1 HP" value="02021e9c:270f" /></div>
+          <div><input type="checkbox" name="P1 TP" value="02021ea8:03e7" /></div>
+          <div><input type="checkbox" name="P2 status" value="02022108:00" /></div>
+          <div><input type="checkbox" name="P2 HP" value="02022124:03e7" /></div>
+          <div><input type="checkbox" name="P2 TP" value="02022130:03e7" /></div>
+          <div><input type="checkbox" name="P3 status" value="02022390:00" /></div>
+          <div><input type="checkbox" name="P3 HP" value="020223ac:03e7" /></div>
+          <div><input type="checkbox" name="P3 TP" value="020223b8:03e7" /></div>
+          <div><input type="checkbox" name="P4 status" value="02022618:00" /></div>
+          <div><input type="checkbox" name="P4 HP" value="02022634:03e7" /></div>
+          <div><input type="checkbox" name="P4 TP" value="02022640:03e7" /></div>
         </div>
 
         <div class="codeSect">
@@ -896,7 +942,37 @@
 
         <div class="codeSect">
           <div class="title">Char mod</div>
-          
+           <div class="title">Cless</div>
+            <div style="margin-bottom: 6px;">Name:&nbsp;
+              <select name="chester" codetype="name" addr="03000a6c"></select>
+              <select name="chester" codetype="name" addr="03000a6d"></select>
+              <select name="chester" codetype="name" addr="03000a6e"></select>
+              <select name="chester" codetype="name" addr="03000a6f"></select>
+              <select name="chester" codetype="name" addr="03000a70"></select>
+              <select name="chester" codetype="name" addr="03000a71"></select>
+              <input type="submit" name value="+" />
+            </div>
+            <div><input type="checkbox" name="Level" value="03000a62:63" /></div>
+            <div><input type="checkbox" name="Exp to go" value="03000a68:01" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="checkbox" name="Str" value="03000a80:270f" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000a74:270f" /></div>
+            <div><input type="checkbox" name="HP max" value="03000a76:270f" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000a78:270f" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000a92:270f" /></div>
+            <div><input type="checkbox" name="Atk" value="03000a94:270f" /></div>
+            <div><input type="checkbox" name="Def" value="03000a96:270f" /></div>
+            <div><input type="checkbox" name="Acc" value="03000a98:270f" /></div>
+            <div><input type="checkbox" name="Eva" value="03000a9a:270f" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000a9c:00dc" /></div>  
+            <div><input type="checkbox" name="Armor slot" value="03000a9e:00" /></div>  
+            <div><input type="checkbox" name="Shield Slot" value="03000aa0:00" /></div>  
+            <div><input type="checkbox" name="Head Slot" value="03000aa2:00" /></div>  
+            <div><input type="checkbox" name="Arm slot" value="03000aa4:00" /></div>  
+            <div><input type="checkbox" name="Access 1" value="03000aa6:00" /></div>  
+            <div><input type="checkbox" name="Access 2" value="03000aa8:00" /></div>  
+            <div><input type="checkbox" name="statu" value="03000aaa:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+
+         
           <div class="title">Chester</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000cfc"></select>
@@ -909,29 +985,29 @@
             </div>
             <div><input type="checkbox" name="Level" value="03000cf2:63" /></div>
             <div><input type="checkbox" name="Exp to go" value="03000cf8:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000d10:00" size="2" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000d04:00" size="2" /></div>
-            <div><input type="checkbox" name="HP max" value="03000d06:00" size="2" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000d08:00" size="2" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000d22:00" size="2" /></div>
-            <div><input type="checkbox" name="Atk" value="03000d24:00" size="2" /></div>
-            <div><input type="checkbox" name="Def" value="03000d26:00" size="2" /></div>
-            <div><input type="checkbox" name="Acc" value="03000d28:00" size="2" /></div>
-            <div><input type="checkbox" name="Eva" value="03000d2a:00" size="2" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000d2c:00" /></div>  
+            <div><input type="checkbox" name="Str" value="03000d10:270f" /></div>
+            <div><input type="checkbox" name="HP to restore to out of battle" value="03000d04:270f" /></div>
+            <div><input type="checkbox" name="HP max" value="03000d06:270f" /></div>
+            <div><input type="checkbox" name="HP Current" value="03000d08:270f" /></div>
+            <div><input type="checkbox" name="Atk to restore out of battle" value="03000d22:270f" /></div>
+            <div><input type="checkbox" name="Atk" value="03000d24:270f" /></div>
+            <div><input type="checkbox" name="Def" value="03000d26:270f" /></div>
+            <div><input type="checkbox" name="Acc" value="03000d28:270f" /></div>
+            <div><input type="checkbox" name="Eva" value="03000d2a:270f" /></div>
+            <div><input type="checkbox" name="Weapon slot" value="03000d2c:00dc" /></div>  
             <div><input type="checkbox" name="Armor slot" value="03000d2e:00" /></div>  
             <div><input type="checkbox" name="Shield Slot" value="03000d30:00" /></div>  
             <div><input type="checkbox" name="Head Slot" value="03000d32:00" /></div>  
             <div><input type="checkbox" name="Arm slot" value="03000d34:00" /></div>  
             <div><input type="checkbox" name="Access 1" value="03000d36:00" /></div>  
             <div><input type="checkbox" name="Access 2" value="03000d38:00" /></div>  
-            <div><input type="checkbox" name="status(00:norm,01:psn,02:prz,04:stn,08:fnt)" value="03000d39:00" /></div>
+            <div><input type="checkbox" name="statu" value="03000d3a:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
         </div>
 
         <div class="codeSect">
           <div class="title">Items:</div>
-          <div>Inventory: <select id="itemSlot" size="2"></select><select id="items"></select><input type="submit" name="" value="+" /></div>
+          <div>Inventory: <select id="itemSlot" ></select><select id="items"></select><input type="submit" name="" value="+" /></div>
         </div>
       </div>
 
