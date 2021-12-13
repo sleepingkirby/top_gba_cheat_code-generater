@@ -11,7 +11,12 @@
     display: flex;
     font-family: "DejaVu Sans", Arial, sans-serif;
     }
-    
+ 
+    input:active[value="+"]{
+    color: black;
+    background-color: #aaaaaa;
+    }    
+ 
     #wrapper{
     width: 100vw;
     height: calc(100vh - 30px);
@@ -23,7 +28,7 @@
     min-width: 200px;
     max-width: 50vw;
     height: 100%;
-    max-height: 100%;
+    max-height: 92vh;
     flex-direction: column;
     border-radius: 6px;
     padding: 4px 6px 4px 6px;
@@ -83,416 +88,418 @@
     </style>
     <script>
     var itemModAddr="0300109C";
+    var importItemModAddr="0200e040";
+    var importItemModAddrMax=21;
     var itemModAddrMax="";
-    var itemNumAddrBs="0300"; //03000F9C
 
     var itemHash={};
-    itemHash["none"]={"val":"0000", "num":"0F9C"};
-    itemHash["?sword (long sword)"]={"val":"0001","num":"0F9C"};
-    itemHash["?sword (fame face)"]={"val":"0002","num":"0F9D"};
-    itemHash["?sword (slayer sword)"]={"val":"0003","num":"0F9D"};
-    itemHash["?sword (moon falx)"]={"val":"0004","num":"0F9E"};
-    itemHash["?sword (holy sword)"]={"val":"0005","num":"0F9E"};
-    itemHash["?sword (dragon tooth)"]={"val":"0006","num":"0F9F"};
-    itemHash["?sword (flare baselard)"]={"val":"0007","num":"0F9F"};
-    itemHash["?sword (ice coffin)"]={"val":"0008","num":"0FA0"};
-    itemHash["?sword (duel sword)"]={"val":"0009","num":"0FA0"};
-    itemHash["?sword (luck blade)"]={"val":"000A","num":"0FA1"};
-    itemHash["?sword (wazier rapier)"]={"val":"000B","num":"0FA1"};
-    itemHash["?sword (saint rapier)"]={"val":"000C","num":"0FA2"};
-    itemHash["?sword (doom blade)"]={"val":"000D","num":"0FA2"};
-    itemHash["?sword (excalibur)"]={"val":"000E","num":"0FA3"};
-    itemHash["?spear (arc wind)"]={"val":"000F","num":"0FA3"};
-    itemHash["?axe (strike axe)"]={"val":"0010","num":"0FA4"};
-    itemHash["?axe (bahumut's tail)"]={"val":"0011","num":"0FA4"};
-    itemHash["?axespr (saint Halberd)"]={"val":"0012","num":"0FA5"};
-    itemHash["?bow (sylph bow L)"]={"val":"0013","num":"0FA5"};
-    itemHash["?bow (aqua sprite)"]={"val":"0014","num":"0FA6"};
-    itemHash["?bow (flare sprite)"]={"val":"0015","num":"0FA6"};
-    itemHash["?bow (sand sprite)"]={"val":"0016","num":"0FA7"};
-    itemHash["?bow (gale sprite)"]={"val":"0017","num":"0FA7"};
-    itemHash["?bow (merciless bow)"]={"val":"0018","num":"0FA8"};
-    itemHash["?bow (berserker arrow)"]={"val":"0019","num":"0FA8"};
-    itemHash["?rod (rod)"]={"val":"001A","num":"0FA9"};
-    itemHash["?rod (runestaff)"]={"val":"001B","num":"0FA9"};
-    itemHash["?rod (rod mace)"]={"val":"001C","num":"0FAA"};
-    itemHash["?book (sukebe book, porno mag)"]={"val":"001D","num":"0FAA"};
-    itemHash["?book (yellow king)"]={"val":"001E","num":"0FAB"};
-    itemHash["?book (lavor ionis)"]={"val":"001F","num":"0FAB"};
-    itemHash["?book (mist seven sun)"]={"val":"0020","num":"0FAC"};
-    itemHash["?book (misa requiem)"]={"val":"0021","num":"0FAC"};
-    itemHash["?book (toll magic)"]={"val":"0022","num":"0FAD"};
-    itemHash["?cloth (star cloak)"]={"val":"0023","num":"0FAD"};
-    itemHash["?cloth (mythril mesh)"]={"val":"0024","num":"0FAE"};
-    itemHash["?armor (leather armor)"]={"val":"0025","num":"0FAE"};
-    itemHash["?armor (reflex)"]={"val":"0026","num":"0FAF"};
-    itemHash["?armor (mam.bane)"]={"val":"0027","num":"0FAF"};
-    itemHash["?armor (gold armor)"]={"val":"0028","num":"0FB0"};
-    itemHash["?helm (leather helm)"]={"val":"0029","num":"0FB0"};
-    itemHash["?helm (duel helm)"]={"val":"002A","num":"0FB1"};
-    itemHash["?helm (star helm)"]={"val":"002B","num":"0FB1"};
-    itemHash["?beret (star beret)"]={"val":"002C","num":"0FB2"};
-    itemHash["?spear (conseska)"]={"val":"002D","num":"0FB2"};
-    itemHash["?axe (battle axe)"]={"val":"002E","num":"0FB3"};
-    itemHash["?bow (crescent arrow)"]={"val":"002F","num":"0FB3"};
-    itemHash["pendant"]={"val":"0030","num":"0FB4"};
-    itemHash["mascot"]={"val":"0031","num":"0FB4"};
-    itemHash["earring"]={"val":"0032","num":"0FB5"};
-    itemHash["lace ruby"]={"val":"0033","num":"0FB5"};
-    itemHash["Morrison's book"]={"val":"0034","num":"0FB6"};
-    itemHash["broken bow"]={"val":"0035","num":"0FB6"};
-    itemHash["elemental orb"]={"val":"0036","num":"0FB7"};
-    itemHash["dimel's key"]={"val":"0037","num":"0FB7"};
-    itemHash["permit (morlia)"]={"val":"0038","num":"0FB8"};
-    itemHash["emblem"]={"val":"0039","num":"0FB8"};
-    itemHash["introduction letter"]={"val":"003A","num":"0FB9"};
-    itemHash["broken ring"]={"val":"003B","num":"0FB9"};
-    itemHash["lava key"]={"val":"003C","num":"0FBA"};
-    itemHash["cards"]={"val":"003D","num":"0FBA"};
-    itemHash["mysterious mirror"]={"val":"003E","num":"0FBB"};
-    itemHash["golden key"]={"val":"003F","num":"0FBB"};
-    itemHash["wing pack"]={"val":"0040","num":"0FBC"};
-    itemHash["advisor book"]={"val":"0041","num":"0FBC"};
-    itemHash["Rosenia's Dress"]={"val":"0042","num":"0FBD"};
-    itemHash["common room key"]={"val":"0043","num":"0FBD"};
-    itemHash["holy log"]={"val":"0044","num":"0FBE"};
-    itemHash["mercury"]={"val":"0045","num":"0FBE"};
-    itemHash["incense"]={"val":"0046","num":"0FBF"};
-    itemHash["Ukiyo's portrait"]={"val":"0047","num":"0FBF"};
-    itemHash["coral"]={"val":"0048","num":"0FC0"};
-    itemHash["marble"]={"val":"0049","num":"0FC0"};
-    itemHash["clay pot"]={"val":"004A","num":"0FC1"};
-    itemHash["tapestry"]={"val":"004B","num":"0FC1"};
-    itemHash["black platform"]={"val":"004C","num":"0FC2"};
-    itemHash["fur skin"]={"val":"004D","num":"0FC2"};
-    itemHash["winter bug summer grass"]={"val":"004E","num":"0FC3"};
-    itemHash["teacup"]={"val":"004F","num":"0FC3"};
-    itemHash["3 flavor string (instrument)"]={"val":"0050","num":"0FC4"};
-    itemHash["Ivory"]={"val":"0051","num":"0FC4"};
-    itemHash["carrots"]={"val":"0052","num":"0FC5"};
-    itemHash["cabbage"]={"val":"0053","num":"0FC5"};
-    itemHash["lettus"]={"val":"0054","num":"0FC6"};
-    itemHash["daikon radish"]={"val":"0055","num":"0FC6"};
-    itemHash["cucumber"]={"val":"0056","num":"0FC7"};
-    itemHash["potato"]={"val":"0057","num":"0FC7"};
-    itemHash["tomato"]={"val":"0058","num":"0FC8"};
-    itemHash["onion"]={"val":"0059","num":"0FC8"};
-    itemHash["apple"]={"val":"005A","num":"0FC9"};
-    itemHash["lemon"]={"val":"005B","num":"0FC9"};
-    itemHash["strawberry"]={"val":"005C","num":"0FCA"};
-    itemHash["banana"]={"val":"005D","num":"0FCA"};
-    itemHash["pineapple"]={"val":"005E","num":"0FCB"};
-    itemHash["melon"]={"val":"005F","num":"0FCB"};
-    itemHash["grapes"]={"val":"0060","num":"0FCC"};
-    itemHash["mangos"]={"val":"0061","num":"0FCC"};
-    itemHash["prunes"]={"val":"0062","num":"0FCD"};
-    itemHash["tuna"]={"val":"0063","num":"0FCD"};
-    itemHash["horse mackerl"]={"val":"0064","num":"0FCE"};
-    itemHash["sardine"]={"val":"0065","num":"0FCE"};
-    itemHash["squid"]={"val":"0066","num":"0FCF"};
-    itemHash["octopus"]={"val":"0067","num":"0FCF"};
-    itemHash["shrimp"]={"val":"0068","num":"0FD0"};
-    itemHash["chicken"]={"val":"0069","num":"0FD0"};
-    itemHash["beef"]={"val":"006A","num":"0FD1"};
-    itemHash["pork"]={"val":"006B","num":"0FD1"};
-    itemHash["milk"]={"val":"006C","num":"0FD2"};
-    itemHash["cheese"]={"val":"006D","num":"0FD2"};
-    itemHash["konniyaku"]={"val":"006E","num":"0FD3"};
-    itemHash["kelp"]={"val":"006F","num":"0FD3"};
-    itemHash["eggs"]={"val":"0070","num":"0FD4"};
-    itemHash["miso"]={"val":"0071","num":"0FD4"};
-    itemHash["bread"]={"val":"0072","num":"0FD5"};
-    itemHash["rice"]={"val":"0073","num":"0FD5"};
-    itemHash["seaweed"]={"val":"0074","num":"0FD6"};
-    itemHash["spice"]={"val":"0075","num":"0FD6"};
-    itemHash["pasta"]={"val":"0076","num":"0FD7"};
-    itemHash["apple gumi"]={"val":"0077","num":"0FD7"};
-    itemHash["orange gumi"]={"val":"0078","num":"0FD8"};
-    itemHash["mix gumi"]={"val":"0079","num":"0FD8"};
-    itemHash["lemon gumi"]={"val":"007A","num":"0FD9"};
-    itemHash["pine gumi"]={"val":"007B","num":"0FD9"};
-    itemHash["miracle gumi"]={"val":"007C","num":"0FDA"};
-    itemHash["elixir"]={"val":"007D","num":"0FDA"};
-    itemHash["basilisk scale"]={"val":"007E","num":"0FDB"};
-    itemHash["sage"]={"val":"007F","num":"0FDB"};
-    itemHash["savory"]={"val":"0080","num":"0FDC"};
-    itemHash["verbene"]={"val":"0081","num":"0FDC"};
-    itemHash["lavender"]={"val":"0082","num":"0FDD"};
-    itemHash["red sage"]={"val":"0083","num":"0FDD"};
-    itemHash["red savory"]={"val":"0084","num":"0FDE"};
-    itemHash["red verbene"]={"val":"0085","num":"0FDE"};
-    itemHash["red lavender"]={"val":"0086","num":"0FDF"};
-    itemHash["pansea bottle"]={"val":"0087","num":"0FDF"};
-    itemHash["life bottle"]={"val":"0088","num":"0FE0"};
-    itemHash["flare bottle"]={"val":"0089","num":"0FE0"};
-    itemHash["liquer bottle"]={"val":"008A","num":"0FE1"};
-    itemHash["holy bottle"]={"val":"008B","num":"0FE1"};
-    itemHash["dark bottle"]={"val":"008C","num":"0FE2"};
-    itemHash["rune bottle"]={"val":"008D","num":"0FE2"};
-    itemHash["charm bottle"]={"val":"008E","num":"0FE3"};
-    itemHash["miracle charm bottle"]={"val":"008F","num":"0FE3"};
-    itemHash["world map"]={"val":"0090","num":"0FE4"};
-    itemHash["scout orb"]={"val":"0091","num":"0FE4"};
-    itemHash["hourglass"]={"val":"0092","num":"0FE5"};
-    itemHash["chrono glass"]={"val":"0093","num":"0FE5"};
-    itemHash["combo counter"]={"val":"0094","num":"0FE6"};
-    itemHash["spectacles"]={"val":"0095","num":"0FE6"};
-    itemHash["pick axe"]={"val":"0096","num":"0FE7"};
-    itemHash["magical rouge"]={"val":"0097","num":"0FE7"};
-    itemHash["red lanter"]={"val":"0098","num":"0FE8"};
-    itemHash["green torch"]={"val":"0099","num":"0FE8"};
-    itemHash["blue candle"]={"val":"009A","num":"0FE9"};
-    itemHash["rope"]={"val":"009B","num":"0FE9"};
-    itemHash["drum set"]={"val":"009C","num":"0FEA"};
-    itemHash["mah jong tile"]={"val":"009D","num":"0FEA"};
-    itemHash["monstery book"]={"val":"009E","num":"0FEB"};
-    itemHash["collector's book"]={"val":"009F","num":"0FEB"};
-    itemHash["ticket"]={"val":"00A0","num":"0FEC"};
-    itemHash["loudspeaker"]={"val":"00A1","num":"0FEC"};
-    itemHash["long sword"]={"val":"00A2","num":"0FED"};
-    itemHash["sabre"]={"val":"00A3","num":"0FED"};
-    itemHash["rapier"]={"val":"00A4","num":"0FEE"};
-    itemHash["knight saber"]={"val":"00A5","num":"0FEE"};
-    itemHash["verdun"]={"val":"00A6","num":"0FEF"};
-    itemHash["Colichemarde"]={"val":"00A7","num":"0FEF"};
-    itemHash["fine saber"]={"val":"00A8","num":"0FF0"};
-    itemHash["walloon sword"]={"val":"00A9","num":"0FF0"};
-    itemHash["fame face"]={"val":"00AA","num":"0FF1"};
-    itemHash["slayer sword"]={"val":"00AB","num":"0FF1"};
-    itemHash["Moon Falx"]={"val":"00AC","num":"0FF2"};
-    itemHash["Damascus sword"]={"val":"00AD","num":"0FF2"};
-    itemHash["sinclair"]={"val":"00AE","num":"0FF3"};
-    itemHash["destroyer"]={"val":"00AF","num":"0FF3"};
-    itemHash["holy sword"]={"val":"00B0","num":"0FF4"};
-    itemHash["dragon tooth"]={"val":"00B1","num":"0FF4"};
-    itemHash["flare baselard"]={"val":"00B2","num":"0FF5"};
-    itemHash["ice coffin"]={"val":"00B3","num":"0FF5"};
-    itemHash["laser blade"]={"val":"00B4","num":"0FF6"};
-    itemHash["duel sword"]={"val":"00B5","num":"0FF6"};
-    itemHash["luck blade"]={"val":"00B6","num":"0FF7"};
-    itemHash["muramasa"]={"val":"00B7","num":"0FF7"};
-    itemHash["wazier rapier"]={"val":"00B8","num":"0FF8"};
-    itemHash["saint rapier"]={"val":"00B9","num":"0FF8"};
-    itemHash["doom blade"]={"val":"00BA","num":"0FF9"};
-    itemHash["excalibur"]={"val":"00BB","num":"0FF9"};
-    itemHash["vorpal sword"]={"val":"00BC","num":"0FFA"};
-    itemHash["Flamberge"]={"val":"00BD","num":"0FFA"};
-    itemHash["super deform"]={"val":"00BE","num":"0FFB"};
-    itemHash["corsesca"]={"val":"00BF","num":"0FFB"};
-    itemHash["gungnir"]={"val":"00C0","num":"0FFC"};
-    itemHash["sadingrav"]={"val":"00C1","num":"0FFC"};
-    itemHash["naginata blade"]={"val":"00C2","num":"0FFD"};
-    itemHash["arcwind"]={"val":"00C3","num":"0FFD"};
-    itemHash["gungnir (real)"]={"val":"00C4","num":"0FFE"};
-    itemHash["gungnir (revised)"]={"val":"00C5","num":"0FFE"};
-    itemHash["battle axe"]={"val":"00C6","num":"0FFF"};
-    itemHash["crescent axe"]={"val":"00C7","num":"0FFF"};
-    itemHash["bardiche"]={"val":"00C8","num":"1000"};
-    itemHash["strike axe"]={"val":"00C9","num":"1000"};
-    itemHash["hard cleaver"]={"val":"00CA","num":"1001"};
-    itemHash["bahumut tail"]={"val":"00CB","num":"1001"};
-    itemHash["halberd"]={"val":"00CC","num":"1002"};
-    itemHash["pole axe"]={"val":"00CD","num":"1002"};
-    itemHash["mechhalberd"]={"val":"00CE","num":"1003"};
-    itemHash["saint halberd"]={"val":"00CF","num":"1003"};
-    itemHash["sylph bow s"]={"val":"00D0","num":"1004"};
-    itemHash["sylph bow l"]={"val":"00D1","num":"1004"};
-    itemHash["composite bow"]={"val":"00D2","num":"1005"};
-    itemHash["Crane quinn"]={"val":"00D3","num":"1005"};
-    itemHash["aqua sprite"]={"val":"00D4","num":"1006"};
-    itemHash["flare sprite"]={"val":"00D5","num":"1006"};
-    itemHash["sand sprite "]={"val":"00D6","num":"1007"};
-    itemHash["gale sprite"]={"val":"00D7","num":"1007"};
-    itemHash["crescent arrow"]={"val":"00D8","num":"1008"};
-    itemHash["elven bow"]={"val":"00D9","num":"1008"};
-    itemHash["merciless bow"]={"val":"00DA","num":"1009"};
-    itemHash["berserker arrow"]={"val":"00DB","num":"1009"};
-    itemHash["elven bow (2)"]={"val":"00DC","num":"100A"};
-    itemHash["rod"]={"val":"00DD","num":"100A"};
-    itemHash["gem rod"]={"val":"00DE","num":"100B"};
-    itemHash["ruby rod"]={"val":"00DF","num":"100B"};
-    itemHash["rune staff"]={"val":"00E0","num":"100C"};
-    itemHash["unicorn horn"]={"val":"00E1","num":"100C"};
-    itemHash["holy staff"]={"val":"00E2","num":"100D"};
-    itemHash["star mace"]={"val":"00E3","num":"100D"};
-    itemHash["BC rod"]={"val":"00E4","num":"100E"};
-    itemHash["Porno mag"]={"val":"00E5","num":"100E"};
-    itemHash["Namco Gamers (book)"]={"val":"00E6","num":"100F"};
-    itemHash["necronomicon"]={"val":"00E7","num":"100F"};
-    itemHash["yellow kings"]={"val":"00E8","num":"1010"};
-    itemHash["Serano Fragment"]={"val":"00E9","num":"1010"};
-    itemHash["rebainois"]={"val":"00EA","num":"1011"};
-    itemHash["aqua dinguen"]={"val":"00EB","num":"1011"};
-    itemHash["gale fragment"]={"val":"00EC","num":"1012"};
-    itemHash["mist seven sun"]={"val":"00ED","num":"1012"};
-    itemHash["misa requiem"]={"val":"00EE","num":"1013"};
-    itemHash["doom magic"]={"val":"00EF","num":"1013"};
-    itemHash["broom"]={"val":"00F0","num":"1014"};
-    itemHash["mystery broom"]={"val":"00F1","num":"1014"};
-    itemHash["magical broom"]={"val":"00F2","num":"1015"};
-    itemHash["sylph broom"]={"val":"00F3","num":"1015"};
-    itemHash["wonder broom"]={"val":"00F4","num":"1016"};
-    itemHash["star broom"]={"val":"00F5","num":"1016"};
-    itemHash["deck brush"]={"val":"00F6","num":"1017"};
-    itemHash["nintou botan"]={"val":"00F7","num":"1017"};
-    itemHash["nintou ayame"]={"val":"00F8","num":"1018"};
-    itemHash["nintou kikyou"]={"val":"00F9","num":"1018"};
-    itemHash["nintou yuri"]={"val":"00FA","num":"1019"};
-    itemHash["nintou chisakura"]={"val":"00FB","num":"1019"};
-    itemHash["eternal sword"]={"val":"00FC","num":"101A"};
-    itemHash["leather armor"]={"val":"00FD","num":"101A"};
-    itemHash["chain mail"]={"val":"00FE","num":"101B"};
-    itemHash["ring mail"]={"val":"00FF","num":"101B"};
-    itemHash["sprint mail"]={"val":"0100","num":"101C"};
-    itemHash["breast plate"]={"val":"0101","num":"101C"};
-    itemHash["plate mail"]={"val":"0102","num":"101D"};
-    itemHash["mythril plate"]={"val":"0103","num":"101D"};
-    itemHash["reflex"]={"val":"0104","num":"101E"};
-    itemHash["silver plate"]={"val":"0105","num":"101E"};
-    itemHash["rare plate"]={"val":"0106","num":"101F"};
-    itemHash["mambane"]={"val":"0107","num":"101F"};
-    itemHash["gold armor"]={"val":"0108","num":"1020"};
-    itemHash["cloak"]={"val":"0109","num":"1020"};
-    itemHash["amber cloack"]={"val":"010A","num":"1021"};
-    itemHash["silver cloak"]={"val":"010B","num":"1021"};
-    itemHash["holy cloak"]={"val":"010C","num":"1022"};
-    itemHash["star cloak"]={"val":"010D","num":"1022"};
-    itemHash["mythril mesh"]={"val":"010E","num":"1023"};
-    itemHash["black clothes"]={"val":"010F","num":"1023"};
-    itemHash["kisaragi"]={"val":"0110","num":"1024"};
-    itemHash["yayoi"]={"val":"0111","num":"1024"};
-    itemHash["nagatsuki"]={"val":"0112","num":"1025"};
-    itemHash["kannazuki"]={"val":"0113","num":"1025"};
-    itemHash["wood shield"]={"val":"0114","num":"1026"};
-    itemHash["round shield"]={"val":"0115","num":"1026"};
-    itemHash["kite shield"]={"val":"0116","num":"1027"};
-    itemHash["feet shield"]={"val":"0117","num":"1027"};
-    itemHash["fine shield"]={"val":"0118","num":"1028"};
-    itemHash["anhk shield"]={"val":"0119","num":"1028"};
-    itemHash["rare shield"]={"val":"011A","num":"1029"};
-    itemHash["red line shield"]={"val":"011B","num":"1029"};
-    itemHash["star shield"]={"val":"011C","num":"102A"};
-    itemHash["blue line shield"]={"val":"011D","num":"102A"};
-    itemHash["ring shield"]={"val":"011E","num":"102B"};
-    itemHash["leather armor"]={"val":"011F","num":"102B"};
-    itemHash["iron sallet"]={"val":"0120","num":"102C"};
-    itemHash["amment helm"]={"val":"0121","num":"102C"};
-    itemHash["cross helm"]={"val":"0122","num":"102D"};
-    itemHash["duel helm"]={"val":"0123","num":"102D"};
-    itemHash["rare helm"]={"val":"0124","num":"102E"};
-    itemHash["golden helm"]={"val":"0125","num":"102E"};
-    itemHash["star helm"]={"val":"0126","num":"102F"};
-    itemHash["beret"]={"val":"0127","num":"102F"};
-    itemHash["anhk beret"]={"val":"0128","num":"1030"};
-    itemHash["land beret"]={"val":"0129","num":"1030"};
-    itemHash["fine beret"]={"val":"012A","num":"1031"};
-    itemHash["star beret"]={"val":"012B","num":"1031"};
-    itemHash["head wrap"]={"val":"012C","num":"1032"};
-    itemHash["face wrap"]={"val":"012D","num":"1032"};
-    itemHash["blue ribbon"]={"val":"012E","num":"1033"};
-    itemHash["large blue ribbon"]={"val":"012F","num":"1033"};
-    itemHash["stripe ribbon"]={"val":"0130","num":"1034"};
-    itemHash["pretty ribbon"]={"val":"0131","num":"1034"};
-    itemHash["magical ribbon"]={"val":"0132","num":"1035"};
-    itemHash["leather glove"]={"val":"0133","num":"1035"};
-    itemHash["iron glove"]={"val":"0134","num":"1036"};
-    itemHash["gauntlet"]={"val":"0135","num":"1036"};
-    itemHash["mythril glove"]={"val":"0136","num":"1037"};
-    itemHash["rare gauntlet"]={"val":"0137","num":"1037"};
-    itemHash["star glove"]={"val":"0138","num":"1038"};
-    itemHash["h gauntlet"]={"val":"0139","num":"1038"};
-    itemHash["claw gloves"]={"val":"013A","num":"1039"};
-    itemHash["kitchen mittens"]={"val":"013B","num":"1039"};
-    itemHash["pretty mitten"]={"val":"013C","num":"103A"};
-    itemHash["mother's gloves"]={"val":"013D","num":"103A"};
-    itemHash["white gloves"]={"val":"013E","num":"103B"};
-    itemHash["stone check"]={"val":"013F","num":"103B"};
-    itemHash["tailsman"]={"val":"0140","num":"103C"};
-    itemHash["blue tailsman"]={"val":"0141","num":"103C"};
-    itemHash["paralyze check"]={"val":"0142","num":"103D"};
-    itemHash["piyohan"]={"val":"0143","num":"103D"};
-    itemHash["poison check"]={"val":"0144","num":"103E"};
-    itemHash["rabbit symbol"]={"val":"0145","num":"103E"};
-    itemHash["Flame's protection"]={"val":"0146","num":"103F"};
-    itemHash["ice's protection"]={"val":"0147","num":"103F"};
-    itemHash["manji's symbol"]={"val":"0148","num":"1040"};
-    itemHash["silver cape"]={"val":"0149","num":"1040"};
-    itemHash["princess cape"]={"val":"014A","num":"1041"};
-    itemHash["iron boots"]={"val":"014B","num":"1041"};
-    itemHash["elven boots"]={"val":"014C","num":"1042"};
-    itemHash["jet boots"]={"val":"014D","num":"1042"};
-    itemHash["persian boots"]={"val":"014E","num":"1043"};
-    itemHash["nightmare boots"]={"val":"014F","num":"1043"};
-    itemHash["water spider"]={"val":"0150","num":"1044"};
-    itemHash["mantle"]={"val":"0151","num":"1044"};
-    itemHash["leather mantle"]={"val":"0152","num":"1045"};
-    itemHash["thieves mantle"]={"val":"0153","num":"1045"};
-    itemHash["elven mantle"]={"val":"0154","num":"1046"};
-    itemHash["flare mantle"]={"val":"0155","num":"1046"};
-    itemHash["aqua mantle"]={"val":"0156","num":"1047"};
-    itemHash["aquamarine"]={"val":"0157","num":"1047"};
-    itemHash["amethyst"]={"val":"0158","num":"1048"};
-    itemHash["emerald"]={"val":"0159","num":"1048"};
-    itemHash["opal"]={"val":"015A","num":"1049"};
-    itemHash["garnet"]={"val":"015B","num":"1049"};
-    itemHash["sardonyx"]={"val":"015C","num":"104A"};
-    itemHash["sapphire"]={"val":"015D","num":"104A"};
-    itemHash["turquise"]={"val":"015E","num":"104B"};
-    itemHash["diamond"]={"val":"015F","num":"104B"};
-    itemHash["topaz"]={"val":"0160","num":"104C"};
-    itemHash["moonstone"]={"val":"0161","num":"104C"};
-    itemHash["ruby"]={"val":"0162","num":"104D"};
-    itemHash["lapislaiz"]={"val":"0163","num":"104D"};
-    itemHash["sorcerer ring"]={"val":"0164","num":"104E"};
-    itemHash["emerald ring"]={"val":"0165","num":"104E"};
-    itemHash["fairy ring"]={"val":"0166","num":"104F"};
-    itemHash["mental ring"]={"val":"0167","num":"104F"};
-    itemHash["protect ring"]={"val":"0168","num":"1050"};
-    itemHash["faust ring"]={"val":"0169","num":"1050"};
-    itemHash["resist ring"]={"val":"016A","num":"1051"};
-    itemHash["reflect ring"]={"val":"016B","num":"1051"};
-    itemHash["channel ring (bad)"]={"val":"016C","num":"1052"};
-    itemHash["dash ring"]={"val":"016D","num":"1052"};
-    itemHash["technical ring"]={"val":"016E","num":"1053"};
-    itemHash["reverse doll"]={"val":"016F","num":"1053"};
-    itemHash["sephira"]={"val":"0170","num":"1054"};
-    itemHash["sephira +1"]={"val":"0171","num":"1054"};
-    itemHash["pikuru stone"]={"val":"0172","num":"1055"};
-    itemHash["black onyx"]={"val":"0173","num":"1055"};
-    itemHash["white mist"]={"val":"0174","num":"1056"};
-    itemHash["mystical mist"]={"val":"0175","num":"1056"};
-    itemHash["moon crystal"]={"val":"0176","num":"1057"};
-    itemHash["deris emblem"]={"val":"0177","num":"1057"};
-    itemHash["feet symbol"]={"val":"0178","num":"1058"};
-    itemHash["attack symbol"]={"val":"0179","num":"1058"};
-    itemHash["holy symbol"]={"val":"017A","num":"1059"};
-    itemHash["misty symbol"]={"val":"017B","num":"1059"};
-    itemHash["dark seal"]={"val":"017C","num":"105A"};
-    itemHash["demon seal"]={"val":"017D","num":"105A"};
-    itemHash["earring"]={"val":"017E","num":"105B"};
-    itemHash["combo command"]={"val":"017F","num":"105B"};
-    itemHash["silver mattock"]={"val":"0180","num":"105C"};
-    itemHash["magic pouch"]={"val":"0181","num":"105C"};
-    itemHash["magical pouch"]={"val":"0182","num":"105D"};
-    itemHash["copy tail"]={"val":"0183","num":"105D"};
-    itemHash["cleo's mirror"]={"val":"0184","num":"105E"};
-    itemHash["red card"]={"val":"0185","num":"105E"};
-    itemHash["green card"]={"val":"0186","num":"105F"};
-    itemHash["blue card"]={"val":"0187","num":"105F"};
-    itemHash["yellow card"]={"val":"0188","num":"1060"};
-    itemHash["white card"]={"val":"0189","num":"1060"};
-    itemHash["brown card"]={"val":"018A","num":"1061"};
-    itemHash["black card"]={"val":"018B","num":"1061"};
-    itemHash["bravery statue"]={"val":"018C","num":"1062"};
-    itemHash["justice statue"]={"val":"018D","num":"1062"};
-    itemHash["friendship statue"]={"val":"018E","num":"1063"};
-    itemHash["love statue"]={"val":"018F","num":"1063"};
-    itemHash["dream statue"]={"val":"0190","num":"1064"};
-    itemHash["s flag"]={"val":"0191","num":"1064"};
+    itemHash["none"]={"val":"0000", "num":"03000F9C"};
+    itemHash["?sword (long sword)"]={"val":"0001","num":"03000F9C"};
+    itemHash["?sword (fame face)"]={"val":"0002","num":"03000F9D"};
+    itemHash["?sword (slayer sword)"]={"val":"0003","num":"03000F9D"};
+    itemHash["?sword (moon falx)"]={"val":"0004","num":"03000F9E"};
+    itemHash["?sword (holy sword)"]={"val":"0005","num":"03000F9E"};
+    itemHash["?sword (dragon tooth)"]={"val":"0006","num":"03000F9F"};
+    itemHash["?sword (flare baselard)"]={"val":"0007","num":"03000F9F"};
+    itemHash["?sword (ice coffin)"]={"val":"0008","num":"03000FA0"};
+    itemHash["?sword (duel sword)"]={"val":"0009","num":"03000FA0"};
+    itemHash["?sword (luck blade)"]={"val":"000A","num":"03000FA1"};
+    itemHash["?sword (wazier rapier)"]={"val":"000B","num":"03000FA1"};
+    itemHash["?sword (saint rapier)"]={"val":"000C","num":"03000FA2"};
+    itemHash["?sword (doom blade)"]={"val":"000D","num":"03000FA2"};
+    itemHash["?sword (excalibur)"]={"val":"000E","num":"03000FA3"};
+    itemHash["?spear (arc wind)"]={"val":"000F","num":"03000FA3"};
+    itemHash["?axe (strike axe)"]={"val":"0010","num":"03000FA4"};
+    itemHash["?axe (bahumut's tail)"]={"val":"0011","num":"03000FA4"};
+    itemHash["?axespr (saint Halberd)"]={"val":"0012","num":"03000FA5"};
+    itemHash["?bow (sylph bow L)"]={"val":"0013","num":"03000FA5"};
+    itemHash["?bow (aqua sprite)"]={"val":"0014","num":"03000FA6"};
+    itemHash["?bow (flare sprite)"]={"val":"0015","num":"03000FA6"};
+    itemHash["?bow (sand sprite)"]={"val":"0016","num":"03000FA7"};
+    itemHash["?bow (gale sprite)"]={"val":"0017","num":"03000FA7"};
+    itemHash["?bow (merciless bow)"]={"val":"0018","num":"03000FA8"};
+    itemHash["?bow (berserker arrow)"]={"val":"0019","num":"03000FA8"};
+    itemHash["?rod (rod)"]={"val":"001A","num":"03000FA9"};
+    itemHash["?rod (runestaff)"]={"val":"001B","num":"03000FA9"};
+    itemHash["?rod (rod mace)"]={"val":"001C","num":"03000FAA"};
+    itemHash["?book (sukebe book, porno mag)"]={"val":"001D","num":"03000FAA"};
+    itemHash["?book (yellow king)"]={"val":"001E","num":"03000FAB"};
+    itemHash["?book (lavor ionis)"]={"val":"001F","num":"03000FAB"};
+    itemHash["?book (mist seven sun)"]={"val":"0020","num":"03000FAC"};
+    itemHash["?book (misa requiem)"]={"val":"0021","num":"03000FAC"};
+    itemHash["?book (toll magic)"]={"val":"0022","num":"03000FAD"};
+    itemHash["?cloth (star cloak)"]={"val":"0023","num":"03000FAD"};
+    itemHash["?cloth (mythril mesh)"]={"val":"0024","num":"03000FAE"};
+    itemHash["?armor (leather armor)"]={"val":"0025","num":"03000FAE"};
+    itemHash["?armor (reflex)"]={"val":"0026","num":"03000FAF"};
+    itemHash["?armor (mam.bane)"]={"val":"0027","num":"03000FAF"};
+    itemHash["?armor (gold armor)"]={"val":"0028","num":"03000FB0"};
+    itemHash["?helm (leather helm)"]={"val":"0029","num":"03000FB0"};
+    itemHash["?helm (duel helm)"]={"val":"002A","num":"03000FB1"};
+    itemHash["?helm (star helm)"]={"val":"002B","num":"03000FB1"};
+    itemHash["?beret (star beret)"]={"val":"002C","num":"03000FB2"};
+    itemHash["?spear (conseska)"]={"val":"002D","num":"03000FB2"};
+    itemHash["?axe (battle axe)"]={"val":"002E","num":"03000FB3"};
+    itemHash["?bow (crescent arrow)"]={"val":"002F","num":"03000FB3"};
+    itemHash["pendant"]={"val":"0030","num":"03000FB4"};
+    itemHash["mascot"]={"val":"0031","num":"03000FB4"};
+    itemHash["earring"]={"val":"0032","num":"03000FB5"};
+    itemHash["lace ruby"]={"val":"0033","num":"03000FB5"};
+    itemHash["Morrison's book"]={"val":"0034","num":"03000FB6"};
+    itemHash["broken bow"]={"val":"0035","num":"03000FB6"};
+    itemHash["elemental orb"]={"val":"0036","num":"03000FB7"};
+    itemHash["dimel's key"]={"val":"0037","num":"03000FB7"};
+    itemHash["permit (morlia)"]={"val":"0038","num":"03000FB8"};
+    itemHash["emblem"]={"val":"0039","num":"03000FB8"};
+    itemHash["introduction letter"]={"val":"003A","num":"03000FB9"};
+    itemHash["broken ring"]={"val":"003B","num":"03000FB9"};
+    itemHash["lava key"]={"val":"003C","num":"03000FBA"};
+    itemHash["cards"]={"val":"003D","num":"03000FBA"};
+    itemHash["mysterious mirror"]={"val":"003E","num":"03000FBB"};
+    itemHash["golden key"]={"val":"003F","num":"03000FBB"};
+    itemHash["wing pack"]={"val":"0040","num":"03000FBC"};
+    itemHash["advisor book"]={"val":"0041","num":"03000FBC"};
+    itemHash["Rosenia's Dress"]={"val":"0042","num":"03000FBD"};
+    itemHash["common room key"]={"val":"0043","num":"03000FBD"};
+    itemHash["holy log"]={"val":"0044","num":"03000FBE"};
+    itemHash["mercury"]={"val":"0045","num":"03000FBE"};
+    itemHash["incense"]={"val":"0046","num":"03000FBF"};
+    itemHash["Ukiyo's portrait"]={"val":"0047","num":"03000FBF"};
+    itemHash["coral"]={"val":"0048","num":"03000FC0"};
+    itemHash["marble"]={"val":"0049","num":"03000FC0"};
+    itemHash["clay pot"]={"val":"004A","num":"03000FC1"};
+    itemHash["tapestry"]={"val":"004B","num":"03000FC1"};
+    itemHash["black platform"]={"val":"004C","num":"03000FC2"};
+    itemHash["fur skin"]={"val":"004D","num":"03000FC2"};
+    itemHash["winter bug summer grass"]={"val":"004E","num":"03000FC3"};
+    itemHash["teacup"]={"val":"004F","num":"03000FC3"};
+    itemHash["3 flavor string (instrument)"]={"val":"0050","num":"03000FC4"};
+    itemHash["Ivory"]={"val":"0051","num":"03000FC4"};
+    itemHash["carrots"]={"val":"0052","num":"03000FC5"};
+    itemHash["cabbage"]={"val":"0053","num":"03000FC5"};
+    itemHash["lettus"]={"val":"0054","num":"03000FC6"};
+    itemHash["daikon radish"]={"val":"0055","num":"03000FC6"};
+    itemHash["cucumber"]={"val":"0056","num":"03000FC7"};
+    itemHash["potato"]={"val":"0057","num":"03000FC7"};
+    itemHash["tomato"]={"val":"0058","num":"03000FC8"};
+    itemHash["onion"]={"val":"0059","num":"03000FC8"};
+    itemHash["apple"]={"val":"005A","num":"03000FC9"};
+    itemHash["lemon"]={"val":"005B","num":"03000FC9"};
+    itemHash["strawberry"]={"val":"005C","num":"03000FCA"};
+    itemHash["banana"]={"val":"005D","num":"03000FCA"};
+    itemHash["pineapple"]={"val":"005E","num":"03000FCB"};
+    itemHash["melon"]={"val":"005F","num":"03000FCB"};
+    itemHash["grapes"]={"val":"0060","num":"03000FCC"};
+    itemHash["mangos"]={"val":"0061","num":"03000FCC"};
+    itemHash["prunes"]={"val":"0062","num":"03000FCD"};
+    itemHash["tuna"]={"val":"0063","num":"03000FCD"};
+    itemHash["horse mackerl"]={"val":"0064","num":"03000FCE"};
+    itemHash["sardine"]={"val":"0065","num":"03000FCE"};
+    itemHash["squid"]={"val":"0066","num":"03000FCF"};
+    itemHash["octopus"]={"val":"0067","num":"03000FCF"};
+    itemHash["shrimp"]={"val":"0068","num":"03000FD0"};
+    itemHash["chicken"]={"val":"0069","num":"03000FD0"};
+    itemHash["beef"]={"val":"006A","num":"03000FD1"};
+    itemHash["pork"]={"val":"006B","num":"03000FD1"};
+    itemHash["milk"]={"val":"006C","num":"03000FD2"};
+    itemHash["cheese"]={"val":"006D","num":"03000FD2"};
+    itemHash["konniyaku"]={"val":"006E","num":"03000FD3"};
+    itemHash["kelp"]={"val":"006F","num":"03000FD3"};
+    itemHash["eggs"]={"val":"0070","num":"03000FD4"};
+    itemHash["miso"]={"val":"0071","num":"03000FD4"};
+    itemHash["bread"]={"val":"0072","num":"03000FD5"};
+    itemHash["rice"]={"val":"0073","num":"03000FD5"};
+    itemHash["seaweed"]={"val":"0074","num":"03000FD6"};
+    itemHash["spice"]={"val":"0075","num":"03000FD6"};
+    itemHash["pasta"]={"val":"0076","num":"03000FD7"};
+    itemHash["apple gumi"]={"val":"0077","num":"03000FD7"};
+    itemHash["orange gumi"]={"val":"0078","num":"03000FD8"};
+    itemHash["mix gumi"]={"val":"0079","num":"03000FD8"};
+    itemHash["lemon gumi"]={"val":"007A","num":"03000FD9"};
+    itemHash["pine gumi"]={"val":"007B","num":"03000FD9"};
+    itemHash["miracle gumi"]={"val":"007C","num":"03000FDA"};
+    itemHash["elixir"]={"val":"007D","num":"03000FDA"};
+    itemHash["basilisk scale"]={"val":"007E","num":"03000FDB"};
+    itemHash["sage"]={"val":"007F","num":"03000FDB"};
+    itemHash["savory"]={"val":"0080","num":"03000FDC"};
+    itemHash["verbene"]={"val":"0081","num":"03000FDC"};
+    itemHash["lavender"]={"val":"0082","num":"03000FDD"};
+    itemHash["red sage"]={"val":"0083","num":"03000FDD"};
+    itemHash["red savory"]={"val":"0084","num":"03000FDE"};
+    itemHash["red verbene"]={"val":"0085","num":"03000FDE"};
+    itemHash["red lavender"]={"val":"0086","num":"03000FDF"};
+    itemHash["pansea bottle"]={"val":"0087","num":"03000FDF"};
+    itemHash["life bottle"]={"val":"0088","num":"03000FE0"};
+    itemHash["flare bottle"]={"val":"0089","num":"03000FE0"};
+    itemHash["liquer bottle"]={"val":"008A","num":"03000FE1"};
+    itemHash["holy bottle"]={"val":"008B","num":"03000FE1"};
+    itemHash["dark bottle"]={"val":"008C","num":"03000FE2"};
+    itemHash["rune bottle"]={"val":"008D","num":"03000FE2"};
+    itemHash["charm bottle"]={"val":"008E","num":"03000FE3"};
+    itemHash["miracle charm bottle"]={"val":"008F","num":"03000FE3"};
+    itemHash["world map"]={"val":"0090","num":"03000FE4"};
+    itemHash["scout orb"]={"val":"0091","num":"03000FE4"};
+    itemHash["hourglass"]={"val":"0092","num":"03000FE5"};
+    itemHash["chrono glass"]={"val":"0093","num":"03000FE5"};
+    itemHash["combo counter"]={"val":"0094","num":"03000FE6"};
+    itemHash["spectacles"]={"val":"0095","num":"03000FE6"};
+    itemHash["pick axe"]={"val":"0096","num":"03000FE7"};
+    itemHash["magical rouge"]={"val":"0097","num":"03000FE7"};
+    itemHash["red lanter"]={"val":"0098","num":"03000FE8"};
+    itemHash["green torch"]={"val":"0099","num":"03000FE8"};
+    itemHash["blue candle"]={"val":"009A","num":"03000FE9"};
+    itemHash["rope"]={"val":"009B","num":"03000FE9"};
+    itemHash["drum set"]={"val":"009C","num":"03000FEA"};
+    itemHash["mah jong tile"]={"val":"009D","num":"03000FEA"};
+    itemHash["monstery book"]={"val":"009E","num":"03000FEB"};
+    itemHash["collector's book"]={"val":"009F","num":"03000FEB"};
+    itemHash["ticket"]={"val":"00A0","num":"03000FEC"};
+    itemHash["loudspeaker"]={"val":"00A1","num":"03000FEC"};
+    itemHash["long sword"]={"val":"00A2","num":"03000FED"};
+    itemHash["sabre"]={"val":"00A3","num":"03000FED"};
+    itemHash["rapier"]={"val":"00A4","num":"03000FEE"};
+    itemHash["knight saber"]={"val":"00A5","num":"03000FEE"};
+    itemHash["verdun"]={"val":"00A6","num":"03000FEF"};
+    itemHash["Colichemarde"]={"val":"00A7","num":"03000FEF"};
+    itemHash["fine saber"]={"val":"00A8","num":"03000FF0"};
+    itemHash["walloon sword"]={"val":"00A9","num":"03000FF0"};
+    itemHash["fame face"]={"val":"00AA","num":"03000FF1"};
+    itemHash["slayer sword"]={"val":"00AB","num":"03000FF1"};
+    itemHash["Moon Falx"]={"val":"00AC","num":"03000FF2"};
+    itemHash["Damascus sword"]={"val":"00AD","num":"03000FF2"};
+    itemHash["sinclair"]={"val":"00AE","num":"03000FF3"};
+    itemHash["destroyer"]={"val":"00AF","num":"03000FF3"};
+    itemHash["holy sword"]={"val":"00B0","num":"03000FF4"};
+    itemHash["dragon tooth"]={"val":"00B1","num":"03000FF4"};
+    itemHash["flare baselard"]={"val":"00B2","num":"03000FF5"};
+    itemHash["ice coffin"]={"val":"00B3","num":"03000FF5"};
+    itemHash["laser blade"]={"val":"00B4","num":"03000FF6"};
+    itemHash["duel sword"]={"val":"00B5","num":"03000FF6"};
+    itemHash["luck blade"]={"val":"00B6","num":"03000FF7"};
+    itemHash["muramasa"]={"val":"00B7","num":"03000FF7"};
+    itemHash["wazier rapier"]={"val":"00B8","num":"03000FF8"};
+    itemHash["saint rapier"]={"val":"00B9","num":"03000FF8"};
+    itemHash["doom blade"]={"val":"00BA","num":"03000FF9"};
+    itemHash["excalibur"]={"val":"00BB","num":"03000FF9"};
+    itemHash["vorpal sword"]={"val":"00BC","num":"03000FFA"};
+    itemHash["Flamberge"]={"val":"00BD","num":"03000FFA"};
+    itemHash["super deform"]={"val":"00BE","num":"03000FFB"};
+    itemHash["corsesca"]={"val":"00BF","num":"03000FFB"};
+    itemHash["gungnir"]={"val":"00C0","num":"03000FFC"};
+    itemHash["sadingrav"]={"val":"00C1","num":"03000FFC"};
+    itemHash["naginata blade"]={"val":"00C2","num":"03000FFD"};
+    itemHash["arcwind"]={"val":"00C3","num":"03000FFD"};
+    itemHash["gungnir (real)"]={"val":"00C4","num":"03000FFE"};
+    itemHash["gungnir (revised)"]={"val":"00C5","num":"03000FFE"};
+    itemHash["battle axe"]={"val":"00C6","num":"03000FFF"};
+    itemHash["crescent axe"]={"val":"00C7","num":"03000FFF"};
+    itemHash["bardiche"]={"val":"00C8","num":"03001000"};
+    itemHash["strike axe"]={"val":"00C9","num":"03001000"};
+    itemHash["hard cleaver"]={"val":"00CA","num":"03001001"};
+    itemHash["bahumut tail"]={"val":"00CB","num":"03001001"};
+    itemHash["halberd"]={"val":"00CC","num":"03001002"};
+    itemHash["pole axe"]={"val":"00CD","num":"03001002"};
+    itemHash["mechhalberd"]={"val":"00CE","num":"03001003"};
+    itemHash["saint halberd"]={"val":"00CF","num":"03001003"};
+    itemHash["sylph bow s"]={"val":"00D0","num":"03001004"};
+    itemHash["sylph bow l"]={"val":"00D1","num":"03001004"};
+    itemHash["composite bow"]={"val":"00D2","num":"03001005"};
+    itemHash["Crane quinn"]={"val":"00D3","num":"03001005"};
+    itemHash["aqua sprite"]={"val":"00D4","num":"03001006"};
+    itemHash["flare sprite"]={"val":"00D5","num":"03001006"};
+    itemHash["sand sprite "]={"val":"00D6","num":"03001007"};
+    itemHash["gale sprite"]={"val":"00D7","num":"03001007"};
+    itemHash["crescent arrow"]={"val":"00D8","num":"03001008"};
+    itemHash["elven bow"]={"val":"00D9","num":"03001008"};
+    itemHash["merciless bow"]={"val":"00DA","num":"03001009"};
+    itemHash["berserker arrow"]={"val":"00DB","num":"03001009"};
+    itemHash["elven bow (2)"]={"val":"00DC","num":"0300100A"};
+    itemHash["rod"]={"val":"00DD","num":"0300100A"};
+    itemHash["gem rod"]={"val":"00DE","num":"0300100B"};
+    itemHash["ruby rod"]={"val":"00DF","num":"0300100B"};
+    itemHash["rune staff"]={"val":"00E0","num":"0300100C"};
+    itemHash["unicorn horn"]={"val":"00E1","num":"0300100C"};
+    itemHash["holy staff"]={"val":"00E2","num":"0300100D"};
+    itemHash["star mace"]={"val":"00E3","num":"0300100D"};
+    itemHash["BC rod"]={"val":"00E4","num":"0300100E"};
+    itemHash["Porno mag"]={"val":"00E5","num":"0300100E"};
+    itemHash["Namco Gamers (book)"]={"val":"00E6","num":"0300100F"};
+    itemHash["necronomicon"]={"val":"00E7","num":"0300100F"};
+    itemHash["yellow kings"]={"val":"00E8","num":"03001010"};
+    itemHash["Serano Fragment"]={"val":"00E9","num":"03001010"};
+    itemHash["rebainois"]={"val":"00EA","num":"03001011"};
+    itemHash["aqua dinguen"]={"val":"00EB","num":"03001011"};
+    itemHash["gale fragment"]={"val":"00EC","num":"03001012"};
+    itemHash["mist seven sun"]={"val":"00ED","num":"03001012"};
+    itemHash["misa requiem"]={"val":"00EE","num":"03001013"};
+    itemHash["doom magic"]={"val":"00EF","num":"03001013"};
+    itemHash["broom"]={"val":"00F0","num":"03001014"};
+    itemHash["mystery broom"]={"val":"00F1","num":"03001014"};
+    itemHash["magical broom"]={"val":"00F2","num":"03001015"};
+    itemHash["sylph broom"]={"val":"00F3","num":"03001015"};
+    itemHash["wonder broom"]={"val":"00F4","num":"03001016"};
+    itemHash["star broom"]={"val":"00F5","num":"03001016"};
+    itemHash["deck brush"]={"val":"00F6","num":"03001017"};
+    itemHash["nintou botan"]={"val":"00F7","num":"03001017"};
+    itemHash["nintou ayame"]={"val":"00F8","num":"03001018"};
+    itemHash["nintou kikyou"]={"val":"00F9","num":"03001018"};
+    itemHash["nintou yuri"]={"val":"00FA","num":"03001019"};
+    itemHash["nintou chisakura"]={"val":"00FB","num":"03001019"};
+    itemHash["eternal sword"]={"val":"00FC","num":"0300101A"};
+    itemHash["leather armor"]={"val":"00FD","num":"0300101A"};
+    itemHash["chain mail"]={"val":"00FE","num":"0300101B"};
+    itemHash["ring mail"]={"val":"00FF","num":"0300101B"};
+    itemHash["sprint mail"]={"val":"0100","num":"0300101C"};
+    itemHash["breast plate"]={"val":"0101","num":"0300101C"};
+    itemHash["plate mail"]={"val":"0102","num":"0300101D"};
+    itemHash["mythril plate"]={"val":"0103","num":"0300101D"};
+    itemHash["reflex"]={"val":"0104","num":"0300101E"};
+    itemHash["silver plate"]={"val":"0105","num":"0300101E"};
+    itemHash["rare plate"]={"val":"0106","num":"0300101F"};
+    itemHash["mambane"]={"val":"0107","num":"0300101F"};
+    itemHash["gold armor"]={"val":"0108","num":"03001020"};
+    itemHash["cloak"]={"val":"0109","num":"03001020"};
+    itemHash["amber cloack"]={"val":"010A","num":"03001021"};
+    itemHash["silver cloak"]={"val":"010B","num":"03001021"};
+    itemHash["holy cloak"]={"val":"010C","num":"03001022"};
+    itemHash["star cloak"]={"val":"010D","num":"03001022"};
+    itemHash["mythril mesh"]={"val":"010E","num":"03001023"};
+    itemHash["black clothes"]={"val":"010F","num":"03001023"};
+    itemHash["kisaragi"]={"val":"0110","num":"03001024"};
+    itemHash["yayoi"]={"val":"0111","num":"03001024"};
+    itemHash["nagatsuki"]={"val":"0112","num":"03001025"};
+    itemHash["kannazuki"]={"val":"0113","num":"03001025"};
+    itemHash["wood shield"]={"val":"0114","num":"03001026"};
+    itemHash["round shield"]={"val":"0115","num":"03001026"};
+    itemHash["kite shield"]={"val":"0116","num":"03001027"};
+    itemHash["feet shield"]={"val":"0117","num":"03001027"};
+    itemHash["fine shield"]={"val":"0118","num":"03001028"};
+    itemHash["anhk shield"]={"val":"0119","num":"03001028"};
+    itemHash["rare shield"]={"val":"011A","num":"03001029"};
+    itemHash["red line shield"]={"val":"011B","num":"03001029"};
+    itemHash["star shield"]={"val":"011C","num":"0300102A"};
+    itemHash["blue line shield"]={"val":"011D","num":"0300102A"};
+    itemHash["ring shield"]={"val":"011E","num":"0300102B"};
+    itemHash["leather armor"]={"val":"011F","num":"0300102B"};
+    itemHash["iron sallet"]={"val":"0120","num":"0300102C"};
+    itemHash["amment helm"]={"val":"0121","num":"0300102C"};
+    itemHash["cross helm"]={"val":"0122","num":"0300102D"};
+    itemHash["duel helm"]={"val":"0123","num":"0300102D"};
+    itemHash["rare helm"]={"val":"0124","num":"0300102E"};
+    itemHash["golden helm"]={"val":"0125","num":"0300102E"};
+    itemHash["star helm"]={"val":"0126","num":"0300102F"};
+    itemHash["beret"]={"val":"0127","num":"0300102F"};
+    itemHash["anhk beret"]={"val":"0128","num":"03001030"};
+    itemHash["land beret"]={"val":"0129","num":"03001030"};
+    itemHash["fine beret"]={"val":"012A","num":"03001031"};
+    itemHash["star beret"]={"val":"012B","num":"03001031"};
+    itemHash["head wrap"]={"val":"012C","num":"03001032"};
+    itemHash["face wrap"]={"val":"012D","num":"03001032"};
+    itemHash["blue ribbon"]={"val":"012E","num":"03001033"};
+    itemHash["large blue ribbon"]={"val":"012F","num":"03001033"};
+    itemHash["stripe ribbon"]={"val":"0130","num":"03001034"};
+    itemHash["pretty ribbon"]={"val":"0131","num":"03001034"};
+    itemHash["magical ribbon"]={"val":"0132","num":"03001035"};
+    itemHash["leather glove"]={"val":"0133","num":"03001035"};
+    itemHash["iron glove"]={"val":"0134","num":"03001036"};
+    itemHash["gauntlet"]={"val":"0135","num":"03001036"};
+    itemHash["mythril glove"]={"val":"0136","num":"03001037"};
+    itemHash["rare gauntlet"]={"val":"0137","num":"03001037"};
+    itemHash["star glove"]={"val":"0138","num":"03001038"};
+    itemHash["h gauntlet"]={"val":"0139","num":"03001038"};
+    itemHash["claw gloves"]={"val":"013A","num":"03001039"};
+    itemHash["kitchen mittens"]={"val":"013B","num":"03001039"};
+    itemHash["pretty mitten"]={"val":"013C","num":"0300103A"};
+    itemHash["mother's gloves"]={"val":"013D","num":"0300103A"};
+    itemHash["white gloves"]={"val":"013E","num":"0300103B"};
+    itemHash["stone check"]={"val":"013F","num":"0300103B"};
+    itemHash["tailsman"]={"val":"0140","num":"0300103C"};
+    itemHash["blue tailsman"]={"val":"0141","num":"0300103C"};
+    itemHash["paralyze check"]={"val":"0142","num":"0300103D"};
+    itemHash["piyohan"]={"val":"0143","num":"0300103D"};
+    itemHash["poison check"]={"val":"0144","num":"0300103E"};
+    itemHash["rabbit symbol"]={"val":"0145","num":"0300103E"};
+    itemHash["Flame's protection"]={"val":"0146","num":"0300103F"};
+    itemHash["ice's protection"]={"val":"0147","num":"0300103F"};
+    itemHash["manji's symbol"]={"val":"0148","num":"03001040"};
+    itemHash["silver cape"]={"val":"0149","num":"03001040"};
+    itemHash["princess cape"]={"val":"014A","num":"03001041"};
+    itemHash["iron boots"]={"val":"014B","num":"03001041"};
+    itemHash["elven boots"]={"val":"014C","num":"03001042"};
+    itemHash["jet boots"]={"val":"014D","num":"03001042"};
+    itemHash["persian boots"]={"val":"014E","num":"03001043"};
+    itemHash["nightmare boots"]={"val":"014F","num":"03001043"};
+    itemHash["water spider"]={"val":"0150","num":"03001044"};
+    itemHash["mantle"]={"val":"0151","num":"03001044"};
+    itemHash["leather mantle"]={"val":"0152","num":"03001045"};
+    itemHash["thieves mantle"]={"val":"0153","num":"03001045"};
+    itemHash["elven mantle"]={"val":"0154","num":"03001046"};
+    itemHash["flare mantle"]={"val":"0155","num":"03001046"};
+    itemHash["aqua mantle"]={"val":"0156","num":"03001047"};
+    itemHash["aquamarine"]={"val":"0157","num":"03001047"};
+    itemHash["amethyst"]={"val":"0158","num":"03001048"};
+    itemHash["emerald"]={"val":"0159","num":"03001048"};
+    itemHash["opal"]={"val":"015A","num":"03001049"};
+    itemHash["garnet"]={"val":"015B","num":"03001049"};
+    itemHash["sardonyx"]={"val":"015C","num":"0300104A"};
+    itemHash["sapphire"]={"val":"015D","num":"0300104A"};
+    itemHash["turquise"]={"val":"015E","num":"0300104B"};
+    itemHash["diamond"]={"val":"015F","num":"0300104B"};
+    itemHash["topaz"]={"val":"0160","num":"0300104C"};
+    itemHash["moonstone"]={"val":"0161","num":"0300104C"};
+    itemHash["ruby"]={"val":"0162","num":"0300104D"};
+    itemHash["lapislaiz"]={"val":"0163","num":"0300104D"};
+    itemHash["sorcerer ring"]={"val":"0164","num":"0300104E"};
+    itemHash["emerald ring"]={"val":"0165","num":"0300104E"};
+    itemHash["fairy ring"]={"val":"0166","num":"0300104F"};
+    itemHash["mental ring"]={"val":"0167","num":"0300104F"};
+    itemHash["protect ring"]={"val":"0168","num":"03001050"};
+    itemHash["faust ring"]={"val":"0169","num":"03001050"};
+    itemHash["resist ring"]={"val":"016A","num":"03001051"};
+    itemHash["reflect ring"]={"val":"016B","num":"03001051"};
+    itemHash["channel ring (bad)"]={"val":"016C","num":"03001052"};
+    itemHash["dash ring"]={"val":"016D","num":"03001052"};
+    itemHash["technical ring"]={"val":"016E","num":"03001053"};
+    itemHash["reverse doll"]={"val":"016F","num":"03001053"};
+    itemHash["sephira"]={"val":"0170","num":"03001054"};
+    itemHash["sephira +1"]={"val":"0171","num":"03001054"};
+    itemHash["pikuru stone"]={"val":"0172","num":"03001055"};
+    itemHash["black onyx"]={"val":"0173","num":"03001055"};
+    itemHash["white mist"]={"val":"0174","num":"03001056"};
+    itemHash["mystical mist"]={"val":"0175","num":"03001056"};
+    itemHash["moon crystal"]={"val":"0176","num":"03001057"};
+    itemHash["deris emblem"]={"val":"0177","num":"03001057"};
+    itemHash["feet symbol"]={"val":"0178","num":"03001058"};
+    itemHash["attack symbol"]={"val":"0179","num":"03001058"};
+    itemHash["holy symbol"]={"val":"017A","num":"03001059"};
+    itemHash["misty symbol"]={"val":"017B","num":"03001059"};
+    itemHash["dark seal"]={"val":"017C","num":"0300105A"};
+    itemHash["demon seal"]={"val":"017D","num":"0300105A"};
+    itemHash["earring"]={"val":"017E","num":"0300105B"};
+    itemHash["combo command"]={"val":"017F","num":"0300105B"};
+    itemHash["silver mattock"]={"val":"0180","num":"0300105C"};
+    itemHash["magic pouch"]={"val":"0181","num":"0300105C"};
+    itemHash["magical pouch"]={"val":"0182","num":"0300105D"};
+    itemHash["copy tail"]={"val":"0183","num":"0300105D"};
+    itemHash["cleo's mirror"]={"val":"0184","num":"0300105E"};
+    itemHash["red card"]={"val":"0185","num":"0300105E"};
+    itemHash["green card"]={"val":"0186","num":"0300105F"};
+    itemHash["blue card"]={"val":"0187","num":"0300105F"};
+    itemHash["yellow card"]={"val":"0188","num":"03001060"};
+    itemHash["white card"]={"val":"0189","num":"03001060"};
+    itemHash["brown card"]={"val":"018A","num":"03001061"};
+    itemHash["black card"]={"val":"018B","num":"03001061"};
+    itemHash["bravery statue"]={"val":"018C","num":"03001062"};
+    itemHash["justice statue"]={"val":"018D","num":"03001062"};
+    itemHash["friendship statue"]={"val":"018E","num":"03001063"};
+    itemHash["love statue"]={"val":"018F","num":"03001063"};
+    itemHash["dream statue"]={"val":"0190","num":"03001064"};
+    itemHash["s flag"]={"val":"0191","num":"03001064"};
     
     itemModAddrMax=Object.keys(itemHash).length;
 
     var chars={};
+    chars['00']='end name';
     chars['11']='、';
     chars['12']='。';
     chars['13']='!';
@@ -738,211 +745,213 @@
 
   <body>
     <div id="wrapper">
-      <div class="col">
-      <textarea id="codes"></textarea>
+      <div class="col" style="align-items: flex-end;">
+        <div style="flex-grow: 5;"><textarea id="codes"></textarea></div>
+        <div><input style="margin-top: 6px; margin-right: 0px; padding: 2px 4px 2px 4px;" type="submit" value="make cheat file."/></div>
       </div>
 
       <div class="col" style="margin-left: 50px;flex-grow: 3; border: 1px solid #aaaaaa; border-radius: 6px; padding: 6px; overflow: auto;">
+        <div style="margin-bottom: 10px; font-weight: bold;">Tales Of Phantasia GBA Japanese cheat code file generator:</div>
         <div style="flex-direction: column;"> 
-          <div><input type="checkbox" name="Gald 1" value="03000F94:967F" /></div>
-          <div><input type="checkbox" name="Gald 2" value="03000F94:98" /></div>
-          <div><input type="checkbox" name="manual/semi/auto (might require technical ring)" value="03000AAE:02" /></div>
-          <div><input type="checkbox" name="save in dungeon" value="03001A03:60" /></div>
-          <div><input type="checkbox" name="save in dungeon + sorceror's ring" value="03001A03:63" /></div>
+          <div><input type="submit" name="Gald 1" addr="03000F94" codeVal="967F" value="+" /></div>
+          <div><input type="submit" name="Gald 2" addr="03000F96" codeVal="98" value="+" /></div>
+          <div><input type="submit" name="manual/semi/auto (might require technical ring)" addr="03000AAE" codeVal="02" value="+" /></div>
+          <div><input type="submit" name="save in dungeon" addr="03001A03" codeVal="60" value="+" /></div>
+          <div><input type="submit" name="save in dungeon + sorceror's ring" addr="03001A03" codeVal="63" value="+" /></div>
           <div class="comment">Be careful with the save in dungeon codes. The one-off small rooms in some dungeons are temporary storage. Saving in there and reloading the game from there may get you stuck in that room.</div>
 
           <div style="margin-top: 10px;">What character in what slot?</div>
           <div class="comment">01:Cless, 02:Mint, 03:Arche, 04:Klarth, 05:Chester, 06:Suzu, 07:Ria, 08:Brambart. *Note* Ria and Brambart are NPC's.</div>
-          <div><input type="checkbox" name="1st slot" value="03001530:01" /></div>
-          <div><input type="checkbox" name="2nd slot" value="03001532:02" /></div>
-          <div><input type="checkbox" name="3rd slot" value="03001534:03" /></div>
-          <div><input type="checkbox" name="4th slot" value="03001536:04" /></div>
-          <div><input type="checkbox" name="5th slot" value="03001538:05" /></div>
-          <div><input type="checkbox" name="6th slot" value="0300153A:06" /></div>
+          <div><input type="submit" name="1st slot" addr="03001530" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="2nd slot" addr="03001532" codeVal="02" value="+" /></div>
+          <div><input type="submit" name="3rd slot" addr="03001534" codeVal="03" value="+" /></div>
+          <div><input type="submit" name="4th slot" addr="03001536" codeVal="04" value="+" /></div>
+          <div><input type="submit" name="5th slot" addr="03001538" codeVal="05" value="+" /></div>
+          <div><input type="submit" name="6th slot" addr="0300153A" codeVal="06" value="+" /></div>
 
           <div class="name">Let's go Arche</div>
-          <div><input type="checkbox" name="Time (4 seconds)" value="03001731:00" /></div>
-          <div><input type="checkbox" name="Time (nano seconds)" value="03001730:00" /></div>
-          <div><input type="checkbox" name="Missions Taken On" value="030017B2:0A" /></div>
-          <div><input type="checkbox" name="Arche Mission Completed" value="030017B0:0A" /></div>
+          <div><input type="submit" name="Time (4 seconds)" addr="03001731" codeVal="00" value="+" /></div>
+          <div><input type="submit" name="Time (nano seconds)" addr="03001730" codeVal="00" value="+" /></div>
+          <div><input type="submit" name="Missions Taken On" addr="030017B2" codeVal="0A" value="+" /></div>
+          <div><input type="submit" name="Arche Mission Completed" addr="030017B0" codeVal="0A" value="+" /></div>
         </div>
 
         <div class="codeSect">
           <div>Battle Codes:</div>
           <div class="comment">status: 00=norm, 01=psn, 02=prlz, 04=stn, 08=fnt</div>
-          <div><input type="checkbox" name="P1 status" value="02021e80:00" /></div>
-          <div><input type="checkbox" name="P1 HP" value="02021e9c:270f" /></div>
-          <div><input type="checkbox" name="P1 TP" value="02021ea8:03e7" /></div>
-          <div><input type="checkbox" name="P2 status" value="02022108:00" /></div>
-          <div><input type="checkbox" name="P2 HP" value="02022124:03e7" /></div>
-          <div><input type="checkbox" name="P2 TP" value="02022130:03e7" /></div>
-          <div><input type="checkbox" name="P3 status" value="02022390:00" /></div>
-          <div><input type="checkbox" name="P3 HP" value="020223ac:03e7" /></div>
-          <div><input type="checkbox" name="P3 TP" value="020223b8:03e7" /></div>
-          <div><input type="checkbox" name="P4 status" value="02022618:00" /></div>
-          <div><input type="checkbox" name="P4 HP" value="02022634:03e7" /></div>
-          <div><input type="checkbox" name="P4 TP" value="02022640:03e7" /></div>
+          <div><input type="submit" name="P1 status" addr="02021e80" codeVal="00" value="+" /></div>
+          <div><input type="submit" name="P1 HP" addr="02021e9c" codeVal="270f" value="+" /></div>
+          <div><input type="submit" name="P1 TP" addr="02021ea8" codeVal="03e7" value="+" /></div>
+          <div><input type="submit" name="P2 status" addr="02022108" codeVal="00" value="+" /></div>
+          <div><input type="submit" name="P2 HP" addr="02022124" codeVal="03e7" value="+" /></div>
+          <div><input type="submit" name="P2 TP" addr="02022130" codeVal="03e7" value="+" /></div>
+          <div><input type="submit" name="P3 status" addr="02022390" codeVal="00" value="+" /></div>
+          <div><input type="submit" name="P3 HP" addr="020223ac" codeVal="03e7" value="+" /></div>
+          <div><input type="submit" name="P3 TP" addr="020223b8" codeVal="03e7" value="+" /></div>
+          <div><input type="submit" name="P4 status" addr="02022618" codeVal="00" value="+" /></div>
+          <div><input type="submit" name="P4 HP" addr="02022634" codeVal="03e7" value="+" /></div>
+          <div><input type="submit" name="P4 TP" addr="02022640" codeVal="03e7" value="+" /></div>
         </div>
 
         <div class="codeSect">
           <div>Skills</div>
           <div class="comment">These skills are laid out in the order that the game has them, but it doesn't have to be this order. Note that a lot of skills, particularly magic, can be used by anyone. Also, characters that are not Cless can often have room to hold extra skills. Ex. 0301d49:69 will give chester time stop after his last skill.</div>
           <div class="name">Cless</div>
-          <div><input type="checkbox" name="Slot 1 Psion Bolt" value="03000ab0:01" /></div>
-          <div><input type="checkbox" name="Slot 2 Dual Kick" value="03000ab1:02" /></div>
-          <div><input type="checkbox" name="Slot 3 Lightning Bolt" value="03000ab2:03" /></div>
-          <div><input type="checkbox" name="Slot 4 Blade Storm" value="03000ab3:04" /></div>
-          <div><input type="checkbox" name="Slot 5 Tiger teeth" value="03000ab4:05" /></div>
-          <div><input type="checkbox" name="Slot 6 Focus" value="03000ab5:10" /></div>
-          <div><input type="checkbox" name="Slot 7 Phoenix" value="03000ab6:06" /></div>
-          <div><input type="checkbox" name="Slot 8 Gale Shield" value="03000ab7:0e" /></div>
-          <div><input type="checkbox" name="Slot 9 Fury Slash" value="03000ab8:0c" /></div>
-          <div><input type="checkbox" name="Slot 10 Eir's Love" value="03000ab9:11" /></div>
-          <div><input type="checkbox" name="Slot 11 Lionheart" value="03000aba:07" /></div>
-          <div><input type="checkbox" name="Slot 12 Focus More" value="03000abb:0f" /></div>
-          <div><input type="checkbox" name="Slot 13 Magma Rift" value="03000abc:08" /></div>
-          <div><input type="checkbox" name="Slot 14 Firebrand" value="03000abd:0d" /></div>
-          <div><input type="checkbox" name="Slot 15 Soul Wave" value="03000abe:09" /></div>
-          <div><input type="checkbox" name="Slot 16 Teleport" value="03000abf:0A" /></div>
-          <div><input type="checkbox" name="Slot 17 Soul Edge" value="03000ac0:0B" /></div>
-          <div><input type="checkbox" name="Slot 18 Wild tiger strike (???)" value="03000ac1:12" /></div>
-          <div><input type="checkbox" name="Slot 19 Psion Kick (Psion Bolt +Dual Kick)" value="03000ac2:13" /></div>
-          <div><input type="checkbox" name="Slot 20 Mecha Blade (Psion Bolt+Tiger Teeth)" value="03000ac3:14" /></div>
-          <div><input type="checkbox" name="Slot 21 Psion Storm (Psion Bolt+Blade Storm)" value="03000ac4:15" /></div>
-          <div><input type="checkbox" name="Slot 22 Magma Bolt (Psion Bolt+Magma Rift)" value="03000ac5:16" /></div>
-          <div><input type="checkbox" name="Slot 23 Lion Lunge (Lionheart+Dual Kick)" value="03000ac6:17" /></div>
-          <div><input type="checkbox" name="Slot 24 Lion Teeth (Lionheart +Tiger Teeth)" value="03000ac7:18" /></div>
-          <div><input type="checkbox" name="Slot 25 Lion Claws (Lionheart +Blade Storm)" value="03000ac8:19" /></div>
-          <div><input type="checkbox" name="Slot 26 Lion Flare(Lionheart + Magma Rift)" value="03000ac9:1a" /></div>
-          <div><input type="checkbox" name="Slot 27 Bolt Crash (Lightning+Dual Kick)" value="03000aca:1b" /></div>
-          <div><input type="checkbox" name="Slot 28 Thor's Wrath(Lightning+Tiger Teeth)" value="03000acb:1c" /></div>
-          <div><input type="checkbox" name="Slot 29 Tempest (Lightning+Blade Storm)" value="03000acc:1d" /></div>
-          <div><input type="checkbox" name="Slot 30 Earth's Rage(Lightning +Magma Rift)" value="03000acd:1e" /></div>
-          <div><input type="checkbox" name="Slot 31 Flare Talon (Phoenix+Dual Kick)" value="03000ace:1f" /></div>
-          <div><input type="checkbox" name="Slot 32 Odin's Wrath (Phoenix+Tiger Teeth)" value="03000acf:20" /></div>
-          <div><input type="checkbox" name="Slot 33 Burning Soul (Phoenix+Blade storm)" value="03000ad0:21" /></div>
-          <div><input type="checkbox" name="Slot 34 Cinder Hawk (Phoneix+Magma Rift)" value="03000ad1:22" /></div>
-          <div><input type="checkbox" name="Slot 35 Soul Forge (Soul wave+Soul Edge)" value="03000ad2:23" /></div>
-          <div><input type="checkbox" name="Slot 36 Soul Strike (Teleport+Soul Wave)" value="03000ad3:24" /></div>
+          <div><input type="submit" name="Slot 1 Psion Bolt" addr="03000ab0" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Slot 2 Dual Kick" addr="03000ab1" codeVal="02" value="+" /></div>
+          <div><input type="submit" name="Slot 3 Lightning Bolt" addr="03000ab2" codeVal="03" value="+" /></div>
+          <div><input type="submit" name="Slot 4 Blade Storm" addr="03000ab3" codeVal="04" value="+" /></div>
+          <div><input type="submit" name="Slot 5 Tiger teeth" addr="03000ab4" codeVal="05" value="+" /></div>
+          <div><input type="submit" name="Slot 6 Focus" addr="03000ab5" codeVal="10" value="+" /></div>
+          <div><input type="submit" name="Slot 7 Phoenix" addr="03000ab6" codeVal="06" value="+" /></div>
+          <div><input type="submit" name="Slot 8 Gale Shield" addr="03000ab7" codeVal="0e" value="+" /></div>
+          <div><input type="submit" name="Slot 9 Fury Slash" addr="03000ab8" codeVal="0c" value="+" /></div>
+          <div><input type="submit" name="Slot 10 Eir's Love" addr="03000ab9" codeVal="11" value="+" /></div>
+          <div><input type="submit" name="Slot 11 Lionheart" addr="03000aba" codeVal="07" value="+" /></div>
+          <div><input type="submit" name="Slot 12 Focus More" addr="03000abb" codeVal="0f" value="+" /></div>
+          <div><input type="submit" name="Slot 13 Magma Rift" addr="03000abc" codeVal="08" value="+" /></div>
+          <div><input type="submit" name="Slot 14 Firebrand" addr="03000abd" codeVal="0d" value="+" /></div>
+          <div><input type="submit" name="Slot 15 Soul Wave" addr="03000abe" codeVal="09" value="+" /></div>
+          <div><input type="submit" name="Slot 16 Teleport" addr="03000abf" codeVal="0A" value="+" /></div>
+          <div><input type="submit" name="Slot 17 Soul Edge" addr="03000ac0" codeVal="0B" value="+" /></div>
+          <div><input type="submit" name="Slot 18 Wild tiger strike (???)" addr="03000ac1" codeVal="12" value="+" /></div>
+          <div><input type="submit" name="Slot 19 Psion Kick (Psion Bolt +Dual Kick)" addr="03000ac2" codeVal="13" value="+" /></div>
+          <div><input type="submit" name="Slot 20 Mecha Blade (Psion Bolt+Tiger Teeth)" addr="03000ac3" codeVal="14" value="+" /></div>
+          <div><input type="submit" name="Slot 21 Psion Storm (Psion Bolt+Blade Storm)" addr="03000ac4" codeVal="15" value="+" /></div>
+          <div><input type="submit" name="Slot 22 Magma Bolt (Psion Bolt+Magma Rift)" addr="03000ac5" codeVal="16" value="+" /></div>
+          <div><input type="submit" name="Slot 23 Lion Lunge (Lionheart+Dual Kick)" addr="03000ac6" codeVal="17" value="+" /></div>
+          <div><input type="submit" name="Slot 24 Lion Teeth (Lionheart +Tiger Teeth)" addr="03000ac7" codeVal="18" value="+" /></div>
+          <div><input type="submit" name="Slot 25 Lion Claws (Lionheart +Blade Storm)" addr="03000ac8" codeVal="19" value="+" /></div>
+          <div><input type="submit" name="Slot 26 Lion Flare(Lionheart + Magma Rift)" addr="03000ac9" codeVal="1a" value="+" /></div>
+          <div><input type="submit" name="Slot 27 Bolt Crash (Lightning+Dual Kick)" addr="03000aca" codeVal="1b" value="+" /></div>
+          <div><input type="submit" name="Slot 28 Thor's Wrath(Lightning+Tiger Teeth)" addr="03000acb" codeVal="1c" value="+" /></div>
+          <div><input type="submit" name="Slot 29 Tempest (Lightning+Blade Storm)" addr="03000acc" codeVal="1d" value="+" /></div>
+          <div><input type="submit" name="Slot 30 Earth's Rage(Lightning +Magma Rift)" addr="03000acd" codeVal="1e" value="+" /></div>
+          <div><input type="submit" name="Slot 31 Flare Talon (Phoenix+Dual Kick)" addr="03000ace" codeVal="1f" value="+" /></div>
+          <div><input type="submit" name="Slot 32 Odin's Wrath (Phoenix+Tiger Teeth)" addr="03000acf" codeVal="20" value="+" /></div>
+          <div><input type="submit" name="Slot 33 Burning Soul (Phoenix+Blade storm)" addr="03000ad0" codeVal="21" value="+" /></div>
+          <div><input type="submit" name="Slot 34 Cinder Hawk (Phoneix+Magma Rift)" addr="03000ad1" codeVal="22" value="+" /></div>
+          <div><input type="submit" name="Slot 35 Soul Forge (Soul wave+Soul Edge)" addr="03000ad2" codeVal="23" value="+" /></div>
+          <div><input type="submit" name="Slot 36 Soul Strike (Teleport+Soul Wave)" addr="03000ad3" codeVal="24" value="+" /></div>
           <div class="name">Chester</div>
-          <div><input type="checkbox" name="Slot 1 Crimson Lotus" value="03000d40:25" /></div>
-          <div><input type="checkbox" name="Slot 2 Frozen Fang" value="03000d41:26" /></div>
-          <div><input type="checkbox" name="Slot 3 Thundering Sky" value="03000d42:27" /></div>
-          <div><input type="checkbox" name="Slot 4 Shock Wave" value="03000d43:2a" /></div>
-          <div><input type="checkbox" name="Slot 5 Quaking Sky" value="03000d44:2b" /></div>
-          <div><input type="checkbox" name="Slot 6 Eagle Wing" value="03000d45:28" /></div>
-          <div><input type="checkbox" name="Slot 7 Rapid wind" value="03000d46:29" /></div>
-          <div><input type="checkbox" name="Slot 8 Giant Fang" value="03000d47:2c" /></div>
-          <div><input type="checkbox" name="Slot 9 Dragon Slay" value="03000d48:2d" /></div>
+          <div><input type="submit" name="Slot 1 Crimson Lotus" addr="03000d40" codeVal="25" value="+" /></div>
+          <div><input type="submit" name="Slot 2 Frozen Fang" addr="03000d41" codeVal="26" value="+" /></div>
+          <div><input type="submit" name="Slot 3 Thundering Sky" addr="03000d42" codeVal="27" value="+" /></div>
+          <div><input type="submit" name="Slot 4 Shock Wave" addr="03000d43" codeVal="2a" value="+" /></div>
+          <div><input type="submit" name="Slot 5 Quaking Sky" addr="03000d44" codeVal="2b" value="+" /></div>
+          <div><input type="submit" name="Slot 6 Eagle Wing" addr="03000d45" codeVal="28" value="+" /></div>
+          <div><input type="submit" name="Slot 7 Rapid wind" addr="03000d46" codeVal="29" value="+" /></div>
+          <div><input type="submit" name="Slot 8 Giant Fang" addr="03000d47" codeVal="2c" value="+" /></div>
+          <div><input type="submit" name="Slot 9 Dragon Slay" addr="03000d48" codeVal="2d" value="+" /></div>
           <div class="name">Mint</div>
-          <div><input type="checkbox" name="Slot 1 First Aid" value="03000b54:5c" /></div>
-          <div><input type="checkbox" name="Slot 2 Pico Hammer" value="03000b55:64" /></div>
-          <div><input type="checkbox" name="Slot 3 Charge" value="03000b56:6a" /></div>
-          <div><input type="checkbox" name="Slot 4 Deep Mist" value="03000b57:67" /></div>
-          <div><input type="checkbox" name="Slot 5 Heal" value="03000b58:5d" /></div>
-          <div><input type="checkbox" name="Slot 6 Acid Rain" value="03000b59:66" /></div>
-          <div><input type="checkbox" name="Slot 7 Antidote" value="03000b5a:61" /></div>
-          <div><input type="checkbox" name="Slot 8 Nurse" value="03000b5b:5f" /></div>
-          <div><input type="checkbox" name="Slot 9 Haste" value="03000b5c:5e" /></div>
-          <div><input type="checkbox" name="Slot 10 Antidote" value="03000b5d:6c" /></div>
-          <div><input type="checkbox" name="Slot 11 Silence" value="03000b5e:68" /></div>
-          <div><input type="checkbox" name="Slot 12 Sharpness" value="03000b5f:6d" /></div>
-          <div><input type="checkbox" name="Slot 13 Recover" value="03000b60:62" /></div>
-          <div><input type="checkbox" name="Slot 14 Pico-pico hammer" value="03000b61:65" /></div>
-          <div><input type="checkbox" name="Slot 15 Barrier" value="03000b62:6b" /></div>
-          <div><input type="checkbox" name="Slot 16 Raise dead" value="03000b63:63" /></div>
-          <div><input type="checkbox" name="Slot 17 Ressurection" value="03000b64:60" /></div>
-          <div><input type="checkbox" name="Slot 18 Time Stop" value="03000b65:69" /></div>
+          <div><input type="submit" name="Slot 1 First Aid" addr="03000b54" codeVal="5c" value="+" /></div>
+          <div><input type="submit" name="Slot 2 Pico Hammer" addr="03000b55" codeVal="64" value="+" /></div>
+          <div><input type="submit" name="Slot 3 Charge" addr="03000b56" codeVal="6a" value="+" /></div>
+          <div><input type="submit" name="Slot 4 Deep Mist" addr="03000b57" codeVal="67" value="+" /></div>
+          <div><input type="submit" name="Slot 5 Heal" addr="03000b58" codeVal="5d" value="+" /></div>
+          <div><input type="submit" name="Slot 6 Acid Rain" addr="03000b59" codeVal="66" value="+" /></div>
+          <div><input type="submit" name="Slot 7 Antidote" addr="03000b5a" codeVal="61" value="+" /></div>
+          <div><input type="submit" name="Slot 8 Nurse" addr="03000b5b" codeVal="5f" value="+" /></div>
+          <div><input type="submit" name="Slot 9 Haste" addr="03000b5c" codeVal="5e" value="+" /></div>
+          <div><input type="submit" name="Slot 10 Antidote" addr="03000b5d" codeVal="6c" value="+" /></div>
+          <div><input type="submit" name="Slot 11 Silence" addr="03000b5e" codeVal="68" value="+" /></div>
+          <div><input type="submit" name="Slot 12 Sharpness" addr="03000b5f" codeVal="6d" value="+" /></div>
+          <div><input type="submit" name="Slot 13 Recover" addr="03000b60" codeVal="62" value="+" /></div>
+          <div><input type="submit" name="Slot 14 Pico-pico hammer" addr="03000b61" codeVal="65" value="+" /></div>
+          <div><input type="submit" name="Slot 15 Barrier" addr="03000b62" codeVal="6b" value="+" /></div>
+          <div><input type="submit" name="Slot 16 Raise dead" addr="03000b63" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Slot 17 Ressurection" addr="03000b64" codeVal="60" value="+" /></div>
+          <div><input type="submit" name="Slot 18 Time Stop" addr="03000b65" codeVal="69" value="+" /></div>
           <div class="name">Arche</div>
-          <div><input type="checkbox" name="Slot 1 Fire Ball" value="03000bf8:37" /></div>
-          <div><input type="checkbox" name="Slot 2 ice needle" value="03000bf9:3e" /></div>
-          <div><input type="checkbox" name="Slot 3 stone blast" value="03000bfa:42" /></div>
-          <div><input type="checkbox" name="Slot 4 lightning" value="03000bfb:3b" /></div>
-          <div><input type="checkbox" name="Slot 5 distortion" value="03000bfc:46" /></div>
-          <div><input type="checkbox" name="Slot 6 grave" value="03000bfd:43" /></div>
-          <div><input type="checkbox" name="Slot 7 ice tornado" value="03000bfe:3f" /></div>
-          <div><input type="checkbox" name="Slot 8 eruption" value="03000bff:38" /></div>
-          <div><input type="checkbox" name="Slot 9 tractor beam" value="03000c00:4c" /></div>
-          <div><input type="checkbox" name="Slot 10 thunder blade" value="03000c01:3c" /></div>
-          <div><input type="checkbox" name="Slot 11 cyclone" value="03000c02:47" /></div>
-          <div><input type="checkbox" name="Slot 12 ray" value="03000c03:4a" /></div>
-          <div><input type="checkbox" name="Slot 13 firestorm" value="03000c04:39" /></div>
-          <div><input type="checkbox" name="Slot 14 Rock Mountain" value="03000c05:44" /></div>
-          <div><input type="checkbox" name="Slot 15 Tempst" value="03000c06:48" /></div>
-          <div><input type="checkbox" name="Slot 16 Maelstorm" value="03000c07:40" /></div>
-          <div><input type="checkbox" name="Slot 17 Earthquake" value="03000c08:45" /></div>
-          <div><input type="checkbox" name="Slot 18 God Breath" value="03000c09:49" /></div>
-          <div><input type="checkbox" name="Slot 19 Explode" value="03000c0a:3a" /></div>
-          <div><input type="checkbox" name="Slot 20 Indignation" value="03000c0b:3d" /></div>
-          <div><input type="checkbox" name="Slot 21 Tidal Wave" value="03000c0c:41" /></div>
-          <div><input type="checkbox" name="Slot 22 Black hole" value="03000c0d:4e" /></div>
-          <div><input type="checkbox" name="Slot 23 Meteo-swarm" value="03000c0e:4d" /></div>
-          <div><input type="checkbox" name="Slot 24 Extinction" value="03000c0f:4b" /></div>
+          <div><input type="submit" name="Slot 1 Fire Ball" addr="03000bf8" codeVal="37" value="+" /></div>
+          <div><input type="submit" name="Slot 2 ice needle" addr="03000bf9" codeVal="3e" value="+" /></div>
+          <div><input type="submit" name="Slot 3 stone blast" addr="03000bfa" codeVal="42" value="+" /></div>
+          <div><input type="submit" name="Slot 4 lightning" addr="03000bfb" codeVal="3b" value="+" /></div>
+          <div><input type="submit" name="Slot 5 distortion" addr="03000bfc" codeVal="46" value="+" /></div>
+          <div><input type="submit" name="Slot 6 grave" addr="03000bfd" codeVal="43" value="+" /></div>
+          <div><input type="submit" name="Slot 7 ice tornado" addr="03000bfe" codeVal="3f" value="+" /></div>
+          <div><input type="submit" name="Slot 8 eruption" addr="03000bff" codeVal="38" value="+" /></div>
+          <div><input type="submit" name="Slot 9 tractor beam" addr="03000c00" codeVal="4c" value="+" /></div>
+          <div><input type="submit" name="Slot 10 thunder blade" addr="03000c01" codeVal="3c" value="+" /></div>
+          <div><input type="submit" name="Slot 11 cyclone" addr="03000c02" codeVal="47" value="+" /></div>
+          <div><input type="submit" name="Slot 12 ray" addr="03000c03" codeVal="4a" value="+" /></div>
+          <div><input type="submit" name="Slot 13 firestorm" addr="03000c04" codeVal="39" value="+" /></div>
+          <div><input type="submit" name="Slot 14 Rock Mountain" addr="03000c05" codeVal="44" value="+" /></div>
+          <div><input type="submit" name="Slot 15 Tempst" addr="03000c06" codeVal="48" value="+" /></div>
+          <div><input type="submit" name="Slot 16 Maelstorm" addr="03000c07" codeVal="40" value="+" /></div>
+          <div><input type="submit" name="Slot 17 Earthquake" addr="03000c08" codeVal="45" value="+" /></div>
+          <div><input type="submit" name="Slot 18 God Breath" addr="03000c09" codeVal="49" value="+" /></div>
+          <div><input type="submit" name="Slot 19 Explode" addr="03000c0a" codeVal="3a" value="+" /></div>
+          <div><input type="submit" name="Slot 20 Indignation" addr="03000c0b" codeVal="3d" value="+" /></div>
+          <div><input type="submit" name="Slot 21 Tidal Wave" addr="03000c0c" codeVal="41" value="+" /></div>
+          <div><input type="submit" name="Slot 22 Black hole" addr="03000c0d" codeVal="4e" value="+" /></div>
+          <div><input type="submit" name="Slot 23 Meteo-swarm" addr="03000c0e" codeVal="4d" value="+" /></div>
+          <div><input type="submit" name="Slot 24 Extinction" addr="03000c0f" codeVal="4b" value="+" /></div>
           <div class="name">Klarth</div>
-          <div><input type="checkbox" name="Slot 1 Sylph" value="03000c9c:4f" /></div>
-          <div><input type="checkbox" name="Slot 2 Undine" value="03000c9d:50" /></div>
-          <div><input type="checkbox" name="Slot 3 Gnome" value="03000c9e:51" /></div>
-          <div><input type="checkbox" name="Slot 4 Ifrit" value="03000c9f:52" /></div>
-          <div><input type="checkbox" name="Slot 5 Maxwell" value="03000ca0:53" /></div>
-          <div><input type="checkbox" name="Slot 6 Luna" value="03000ca1:54" /></div>
-          <div><input type="checkbox" name="Slot 7 Shadow" value="03000ca2:55" /></div>
-          <div><input type="checkbox" name="Slot 8 Aska" value="03000ca3:56" /></div>
-          <div><input type="checkbox" name="Slot 9 Volt" value="03000ca4:57" /></div>
-          <div><input type="checkbox" name="Slot 10 Origin" value="03000ca5:58" /></div>
-          <div><input type="checkbox" name="Slot 11 Gremlin Lair" value="03000ca6:59" /></div>
-          <div><input type="checkbox" name="Slot 12 Chamleon" value="03000ca7:5a" /></div>
-          <div><input type="checkbox" name="Slot 13 Pluto" value="03000ca8:5b" /></div>
+          <div><input type="submit" name="Slot 1 Sylph" addr="03000c9c" codeVal="4f" value="+" /></div>
+          <div><input type="submit" name="Slot 2 Undine" addr="03000c9d" codeVal="50" value="+" /></div>
+          <div><input type="submit" name="Slot 3 Gnome" addr="03000c9e" codeVal="51" value="+" /></div>
+          <div><input type="submit" name="Slot 4 Ifrit" addr="03000c9f" codeVal="52" value="+" /></div>
+          <div><input type="submit" name="Slot 5 Maxwell" addr="03000ca0" codeVal="53" value="+" /></div>
+          <div><input type="submit" name="Slot 6 Luna" addr="03000ca1" codeVal="54" value="+" /></div>
+          <div><input type="submit" name="Slot 7 Shadow" addr="03000ca2" codeVal="55" value="+" /></div>
+          <div><input type="submit" name="Slot 8 Aska" addr="03000ca3" codeVal="56" value="+" /></div>
+          <div><input type="submit" name="Slot 9 Volt" addr="03000ca4" codeVal="57" value="+" /></div>
+          <div><input type="submit" name="Slot 10 Origin" addr="03000ca5" codeVal="58" value="+" /></div>
+          <div><input type="submit" name="Slot 11 Gremlin Lair" addr="03000ca6" codeVal="59" value="+" /></div>
+          <div><input type="submit" name="Slot 12 Chamleon" addr="03000ca7" codeVal="5a" value="+" /></div>
+          <div><input type="submit" name="Slot 13 Pluto" addr="03000ca8" codeVal="5b" value="+" /></div>
           <div class="name">Suzu</div>
-          <div><input type="checkbox" name="Slot 1 utsusemi" value="03000DE4:2E" /></div>
-          <div><input type="checkbox" name="Slot 2 shiranui" value="03000DE5:32" /></div>
-          <div><input type="checkbox" name="Slot 3 izunaotoshi" value="03000DE6:30" /></div>
-          <div><input type="checkbox" name="Slot 4 hagakure" value="03000DE7:31" /></div>
-          <div><input type="checkbox" name="Slot 5 masonjushaku" value="03000DE8:33" /></div>
-          <div><input type="checkbox" name="Slot 6 kamaitachi" value="03000DE9:35" /></div>
-          <div><input type="checkbox" name="Slot 7 raiden" value="03000DEA:34" /></div>
-          <div><input type="checkbox" name="Slot 8 samidare" value="03000DEB:2F" /></div>
-          <div><input type="checkbox" name="Slot 9 jiraiya" value="03000DEC:36" /></div>
+          <div><input type="submit" name="Slot 1 utsusemi" addr="03000DE4" codeVal="2E" value="+" /></div>
+          <div><input type="submit" name="Slot 2 shiranui" addr="03000DE5" codeVal="32" value="+" /></div>
+          <div><input type="submit" name="Slot 3 izunaotoshi" addr="03000DE6" codeVal="30" value="+" /></div>
+          <div><input type="submit" name="Slot 4 hagakure" addr="03000DE7" codeVal="31" value="+" /></div>
+          <div><input type="submit" name="Slot 5 masonjushaku" addr="03000DE8" codeVal="33" value="+" /></div>
+          <div><input type="submit" name="Slot 6 kamaitachi" addr="03000DE9" codeVal="35" value="+" /></div>
+          <div><input type="submit" name="Slot 7 raiden" addr="03000DEA" codeVal="34" value="+" /></div>
+          <div><input type="submit" name="Slot 8 samidare" addr="03000DEB" codeVal="2F" value="+" /></div>
+          <div><input type="submit" name="Slot 9 jiraiya" addr="03000DEC" codeVal="36" value="+" /></div>
         </div>
 
         <div class="codeSect">
           <div class="title">Skill Exp</div>
           <div class="comment">Set to 0x63/99. Use once to master. Master at 0xFF/255. The flag for enabling a combo is different from the amount used. Mastering the skills for a combo will enable the combo. But you can enable it directly with the "Combo Enable" codes below.</div>
-          <div><input type="checkbox" name="Psion Bolt " value="030014ec:63" /></div>
-          <div><input type="checkbox" name="Dual Kick" value="030014ed:63" /></div>
-          <div><input type="checkbox" name="Lightning Bolt " value="030014ee:63" /></div>
-          <div><input type="checkbox" name="Blade Storm" value="030014ef:63" /></div>
-          <div><input type="checkbox" name="Tiger teeth" value="030014f0:63" /></div>
-          <div><input type="checkbox" name="Phoenix" value="030014f1:63" /></div>
-          <div><input type="checkbox" name="Lionheart" value="030014f2:63" /></div>
-          <div><input type="checkbox" name="Magma Rift " value="030014f3:63" /></div>
-          <div><input type="checkbox" name="Soul Wave" value="030014f4:63" /></div>
-          <div><input type="checkbox" name="Teleport " value="030014f5:63" /></div>
-          <div><input type="checkbox" name="Soul Edge" value="030014f6:63" /></div>
+          <div><input type="submit" name="Psion Bolt " addr="030014ec" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Dual Kick" addr="030014ed" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Lightning Bolt " addr="030014ee" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Blade Storm" addr="030014ef" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Tiger teeth" addr="030014f0" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Phoenix" addr="030014f1" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Lionheart" addr="030014f2" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Magma Rift " addr="030014f3" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Soul Wave" addr="030014f4" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Teleport " addr="030014f5" codeVal="63" value="+" /></div>
+          <div><input type="submit" name="Soul Edge" addr="030014f6" codeVal="63" value="+" /></div>
           <div class="name">Combo Enable</div>
           <div class="comment">Even if it doesn't reflect in the menu, when cheat is on, these will be useable in battle.</div>
-          <div><input type="checkbox" name="Psion Kick (Psion Bolt+Dual Kick) " value="030014f8:01" /></div>
-          <div><input type="checkbox" name="Mecha Blade (Psion Bolt+Tiger Teeth) " value="030014f9:01" /></div>
-          <div><input type="checkbox" name="Psion Storm (Psion Bolt+Blade Storm) " value="030014fa:01" /></div>
-          <div><input type="checkbox" name="Magma Bolt (Psion Bolt+Magma Rift) " value="030014fb:01" /></div>
-          <div><input type="checkbox" name="Lion Lunge (Lionheart+Dual Kick) " value="030014fc:01" /></div>
-          <div><input type="checkbox" name="Lion Teeth (Lionheart+Tiger Teeth)" value="030014fd:01" /></div>
-          <div><input type="checkbox" name="Lion Claws (Lionheart+Blade Storm)" value="030014fe:01" /></div>
-          <div><input type="checkbox" name="Lion Flare(Lionheart+Magma Rift) " value="030014ff:01" /></div>
-          <div><input type="checkbox" name="Bolt Crash (Lightning+Dual Kick) " value="03001500:01" /></div>
-          <div><input type="checkbox" name="Thor's Wrath(Lightning+Tiger Teeth)" value="03001501:01" /></div>
-          <div><input type="checkbox" name="Tempest (Lightning+Blade Storm)" value="03001502:01" /></div>
-          <div><input type="checkbox" name="Earth's Rage(Lightning+Magma Rift)" value="03001503:01" /></div>
-          <div><input type="checkbox" name="Flare Talon (Phoenix+Dual Kick)" value="03001504:01" /></div>
-          <div><input type="checkbox" name="Odin's Wrath (Phoenix+Tiger Teeth) " value="03001505:01" /></div>
-          <div><input type="checkbox" name="Burning Soul (Phoenix+Blade storm) " value="03001506:01" /></div>
-          <div><input type="checkbox" name="Cinder Hawk (Phoneix+Magma Rift) " value="03001507:01" /></div>
-          <div><input type="checkbox" name="Soul Forge (Soul wave+Soul Edge) " value="03001508:01" /></div>
-          <div><input type="checkbox" name="Soul Strike (Teleport+Soul Wave) " value="03001509:01" /></div>
+          <div><input type="submit" name="Psion Kick (Psion Bolt+Dual Kick) " addr="030014f8" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Mecha Blade (Psion Bolt+Tiger Teeth) " addr="030014f9" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Psion Storm (Psion Bolt+Blade Storm) " addr="030014fa" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Magma Bolt (Psion Bolt+Magma Rift) " addr="030014fb" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Lion Lunge (Lionheart+Dual Kick) " addr="030014fc" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Lion Teeth (Lionheart+Tiger Teeth)" addr="030014fd" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Lion Claws (Lionheart+Blade Storm)" addr="030014fe" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Lion Flare(Lionheart+Magma Rift) " addr="030014ff" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Bolt Crash (Lightning+Dual Kick) " addr="03001500" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Thor's Wrath(Lightning+Tiger Teeth)" addr="03001501" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Tempest (Lightning+Blade Storm)" addr="03001502" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Earth's Rage(Lightning+Magma Rift)" addr="03001503" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Flare Talon (Phoenix+Dual Kick)" addr="03001504" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Odin's Wrath (Phoenix+Tiger Teeth) " addr="03001505" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Burning Soul (Phoenix+Blade storm) " addr="03001506" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Cinder Hawk (Phoneix+Magma Rift) " addr="03001507" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Soul Forge (Soul wave+Soul Edge) " addr="03001508" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="Soul Strike (Teleport+Soul Wave) " addr="03001509" codeVal="01" value="+" /></div>
         </div>
 
         <div class="codeSect">
           <div class="title">Char mod</div>
-           <div class="title">Cless</div>
+           <div class="name">Cless</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000a6c"></select>
               <select name="chester" codetype="name" addr="03000a6d"></select>
@@ -952,27 +961,27 @@
               <select name="chester" codetype="name" addr="03000a71"></select>
               <input type="submit" name value="+" />
             </div>
-            <div><input type="checkbox" name="Level" value="03000a62:63" /></div>
-            <div><input type="checkbox" name="Exp to go" value="03000a68:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000a80:270f" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000a74:270f" /></div>
-            <div><input type="checkbox" name="HP max" value="03000a76:270f" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000a78:270f" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000a92:270f" /></div>
-            <div><input type="checkbox" name="Atk" value="03000a94:270f" /></div>
-            <div><input type="checkbox" name="Def" value="03000a96:270f" /></div>
-            <div><input type="checkbox" name="Acc" value="03000a98:270f" /></div>
-            <div><input type="checkbox" name="Eva" value="03000a9a:270f" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000a9c:00dc" /></div>  
-            <div><input type="checkbox" name="Armor slot" value="03000a9e:00" /></div>  
-            <div><input type="checkbox" name="Shield Slot" value="03000aa0:00" /></div>  
-            <div><input type="checkbox" name="Head Slot" value="03000aa2:00" /></div>  
-            <div><input type="checkbox" name="Arm slot" value="03000aa4:00" /></div>  
-            <div><input type="checkbox" name="Access 1" value="03000aa6:00" /></div>  
-            <div><input type="checkbox" name="Access 2" value="03000aa8:00" /></div>  
-            <div><input type="checkbox" name="status" value="03000aaa:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="submit" name="Level" addr="03000a62" codeVal="63" value="+" /></div>
+            <div><input type="submit" name="Exp to go" addr="03000a68" codeVal="01" value="+" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="submit" name="Str" addr="03000a80" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP to restore to out of battle" addr="03000a74" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP max" addr="03000a76" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP Current" addr="03000a78" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk to restore out of battle" addr="03000a92" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk" addr="03000a94" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Def" addr="03000a96" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Acc" addr="03000a98" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Eva" addr="03000a9a" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Weapon slot" addr="03000a9c" codeVal="00dc" value="+" /></div>  
+            <div><input type="submit" name="Armor slot" addr="03000a9e" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Shield Slot" addr="03000aa0" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Head Slot" addr="03000aa2" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Arm slot" addr="03000aa4" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 1" addr="03000aa6" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 2" addr="03000aa8" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="status" addr="03000aaa" codeVal="00" value="+" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
-           <div class="title">Mint</div>
+           <div class="name">Mint</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000b10"></select>
               <select name="chester" codetype="name" addr="03000b11"></select>
@@ -982,27 +991,27 @@
               <select name="chester" codetype="name" addr="03000b15"></select>
               <input type="submit" name value="+" />
             </div>
-            <div><input type="checkbox" name="Level" value="03000b06:63" /></div>
-            <div><input type="checkbox" name="Exp to go" value="03000b0c:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000b24:270f" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000b18:270f" /></div>
-            <div><input type="checkbox" name="HP max" value="03000b1a:270f" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000b1c:270f" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000b36:270f" /></div>
-            <div><input type="checkbox" name="Atk" value="03000b38:270f" /></div>
-            <div><input type="checkbox" name="Def" value="03000b3a:270f" /></div>
-            <div><input type="checkbox" name="Acc" value="03000b3c:270f" /></div>
-            <div><input type="checkbox" name="Eva" value="03000b3e:270f" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000b40:00dc" /></div>  
-            <div><input type="checkbox" name="Armor slot" value="03000b42:00" /></div>  
-            <div><input type="checkbox" name="Shield Slot" value="03000b44:00" /></div>  
-            <div><input type="checkbox" name="Head Slot" value="03000b46:00" /></div>  
-            <div><input type="checkbox" name="Arm slot" value="03000b48:00" /></div>  
-            <div><input type="checkbox" name="Access 1" value="03000b4a:00" /></div>  
-            <div><input type="checkbox" name="Access 2" value="03000b4c:00" /></div>  
-            <div><input type="checkbox" name="status" value="03000b4e:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="submit" name="Level" addr="03000b06" codeVal="63" value="+" /></div>
+            <div><input type="submit" name="Exp to go" addr="03000b0c" codeVal="01" value="+" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="submit" name="Str" addr="03000b24" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP to restore to out of battle" addr="03000b18" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP max" addr="03000b1a" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP Current" addr="03000b1c" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk to restore out of battle" addr="03000b36" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk" addr="03000b38" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Def" addr="03000b3a" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Acc" addr="03000b3c" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Eva" addr="03000b3e" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Weapon slot" addr="03000b40" codeVal="00dc" value="+" /></div>  
+            <div><input type="submit" name="Armor slot" addr="03000b42" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Shield Slot" addr="03000b44" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Head Slot" addr="03000b46" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Arm slot" addr="03000b48" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 1" addr="03000b4a" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 2" addr="03000b4c" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="status" addr="03000b4e" codeVal="00" value="+" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
-           <div class="title">Arche</div>
+           <div class="name">Arche</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000bb4"></select>
               <select name="chester" codetype="name" addr="03000bb5"></select>
@@ -1012,27 +1021,27 @@
               <select name="chester" codetype="name" addr="03000bb9"></select>
               <input type="submit" name value="+" />
             </div>
-            <div><input type="checkbox" name="Level" value="03000baa:63" /></div>
-            <div><input type="checkbox" name="Exp to go" value="03000bb0:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000bc8:270f" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000bbc:270f" /></div>
-            <div><input type="checkbox" name="HP max" value="03000bbe:270f" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000bc0:270f" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000bda:270f" /></div>
-            <div><input type="checkbox" name="Atk" value="03000bdc:270f" /></div>
-            <div><input type="checkbox" name="Def" value="03000bde:270f" /></div>
-            <div><input type="checkbox" name="Acc" value="03000be0:270f" /></div>
-            <div><input type="checkbox" name="Eva" value="03000be2:270f" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000be4:00dc" /></div>  
-            <div><input type="checkbox" name="Armor slot" value="03000be6:00" /></div>  
-            <div><input type="checkbox" name="Shield Slot" value="03000be8:00" /></div>  
-            <div><input type="checkbox" name="Head Slot" value="03000bea:00" /></div>  
-            <div><input type="checkbox" name="Arm slot" value="03000bec:00" /></div>  
-            <div><input type="checkbox" name="Access 1" value="03000bee:00" /></div>  
-            <div><input type="checkbox" name="Access 2" value="03000bf0:00" /></div>  
-            <div><input type="checkbox" name="status" value="03000bf2:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="submit" name="Level" addr="03000baa" codeVal="63" value="+" /></div>
+            <div><input type="submit" name="Exp to go" addr="03000bb0" codeVal="01" value="+" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="submit" name="Str" addr="03000bc8" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP to restore to out of battle" addr="03000bbc" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP max" addr="03000bbe" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP Current" addr="03000bc0" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk to restore out of battle" addr="03000bda" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk" addr="03000bdc" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Def" addr="03000bde" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Acc" addr="03000be0" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Eva" addr="03000be2" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Weapon slot" addr="03000be4" codeVal="00dc" value="+" /></div>  
+            <div><input type="submit" name="Armor slot" addr="03000be6" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Shield Slot" addr="03000be8" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Head Slot" addr="03000bea" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Arm slot" addr="03000bec" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 1" addr="03000bee" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 2" addr="03000bf0" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="status" addr="03000bf2" codeVal="00" value="+" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
-           <div class="title">Klarth</div>
+           <div class="name">Klarth</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000c58"></select>
               <select name="chester" codetype="name" addr="03000c59"></select>
@@ -1042,27 +1051,27 @@
               <select name="chester" codetype="name" addr="03000c5d"></select>
               <input type="submit" name value="+" />
             </div>
-            <div><input type="checkbox" name="Level" value="03000c4e:63" /></div>
-            <div><input type="checkbox" name="Exp to go" value="03000c54:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000c6c:270f" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000c60:270f" /></div>
-            <div><input type="checkbox" name="HP max" value="03000c62:270f" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000c64:270f" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000c7e:270f" /></div>
-            <div><input type="checkbox" name="Atk" value="03000c80:270f" /></div>
-            <div><input type="checkbox" name="Def" value="03000c82:270f" /></div>
-            <div><input type="checkbox" name="Acc" value="03000c84:270f" /></div>
-            <div><input type="checkbox" name="Eva" value="03000c86:270f" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000c88:00dc" /></div>  
-            <div><input type="checkbox" name="Armor slot" value="03000c8a:00" /></div>  
-            <div><input type="checkbox" name="Shield Slot" value="03000c8c:00" /></div>  
-            <div><input type="checkbox" name="Head Slot" value="03000c8e:00" /></div>  
-            <div><input type="checkbox" name="Arm slot" value="03000c90:00" /></div>  
-            <div><input type="checkbox" name="Access 1" value="03000c92:00" /></div>  
-            <div><input type="checkbox" name="Access 2" value="03000c94:00" /></div>  
-            <div><input type="checkbox" name="status" value="03000c96:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="submit" name="Level" addr="03000c4e" codeVal="63" value="+" /></div>
+            <div><input type="submit" name="Exp to go" addr="03000c54" codeVal="01" value="+" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="submit" name="Str" addr="03000c6c" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP to restore to out of battle" addr="03000c60" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP max" addr="03000c62" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP Current" addr="03000c64" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk to restore out of battle" addr="03000c7e" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk" addr="03000c80" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Def" addr="03000c82" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Acc" addr="03000c84" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Eva" addr="03000c86" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Weapon slot" addr="03000c88" codeVal="00dc" value="+" /></div>  
+            <div><input type="submit" name="Armor slot" addr="03000c8a" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Shield Slot" addr="03000c8c" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Head Slot" addr="03000c8e" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Arm slot" addr="03000c90" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 1" addr="03000c92" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 2" addr="03000c94" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="status" addr="03000c96" codeVal="00" value="+" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
-          <div class="title">Chester</div>
+          <div class="name">Chester</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000cfc"></select>
               <select name="chester" codetype="name" addr="03000cfd"></select>
@@ -1072,27 +1081,27 @@
               <select name="chester" codetype="name" addr="03000d01"></select>
               <input type="submit" name value="+" />
             </div>
-            <div><input type="checkbox" name="Level" value="03000cf2:63" /></div>
-            <div><input type="checkbox" name="Exp to go" value="03000cf8:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000d10:270f" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000d04:270f" /></div>
-            <div><input type="checkbox" name="HP max" value="03000d06:270f" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000d08:270f" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000d22:270f" /></div>
-            <div><input type="checkbox" name="Atk" value="03000d24:270f" /></div>
-            <div><input type="checkbox" name="Def" value="03000d26:270f" /></div>
-            <div><input type="checkbox" name="Acc" value="03000d28:270f" /></div>
-            <div><input type="checkbox" name="Eva" value="03000d2a:270f" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000d2c:00dc" /></div>  
-            <div><input type="checkbox" name="Armor slot" value="03000d2e:00" /></div>  
-            <div><input type="checkbox" name="Shield Slot" value="03000d30:00" /></div>  
-            <div><input type="checkbox" name="Head Slot" value="03000d32:00" /></div>  
-            <div><input type="checkbox" name="Arm slot" value="03000d34:00" /></div>  
-            <div><input type="checkbox" name="Access 1" value="03000d36:00" /></div>  
-            <div><input type="checkbox" name="Access 2" value="03000d38:00" /></div>  
-            <div><input type="checkbox" name="Status" value="03000d3a:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
+            <div><input type="submit" name="Level" addr="03000cf2" codeVal="63" value="+" /></div>
+            <div><input type="submit" name="Exp to go" addr="03000cf8" codeVal="01" value="+" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="submit" name="Str" addr="03000d10" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP to restore to out of battle" addr="03000d04" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP max" addr="03000d06" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP Current" addr="03000d08" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk to restore out of battle" addr="03000d22" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk" addr="03000d24" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Def" addr="03000d26" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Acc" addr="03000d28" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Eva" addr="03000d2a" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Weapon slot" addr="03000d2c" codeVal="00dc" value="+" /></div>  
+            <div><input type="submit" name="Armor slot" addr="03000d2e" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Shield Slot" addr="03000d30" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Head Slot" addr="03000d32" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Arm slot" addr="03000d34" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 1" addr="03000d36" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 2" addr="03000d38" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Status" addr="03000d3a" codeVal="00" value="+" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
-          <div class="title">Suzu</div>
+          <div class="name">Suzu</div>
             <div style="margin-bottom: 6px;">Name:&nbsp;
               <select name="chester" codetype="name" addr="03000da0"></select>
               <select name="chester" codetype="name" addr="03000da1"></select>
@@ -1102,33 +1111,33 @@
               <select name="chester" codetype="name" addr="03000da5"></select>
               <input type="submit" name value="+" />
             </div>
-            <div><input type="checkbox" name="Level" value="03000d96:63" /></div>
-            <div><input type="checkbox" name="Exp to go" value="03000d9c:01" /> (will level character regardless of how much EXP the character has)</div>
-            <div><input type="checkbox" name="Str" value="03000db4:270f" /></div>
-            <div><input type="checkbox" name="HP to restore to out of battle" value="03000da8:270f" /></div>
-            <div><input type="checkbox" name="HP max" value="03000daa:270f" /></div>
-            <div><input type="checkbox" name="HP Current" value="03000dac:270f" /></div>
-            <div><input type="checkbox" name="Atk to restore out of battle" value="03000dc6:270f" /></div>
-            <div><input type="checkbox" name="Atk" value="03000dc8:270f" /></div>
-            <div><input type="checkbox" name="Def" value="03000dca:270f" /></div>
-            <div><input type="checkbox" name="Acc" value="03000dcc:270f" /></div>
-            <div><input type="checkbox" name="Eva" value="03000dce:270f" /></div>
-            <div><input type="checkbox" name="Weapon slot" value="03000dd0:00dc" /></div>  
-            <div><input type="checkbox" name="Armor slot" value="03000dd2:00" /></div>  
-            <div><input type="checkbox" name="Shield Slot" value="03000dd4:00" /></div>  
-            <div><input type="checkbox" name="Head Slot" value="03000dd6:00" /></div>  
-            <div><input type="checkbox" name="Arm slot" value="03000dd8:00" /></div>  
-            <div><input type="checkbox" name="Access 1" value="03000dda:00" /></div>  
-            <div><input type="checkbox" name="Access 2" value="03000ddc:00" /></div>  
-            <div><input type="checkbox" name="Status" value="03000dde:00" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
-
-
+            <div><input type="submit" name="Level" addr="03000d96" codeVal="63" value="+" /></div>
+            <div><input type="submit" name="Exp to go" addr="03000d9c" codeVal="01" value="+" /> (will level character regardless of how much EXP the character has)</div>
+            <div><input type="submit" name="Str" addr="03000db4" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP to restore to out of battle" addr="03000da8" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP max" addr="03000daa" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="HP Current" addr="03000dac" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk to restore out of battle" addr="03000dc6" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Atk" addr="03000dc8" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Def" addr="03000dca" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Acc" addr="03000dcc" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Eva" addr="03000dce" codeVal="270f" value="+" /></div>
+            <div><input type="submit" name="Weapon slot" addr="03000dd0" codeVal="00dc" value="+" /></div>  
+            <div><input type="submit" name="Armor slot" addr="03000dd2" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Shield Slot" addr="03000dd4" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Head Slot" addr="03000dd6" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Arm slot" addr="03000dd8" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 1" addr="03000dda" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Access 2" addr="03000ddc" codeVal="00" value="+" /></div>  
+            <div><input type="submit" name="Status" addr="03000dde" codeVal="00" value="+" />&nbsp;(00:norm,01:psn,02:prz,04:stn,08:fnt)</div>
 
         </div>
 
         <div class="codeSect">
           <div class="title">Items:</div>
-          <div>Inventory: <select id="itemSlot" ></select><select id="items"></select><input type="submit" name="" value="+" /></div>
+          <div>Inventory:&nbsp;<select id="itemSlot" ></select><select id="items"></select><input type="submit"  value="+" /></div>
+          <div style="margin-top: 8px;">Inventory Num:&nbsp;<select id="itemNum"></select><input type="submit" name="" value="+" /></div>
+          <div style="margin-top: 8px;">Important Inventory:&nbsp;<select id="importItemSlot" ></select><select id="iItems"></select><input type="submit" name="" value="+" /></div>
         </div>
       </div>
 
@@ -1154,28 +1163,20 @@
     goes through codelist to find the item amount code
     and update if needed 
     -----------------------------*/
-    function findItemCodes(addr, high=false){
+    function findItemCodes(addr, vl, high=false){
       if(codeHsh.hasOwnProperty("addr")){
       let i=codeHsh[addr];
       let ob=Object.assign({}, codeLst[i]);
         if(high){
-          if(ob.val.charAt(0)!="0"){
-          //already modified no need to do anything
-          return false;
-          }
-          else{
-          ob.val="E"+ob.val.charAt(1);
+          if(ob.val.charAt(0)!=vl){
+          ob.val=vl+ob.val.charAt(1);
           codeHsh[addr]=Object.assign({},ob); //updating address
           return True;
           }
         }
         else{
-          if(ob.val.charAt(1)!="0"){
-          //already modified no need to do anything
-          return false;
-          }
-          else{
-          ob.val="E"+ob.val.charAt(0);
+          if(ob.val.charAt(1)!="vl"){
+          ob.val=vl+ob.val.charAt(0);
           codeHsh[addr]=Object.assign({},ob); //updating address
           return True;
           }
@@ -1185,14 +1186,15 @@
     }
 
     //make drop down for items
-    function fllItem(hsh){
+    function fllItem(hsh, id, sub){
     var arr=Object.keys(hsh);
     var rtrn="";
       for(let i in arr){
-      rtrn+='<option value="'+hsh[arr[i]].val+'">'+arr[i]+' ['+hsh[arr[i]].val+']'+'</option>';
+      rtrn+='<option value="'+hsh[arr[i]][sub]+'">'+arr[i]+' ['+hsh[arr[i]][sub]+']'+'</option>';
       }
-    document.getElementById('items').innerHTML=rtrn;
+    document.getElementById(id).innerHTML=rtrn;
     }
+
 
     function addToTxtArea(code, val="00", name="", on=false){
       if(!code||code==""){
@@ -1219,12 +1221,28 @@
     var rtrn="";
     let tmpAddr="";
       for(let i=0; i<m; i++){
-      tmpAddr=tmp.toString(16).padStart(1,'0');
-      rtrn+='<option value="'+tmpAddr+'">'+(i+1)+'</option>';
-      tmp++;
+      tmpAddr=tmp.toString(16).padStart(8,'0');
+      rtrn+='<option value="'+tmpAddr+'">'+(i+1)+' ['+tmpAddr+']</option>';
+      tmp=tmp+2;
       }
     document.getElementById('itemSlot').innerHTML=rtrn;
     }
+
+
+    //set item slot dropdown
+    function iItemSlot(){
+    var rtrn="";
+    var tmp=parseInt(importItemModAddr,16);
+    let tmpAddr="";
+      for(let i=0; i<importItemModAddrMax; i++){
+      tmpAddr=tmp.toString(16).padStart(8,'0');
+      rtrn+='<option value="'+tmpAddr+'">'+(i+1)+' ['+tmpAddr+']</option>';
+      tmp=tmp+2;
+      }
+    document.getElementById('importItemSlot').innerHTML=rtrn;
+    }
+
+
 
     //fills the drop down of character for names
     function nameSlot(){
@@ -1232,7 +1250,7 @@
     var indcs=Object.keys(chars).sort();
     var rtrn="";
       for(let i in indcs){
-      rtrn+='<option value="'+indcs[i]+'">'+chars[indcs[i]]+'</option>';
+      rtrn+='<option value="'+indcs[i]+'">'+chars[indcs[i]]+' ['+indcs[i]+']</option>';
       }
       for(let el of elArr){
         if(el.getAttribute('codetype')=='name'){
@@ -1245,19 +1263,79 @@
     function chckBxCodes(){
     var chcks=document.getElementsByTagName("input");
       for(let el of chcks){
-        if(el.hasAttribute("type") && el.type=="checkbox"){
-        var txt = document.createTextNode(el.name+" ["+el.value+"]");
+        if(el.hasAttribute("type") && el.type=="submit" && el.hasAttribute("addr") && el.hasAttribute("codeVal")){
+        var txt = document.createTextNode(el.name+" ["+el.getAttribute("addr")+":"+el.getAttribute("codeVal")+"]");
         el.parentNode.insertBefore(txt, el.nextSibling);
         }
       }
     }
 
 
+    //write to text areas
+    function writeCdLst(taId, codeLst){
+    var el=document.getElementById(taId);
+    var rtrn="";
+      for(let v of codeLst){
+
+      rtrn+="";
+      }
+    }
+    
+
+    //event listener
+    function eventLstn(){
+      document.addEventListener("click",(e)=>{
+        //if is checkbox which has "type==submit" and has addr and value
+        if(e && e.target && e.target.hasAttribute("type") && e.target.getAttribute("type")=="submit" && e.target.hasAttribute("addr") && e.target.hasAttribute("codeVal")){
+        let rawVl=e.target.getAttribute("codeVal");
+
+        let vl=[];
+          if(rawVl.length==4){
+          vl.push(rawVl.substr(2,2));
+          vl.push(rawVl.substr(0,2));
+          }
+          else if(rawVl.length==2){
+          vl.push(rawVl);
+          }
+
+        let rawNm=e.target.getAttribute("name");
+        let nm=null;
+        let addr=null;
+        let tmpAddr=parseInt(e.target.getAttribute("addr"), 16);
+          for(let i in vl){
+          let addr=(tmpAddr + parseInt(i)).toString(16);
+          console.log(addr)
+            if(codeHsh.hasOwnProperty(addr)){
+            let ind=codeHsh[addr];
+            delete codeHsh[addr];
+            codeLst.splice( ind, 1);
+            }
+          //let nm=rawNm+" "+(parseInt(i)+1).toString();
+          let nm=rawNm;
+          i=codeLst.push({"addr":addr, "val":vl[i], "name":nm, "on":false});
+          codeHsh[addr]= (i-1);
+          }
+
+        console.log(codeHsh);
+        console.log(codeLst);
+        }
+        else{
+        
+        }
+      
+      
+      });
+    }
+
+
     chckBxCodes();
     itemSlot();
+    iItemSlot();
     nameSlot();
-    fllItem(itemHash);
-
+    fllItem(itemHash,'items','val');
+    fllItem(itemHash,'iItems','val');
+    fllItem(itemHash,'itemNum','num');
+    eventLstn();
 
 
     </script>
