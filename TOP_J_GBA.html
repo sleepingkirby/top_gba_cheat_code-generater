@@ -1283,8 +1283,47 @@
     }
     
 
+    function prsTACd(taId){
+    var txt=document.getElementById(taId).value;
+    var arr=txt.split("\n");
+    var cdArr=["", "", ""];//0=name, 1=code, 2=on
+    var pattArr=["^# (.+)","^(0[0-9a-fA-F]{7})","^(!disabled)"];
+    var initPatt=new RegExp(pattArr[0]);
+    var i=0;
+      for(let ln of arr){
+      //let patt=new RegExp(pattArr[i]);
+        //if initPatt matches, but i>0, reset i, clear cdArr[1] and cdArr[2], set cdArr[0] to new name
+        if(ln.match(initPatt) && i>0){
+        i=0;
+        cdArr=["", "", ""];
+        cdArr[i]=ln.substr(2);
+        i++;
+        }
+        else if(i<=2){
+        let rtrn=ln.match(pattArr[i]);
+          if(rtrn){
+          cdArr[i]=rtrn[1];
+          i++;
+          }
+        }
+      }
+    }
+
     //event listener
     function eventLstn(){
+      document.addEventListener("change", (e)=>{
+      let cs=e.target.hasAttribute("id")?e.target.id:null;
+        switch(cs){
+        case "codes":
+        console.log(e.target);
+        prsTACd("codes");
+        break;
+        default:
+        break;
+        }
+      });
+      
+      //on click on code 
       document.addEventListener("click",(e)=>{
         //if is checkbox which has "type==submit" and has addr and value
         if(e && e.target && e.target.hasAttribute("type") && e.target.getAttribute("type")=="submit" && e.target.hasAttribute("addr") && e.target.hasAttribute("codeVal")){
@@ -1316,8 +1355,21 @@
           codeHsh[addr]= (i-1);
           }
         }
-        else{
-        
+        else if(e.target.hasAttribute("act")){
+        let cs=e.target.getAttribute("act");
+          switch(cs){
+          case "setName":
+          //setting name code: lnElByName="name-cless"
+          break;
+          case "addrNVal":
+          // act="addrNVal" lnAddr="itemSlot" lnCodeVal="items"
+          break;
+          case "itemNum":
+          //act="itemNum" lnAddr="itemNum" strCodeVal="E" 
+          break;
+          default:
+          break;
+          }
         }
       
       writeCdLst("codes",codeLst);
