@@ -747,7 +747,7 @@
     <div id="wrapper">
       <div class="col" style="align-items: flex-end;">
         <div style="flex-grow: 5;"><textarea id="codes"></textarea></div>
-        <div><input style="margin-top: 6px; margin-right: 0px; padding: 2px 4px 2px 4px;" type="submit" value="make cheat file."/></div>
+        <div><input act="exportFile" style="margin-top: 6px; margin-right: 0px; padding: 2px 4px 2px 4px;" type="submit" value="make cheat file"/></div>
       </div>
 
       <div class="col" style="margin-left: 50px;flex-grow: 3; border: 1px solid #aaaaaa; border-radius: 6px; padding: 6px; overflow: auto;">
@@ -1135,10 +1135,11 @@
 
         <div class="codeSect">
           <div class="title">Items:</div>
+          <div class="comment" style="margin-bottom: 12px;">Make sure to use "Inventory Num" below you're creating new items (important or otherwise). The way this game's inventory system goes, item existing and item number are 2 very different things.</div>
           <div>Inventory:&nbsp;<select id="itemSlot" ></select><select id="items"></select><input type="submit" act="addrNVal" lnAddr="itemSlot" lnCodeVal="items" value="+" /></div>
-          <div style="margin-top: 8px;">Inventory Num:&nbsp;<select id="itemNum"></select><input type="submit" act="itemNum" lnAddr="itemNum" strCodeVal="E" name="" value="+" /></div>
           <div style="margin-top: 8px;">Important Inventory:&nbsp;<select id="importItemSlot" ></select><select id="iItems"></select><input type="submit" act="addrNVal" lnAddr="importItemSlot" lnCodeVal="iItems" name="" value="+" /></div>
         </div>
+        <div style="margin-top: 8px;">Inventory Num:&nbsp;<select id="itemNum"></select><input type="submit" act="itemNum" lnAddr="itemNum" strCodeVal="E" name="" value="+" /></div>
       </div>
 
   
@@ -1347,13 +1348,32 @@
 
       //if the new name DOESN'T exist in previous name, add name to it
       inNm=pNm;
+      console.log("'"+pNm+"'");
       if(pNm.indexOf(nm)<0){
-        var tk=pNm.length<=0?"":"+";
-      inNm=pNm+" "+tk+" "+nm+" num";
+        var tk=pNm.length<=0?"":" + ";
+      inNm=pNm+tk+nm+" num";
       }
 
     addCd(inAddr, inVal, inNm, true);
     }
+
+
+    //exports file
+    function exportFile( str ){
+    //not my code. But very clean and understandable so I;m using it
+    //https://stackoverflow.com/questions/33664398/how-to-download-file-using-javascript-only
+    var a = document.createElement("a");
+    a.style = "display: none";
+    document.body.appendChild(a);
+    
+    var blob = new File([str], {type: 'text/plain'});
+    var url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = "tales_of_phantasia_j.cheats";
+    a.click();
+    window.URL.revokeObjectURL(url);
+    }
+    
 
 
     //event listener
@@ -1383,6 +1403,7 @@
         }
         else if(e.target.hasAttribute("act")){
         let val=null;
+        let el=null;
         let cs=e.target.getAttribute("act");
           switch(cs){
           case "setName":
@@ -1398,15 +1419,23 @@
           // act="addrNVal" lnAddr="itemSlot" lnCodeVal="items"
             let addr=document.getElementById(e.target.getAttribute("lnAddr"));
             val=document.getElementById(e.target.getAttribute("lnCodeVal"));
-            addCd(addr.value, val.value, val.options[val.selectedIndex].getAttribute("itemName"), true); 
+            if(addCd(addr.value, val.value, val.options[val.selectedIndex].getAttribute("itemName"), true)){
+            document.getElementById("itemNum").selectedIndex=val.selectedIndex;
+            } 
           break;
           case "itemNum":
           //act="itemNum" lnAddr="itemNum" strCodeVal="E" 
-          let el=document.getElementById(e.target.getAttribute("lnAddr"));
+          el=document.getElementById(e.target.getAttribute("lnAddr"));
           val=e.target.getAttribute("strCodeVal");
           let nm=el.options[el.selectedIndex].getAttribute("itemName");
           let hi=(el.selectedIndex%2==0)?false:true;
           itemNum(el.value, val, nm, hi);
+          break;
+          case "exportFile":
+          el=document.getElementById("codes");
+            if(el.value.length>0){
+            exportFile(el.value);
+            }
           break;
           default:
           break;
