@@ -1332,6 +1332,14 @@
           }
         }
       }
+      //if there is valid data left after termination
+      if(i==2){
+      var splt=cdArr[1].split(":");
+      hshI=codeLst.push({"addr":splt[0], "val":splt[1], "name":cdArr[0], "on":on});
+      codeHsh[splt[0]]=(hshI - 1);
+      cdArr=["", "", ""];
+      i=0;
+      }
     }
 
     //event listener
@@ -1387,6 +1395,13 @@
           switch(cs){
           case "setName":
           //setting name code: lnElByName="name-cless"
+          console.log(e.target);
+          var els=document.getElementsByName(e.target.getAttribute("lnElByName"));
+            for(let el of els){
+            let addr=el.getAttribute("addr");
+            ind=codeLst.push({"addr":addr, "val":el.value, "name":el.name, "on":true});
+            codeHsh[addr]=(ind-1);
+            }
           break;
           case "addrNVal":
           // act="addrNVal" lnAddr="itemSlot" lnCodeVal="items"
