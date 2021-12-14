@@ -1342,6 +1342,11 @@
       }
     }
 
+    //adds code to codeLst and codeHsh
+    function addCd(addr, val, name="untitled", on=false){
+      
+    }
+
     //event listener
     function eventLstn(){
       document.addEventListener("change", (e)=>{
@@ -1405,6 +1410,9 @@
           break;
           case "addrNVal":
           // act="addrNVal" lnAddr="itemSlot" lnCodeVal="items"
+            let addr=document.getElementById(e.target.getAttribute("lnAddr"));
+            let val=document.getElementById(e.target.getAttribute("lnCodeVal"));
+            console.log(addr.value+":"+val.value);
           break;
           case "itemNum":
           //act="itemNum" lnAddr="itemNum" strCodeVal="E" 
