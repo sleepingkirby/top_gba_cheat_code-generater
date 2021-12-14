@@ -1162,7 +1162,7 @@
     var arr=Object.keys(hsh);
     var rtrn="";
       for(let i in arr){
-      rtrn+='<option value="'+hsh[arr[i]][sub]+'">'+arr[i]+' ['+hsh[arr[i]][sub]+']'+'</option>';
+      rtrn+='<option itemName="'+arr[i]+'" value="'+hsh[arr[i]][sub]+'">'+arr[i]+' ['+hsh[arr[i]][sub]+']'+'</option>';
       }
     document.getElementById(id).innerHTML=rtrn;
     }
@@ -1298,6 +1298,7 @@
     let m=val.length;
       //if value is an even number, not valid
       if((m%2) == 1){
+      console.log("adding code failed due to invalid code value: "+val);
       return false;
       }
 
@@ -1315,13 +1316,45 @@
         delete codeHsh[tmpAddr];
         codeLst[ind]={};
         }
-      curVal=tmpVal.substr(0,2);
-      tmpVal=tmpVal.substr(2);
+      curVal=tmpVal.substr(-2);
+      tmpVal=tmpVal.substr(0, (tmpVal.length - 2));
       hshI=codeLst.push({"addr":tmpAddr, "val":curVal, "name":name, "on":on});
       codeHsh[tmpAddr]=(hshI - 1);
       i++;
-      }      
+      }
+    return true; 
     }
+
+    //item number special logic
+    function itemNum(addr, val, nm, hi){
+    let pVal="00";
+    let pNm="";
+    let inVal=null;
+    let inAddr=addr.toLocaleLowerCase();
+    let inNm=null;
+      if(codeHsh.hasOwnProperty(inAddr)){
+      pVal=codeLst[codeHsh[inAddr]].val;
+      pNm=codeLst[codeHsh[inAddr]].name;
+      }
+      
+      //if value is high on the byte
+      if(hi){
+      inVal=val+pVal.charAt(1);
+      }
+      else{
+      inVal=pVal.charAt(0)+val;
+      }
+
+      //if the new name DOESN'T exist in previous name, add name to it
+      inNm=pNm;
+      if(pNm.indexOf(nm)<0){
+        var tk=pNm.length<=0?"":"+";
+      inNm=pNm+" "+tk+" "+nm+" num";
+      }
+
+    addCd(inAddr, inVal, inNm, true);
+    }
+
 
     //event listener
     function eventLstn(){
@@ -1346,12 +1379,10 @@
         let rawNm=e.target.getAttribute("name");
         let rawAddr=e.target.getAttribute("addr");
 
-          if(!addCd(rawAddr, rawVl, rawNm, true)){
-          console.log("entering code failed. Addr: "+rawAddr+", Val: "+rawVl+", Name: "+rawNm+", On: "+true);
-          }
-
+        addCd(rawAddr, rawVl, rawNm, true);
         }
         else if(e.target.hasAttribute("act")){
+        let val=null;
         let cs=e.target.getAttribute("act");
           switch(cs){
           case "setName":
@@ -1366,11 +1397,16 @@
           case "addrNVal":
           // act="addrNVal" lnAddr="itemSlot" lnCodeVal="items"
             let addr=document.getElementById(e.target.getAttribute("lnAddr"));
-            let val=document.getElementById(e.target.getAttribute("lnCodeVal"));
-            console.log(addr.value+":"+val.value);
+            val=document.getElementById(e.target.getAttribute("lnCodeVal"));
+            addCd(addr.value, val.value, val.options[val.selectedIndex].getAttribute("itemName"), true); 
           break;
           case "itemNum":
           //act="itemNum" lnAddr="itemNum" strCodeVal="E" 
+          let el=document.getElementById(e.target.getAttribute("lnAddr"));
+          val=e.target.getAttribute("strCodeVal");
+          let nm=el.options[el.selectedIndex].getAttribute("itemName");
+          let hi=(el.selectedIndex%2==0)?false:true;
+          itemNum(el.value, val, nm, hi);
           break;
           default:
           break;
