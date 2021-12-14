@@ -1276,8 +1276,11 @@
     var el=document.getElementById(taId);
     var rtrn="";
       for(let v of codeLst){
-      let enbl=v.on?"":"!disabled\n";
-      rtrn+="# "+v.name+"\n"+v.addr+":"+v.val+"\n"+enbl;
+        if(v.hasOwnProperty("addr")){
+        let nm=(!v.hasOwnProperty("name")||v.name=="")?"untitled":v.name;
+        let enbl=v.on?"":"!disabled\n";
+        rtrn+="# "+nm+"\n"+v.addr+":"+v.val+"\n"+enbl;
+        }
       }
     el.value=rtrn;
     }
@@ -1285,25 +1288,47 @@
 
     function prsTACd(taId){
     var txt=document.getElementById(taId).value;
+    //clear code list and code hash
+    codeLst=[];
+    codeHsh={};
     var arr=txt.split("\n");
     var cdArr=["", "", ""];//0=name, 1=code, 2=on
-    var pattArr=["^# (.+)","^(0[0-9a-fA-F]{7})","^(!disabled)"];
+    var pattArr=["^# (.+)","^(0[0-9a-fA-F]{7}:[0-9A-Fa-f]{2})","^(\!disabled)"];
     var initPatt=new RegExp(pattArr[0]);
     var i=0;
+    var hshI=0;
       for(let ln of arr){
       //let patt=new RegExp(pattArr[i]);
         //if initPatt matches, but i>0, reset i, clear cdArr[1] and cdArr[2], set cdArr[0] to new name
         if(ln.match(initPatt) && i>0){
+          //if i>1, it has name and code, can make into code item
+          if(i>1){
+          var splt=cdArr[1].split(":");
+          var on=cdArr[2]=="!disabled"?false:true;
+          hshI=codeLst.push({"addr":splt[0], "val":splt[1], "name":cdArr[0], "on":on});
+          codeHsh[splt[0]]=(hshI - 1);
+          cdArr=["", "", ""];
+          }
+          //else reset
         i=0;
         cdArr=["", "", ""];
         cdArr[i]=ln.substr(2);
         i++;
         }
         else if(i<=2){
-        let rtrn=ln.match(pattArr[i]);
+        let rtrn=ln.match(new RegExp(pattArr[i]));
           if(rtrn){
           cdArr[i]=rtrn[1];
           i++;
+          }
+          //array full, make into code.
+          if(i==3){
+          var splt=cdArr[1].split(":");
+          var on=cdArr[2]=="!disabled"?false:true;
+          hshI=codeLst.push({"addr":splt[0], "val":splt[1], "name":cdArr[0], "on":on});
+          codeHsh[splt[0]]=(hshI - 1);
+          cdArr=["", "", ""];
+          i=0;
           }
         }
       }
@@ -1315,8 +1340,9 @@
       let cs=e.target.hasAttribute("id")?e.target.id:null;
         switch(cs){
         case "codes":
-        console.log(e.target);
         prsTACd("codes");
+        console.log(codeLst);
+        console.log(codeHsh);
         break;
         default:
         break;
@@ -1342,17 +1368,18 @@
         let nm=null;
         let addr=null;
         let tmpAddr=parseInt(e.target.getAttribute("addr"), 16);
+        let ind=null;
           for(let i in vl){
-          let addr=(tmpAddr + parseInt(i)).toString(16);
+          let addr=(tmpAddr + parseInt(i)).toString(16).padStart(8,"0");
             if(codeHsh.hasOwnProperty(addr)){
-            let ind=codeHsh[addr];
+            ind=codeHsh[addr];
             delete codeHsh[addr];
-            codeLst.splice( ind, 1);
+            codeLst[ind]={};
             }
           //let nm=rawNm+" "+(parseInt(i)+1).toString();
           let nm=rawNm;
-          i=codeLst.push({"addr":addr, "val":vl[i], "name":nm, "on":false});
-          codeHsh[addr]= (i-1);
+          ind=codeLst.push({"addr":addr, "val":vl[i], "name":nm, "on":false});
+          codeHsh[addr]= (ind-1);
           }
         }
         else if(e.target.hasAttribute("act")){
@@ -1373,6 +1400,8 @@
         }
       
       writeCdLst("codes",codeLst);
+      console.log(codeHsh);
+      console.log(codeLst);
       });
     }
 
