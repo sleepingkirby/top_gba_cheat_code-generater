@@ -1157,34 +1157,6 @@
       codeLst[5]={"addr":"03000ABC", "val":"F0", "name":"some code name", "on":False};
     */
 
-    /*-----------------------------
-    pre:textarea element exists
-    post: code updated
-    goes through codelist to find the item amount code
-    and update if needed 
-    -----------------------------*/
-    function findItemCodes(addr, vl, high=false){
-      if(codeHsh.hasOwnProperty("addr")){
-      let i=codeHsh[addr];
-      let ob=Object.assign({}, codeLst[i]);
-        if(high){
-          if(ob.val.charAt(0)!=vl){
-          ob.val=vl+ob.val.charAt(1);
-          codeHsh[addr]=Object.assign({},ob); //updating address
-          return True;
-          }
-        }
-        else{
-          if(ob.val.charAt(1)!="vl"){
-          ob.val=vl+ob.val.charAt(0);
-          codeHsh[addr]=Object.assign({},ob); //updating address
-          return True;
-          }
-        }   
-      }
-    return False;
-    }
-
     //make drop down for items
     function fllItem(hsh, id, sub){
     var arr=Object.keys(hsh);
@@ -1195,24 +1167,6 @@
     document.getElementById(id).innerHTML=rtrn;
     }
 
-
-    function addToTxtArea(code, val="00", name="", on=false){
-      if(!code||code==""){
-      return null;
-      }
-    var codeObj={};
-    var icS=parseInt(itemModAddr,16);//item code area start
-    var icE=icS+itemModAddrMax;
-    var tmp=parseInt(code,16);
-      if(tmp>=icS&&tmp<icE){
-      // insert 2 codes
-      
-      }
-      else{
-
-      }
-    //code renderer
-    }
 
     //set item slot dropdown
     function itemSlot(){
@@ -1305,8 +1259,7 @@
           if(i>1){
           var splt=cdArr[1].split(":");
           var on=cdArr[2]=="!disabled"?false:true;
-          hshI=codeLst.push({"addr":splt[0], "val":splt[1], "name":cdArr[0], "on":on});
-          codeHsh[splt[0]]=(hshI - 1);
+          addCd(splt[0], splt[1], cdArr[0], on);
           cdArr=["", "", ""];
           }
           //else reset
@@ -1325,8 +1278,7 @@
           if(i==3){
           var splt=cdArr[1].split(":");
           var on=cdArr[2]=="!disabled"?false:true;
-          hshI=codeLst.push({"addr":splt[0], "val":splt[1], "name":cdArr[0], "on":on});
-          codeHsh[splt[0]]=(hshI - 1);
+          addCd(splt[0], splt[1], cdArr[0], on);
           cdArr=["", "", ""];
           i=0;
           }
@@ -1335,8 +1287,7 @@
       //if there is valid data left after termination
       if(i==2){
       var splt=cdArr[1].split(":");
-      hshI=codeLst.push({"addr":splt[0], "val":splt[1], "name":cdArr[0], "on":on});
-      codeHsh[splt[0]]=(hshI - 1);
+      addCd(splt[0], splt[1], cdArr[0], on);
       cdArr=["", "", ""];
       i=0;
       }
@@ -1344,7 +1295,32 @@
 
     //adds code to codeLst and codeHsh
     function addCd(addr, val, name="untitled", on=false){
-      
+    let m=val.length;
+      //if value is an even number, not valid
+      if((m%2) == 1){
+      return false;
+      }
+
+    let arr=[];
+    let tmpVal=val;
+    let curVal=null;
+    let decAddr=parseInt(addr,16);
+    let tmpAddr=null;
+    let i=0;
+    let hshI=0;
+      while(tmpVal.length>0){
+      tmpAddr=(decAddr + i).toString(16).padStart(8,'0');//add number to decimal address
+        if(codeHsh.hasOwnProperty(tmpAddr)){
+        ind=codeHsh[tmpAddr];
+        delete codeHsh[tmpAddr];
+        codeLst[ind]={};
+        }
+      curVal=tmpVal.substr(0,2);
+      tmpVal=tmpVal.substr(2);
+      hshI=codeLst.push({"addr":tmpAddr, "val":curVal, "name":name, "on":on});
+      codeHsh[tmpAddr]=(hshI - 1);
+      i++;
+      }      
     }
 
     //event listener
@@ -1367,33 +1343,13 @@
         //if is checkbox which has "type==submit" and has addr and value
         if(e && e.target && e.target.hasAttribute("type") && e.target.getAttribute("type")=="submit" && e.target.hasAttribute("addr") && e.target.hasAttribute("codeVal")){
         let rawVl=e.target.getAttribute("codeVal");
-
-        let vl=[];
-          if(rawVl.length==4){
-          vl.push(rawVl.substr(2,2));
-          vl.push(rawVl.substr(0,2));
-          }
-          else if(rawVl.length==2){
-          vl.push(rawVl);
-          }
-
         let rawNm=e.target.getAttribute("name");
-        let nm=null;
-        let addr=null;
-        let tmpAddr=parseInt(e.target.getAttribute("addr"), 16);
-        let ind=null;
-          for(let i in vl){
-          let addr=(tmpAddr + parseInt(i)).toString(16).padStart(8,"0");
-            if(codeHsh.hasOwnProperty(addr)){
-            ind=codeHsh[addr];
-            delete codeHsh[addr];
-            codeLst[ind]={};
-            }
-          //let nm=rawNm+" "+(parseInt(i)+1).toString();
-          let nm=rawNm;
-          ind=codeLst.push({"addr":addr, "val":vl[i], "name":nm, "on":false});
-          codeHsh[addr]= (ind-1);
+        let rawAddr=e.target.getAttribute("addr");
+
+          if(!addCd(rawAddr, rawVl, rawNm, true)){
+          console.log("entering code failed. Addr: "+rawAddr+", Val: "+rawVl+", Name: "+rawNm+", On: "+true);
           }
+
         }
         else if(e.target.hasAttribute("act")){
         let cs=e.target.getAttribute("act");
@@ -1404,8 +1360,7 @@
           var els=document.getElementsByName(e.target.getAttribute("lnElByName"));
             for(let el of els){
             let addr=el.getAttribute("addr");
-            ind=codeLst.push({"addr":addr, "val":el.value, "name":el.name, "on":true});
-            codeHsh[addr]=(ind-1);
+            addCd(addr, el.value, el.name, true);
             }
           break;
           case "addrNVal":
