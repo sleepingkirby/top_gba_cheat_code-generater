@@ -380,7 +380,7 @@
     itemHash["star shield"]={"val":"011C","num":"0300102A"};
     itemHash["blue line shield"]={"val":"011D","num":"0300102A"};
     itemHash["ring shield"]={"val":"011E","num":"0300102B"};
-    itemHash["leather armor"]={"val":"011F","num":"0300102B"};
+    itemHash["leather helm"]={"val":"011F","num":"0300102B"};
     itemHash["iron sallet"]={"val":"0120","num":"0300102C"};
     itemHash["amment helm"]={"val":"0121","num":"0300102C"};
     itemHash["cross helm"]={"val":"0122","num":"0300102D"};
@@ -769,6 +769,15 @@
           <div><input type="submit" name="5th slot" addr="03001538" codeVal="05" value="+" /></div>
           <div><input type="submit" name="6th slot" addr="0300153A" codeVal="06" value="+" /></div>
 
+          <div style="margin-top: 10px;">What character in what slot graphical?</div>
+          <div class="comment">The above will be missing the graphics, but you can go out and into the menu to correct it. Or you can use these codes.</div>
+          <div><input type="submit" name="1st slot" addr="03000f80" codeVal="01" value="+" /></div>
+          <div><input type="submit" name="2nd slot" addr="03000f82" codeVal="02" value="+" /></div>
+          <div><input type="submit" name="3rd slot" addr="03000f84" codeVal="03" value="+" /></div>
+          <div><input type="submit" name="4th slot" addr="03000f86" codeVal="04" value="+" /></div>
+          <div><input type="submit" name="5th slot" addr="03000f88" codeVal="05" value="+" /></div>
+          <div><input type="submit" name="6th slot" addr="03000f8A" codeVal="06" value="+" /></div>
+
           <div class="name">Let's go Arche</div>
           <div><input type="submit" name="Time (4 seconds)" addr="03001731" codeVal="00" value="+" /></div>
           <div><input type="submit" name="Time (nano seconds)" addr="03001730" codeVal="00" value="+" /></div>
@@ -860,7 +869,7 @@
           <div><input type="submit" name="Slot 14 Pico-pico hammer" addr="03000b61" codeVal="65" value="+" /></div>
           <div><input type="submit" name="Slot 15 Barrier" addr="03000b62" codeVal="6b" value="+" /></div>
           <div><input type="submit" name="Slot 16 Raise dead" addr="03000b63" codeVal="63" value="+" /></div>
-          <div><input type="submit" name="Slot 17 Ressurection" addr="03000b64" codeVal="60" value="+" /></div>
+          <div><input type="submit" name="Slot 17 Resurrection" addr="03000b64" codeVal="60" value="+" /></div>
           <div><input type="submit" name="Slot 18 Time Stop" addr="03000b65" codeVal="69" value="+" /></div>
           <div class="name">Arche</div>
           <div><input type="submit" name="Slot 1 Fire Ball" addr="03000bf8" codeVal="37" value="+" /></div>
@@ -1354,7 +1363,6 @@
 
       //if the new name DOESN'T exist in previous name, add name to it
       inNm=pNm;
-      console.log("'"+pNm+"'");
       if(pNm.indexOf(nm)<0){
         var tk=pNm.length<=0?"":" + ";
       inNm=pNm+tk+nm+" num";
@@ -1434,7 +1442,7 @@
           el=document.getElementById(e.target.getAttribute("lnAddr"));
           val=e.target.getAttribute("strCodeVal");
           let nm=el.options[el.selectedIndex].getAttribute("itemName");
-          let hi=(el.selectedIndex%2==0)?false:true;
+          let hi=(parseInt(itemHash[nm].val)%2==0)?false:true;
           itemNum(el.value, val, nm, hi);
           break;
           case "exportFile":
